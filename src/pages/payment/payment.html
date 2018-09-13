@@ -1,0 +1,108 @@
+<ion-header>
+
+  <ion-navbar color="one">
+    <ion-title>Payment</ion-title>
+    <br>
+  </ion-navbar>
+  <ion-title text-center>{{AccountNumber}}</ion-title>
+</ion-header>
+
+<ion-content padding class="home">
+  <ion-card>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <div>
+            <button ion-button icon-only (click)="E15Receipt()"> 
+              <ion-icon name="ios-card" ></ion-icon>
+            </button>
+            <p>E15 Receipt</p>
+          </div>
+        </ion-col>
+        <ion-col>
+          <div>
+            <button ion-button icon-only (click)="MobilBiil()">
+              <ion-icon name="ios-phone-portrait-outline"></ion-icon>
+            </button>
+            <p>Mobile Bill</p>
+          </div>
+        </ion-col>
+        <ion-col>
+          <div>
+            <button ion-button icon-only (click)="MobilRecharge()">
+              <ion-icon name="ios-phone-landscape-outline"></ion-icon>
+            </button>
+            <p>Mobil Recharge </p>
+          </div>
+        </ion-col>
+      </ion-row>
+      <!-- <ion-card> -->
+      <ion-row>
+        <ion-col>
+          <div>
+            <button ion-button icon-only>
+              <ion-icon name="home"></ion-icon>
+            </button>
+            <p>pay</p>
+          </div>
+        </ion-col>
+        <ion-col>
+          <div>
+            <button ion-button icon-only>
+              <ion-icon name="home"></ion-icon>
+            </button>
+            <p>pay</p>
+          </div>
+        </ion-col>
+        <ion-col>
+          <div>
+            <button ion-button icon-only>
+              <ion-icon name="home"></ion-icon>
+            </button>
+            <p>pay </p>
+          </div>
+        </ion-col>
+      </ion-row>
+      <!-- </ion-card> -->
+    </ion-grid>
+  </ion-card>
+
+
+  <ion-card>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <div>
+            <button ion-button icon-only large>
+              <ion-icon name="barcode"></ion-icon>
+            </button>
+            <p>Get </p>
+          </div>
+        </ion-col>
+        <ion-col>
+          <div>
+            <button ion-button icon-only large>
+              <ion-icon name="barcode"></ion-icon>
+            </button>
+            <p>Send </p>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+
+
+  <div>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <div>
+              <img src="../../assets/imgs/pay.jpg" alt="" srcset="" width=100% height="90">
+              <p>Send </p>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+</ion-content>

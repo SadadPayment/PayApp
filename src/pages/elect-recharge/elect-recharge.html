@@ -1,0 +1,31 @@
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>ElectRecharge</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-item>
+        <ion-label fixed>Meter</ion-label>
+        <ion-input type="number" placeholder="Meter Number" [(ngModel)]="Meter"></ion-input>
+        <!--<ion-input type="number" placeholder="Meter Number" maxlength="12" minlength="12"-->
+                   [
+    </ion-item>
+
+    <ion-item>
+        <ion-label fixed>Amount:</ion-label>
+        <ion-input type="number" placeholder="Amount" maxlength="4" minlength="1" [(ngModel)]="Amount"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label fixed>ipin</ion-label>
+        <ion-input type="password" placeholder="ipin Number" maxlength="4" minlength="4" [(ngModel)]="Ipin"></ion-input>
+    </ion-item>
+
+    <ion-card>
+        <button ion-button block (click)="Send()">Check</button>
+    </ion-card>
+</ion-content>

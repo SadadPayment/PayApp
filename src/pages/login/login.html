@@ -1,0 +1,76 @@
+<!--
+  Generated template for the LoginPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Login</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      Login
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <form novalidate (ngSubmit)="login()" [formGroup]="LoginForm">
+
+          <ion-item>
+            <ion-label floating>Phone:</ion-label>
+            <ion-input type="number" maxlength="10" minlength="10" max="10" min="10" [(ngModel)]="userData.phone" formControlName="phone"
+                       [class.error1]="!LoginForm.controls.phone.valid && LoginForm.controls.phone.dirty"></ion-input>
+          </ion-item>
+
+          <ion-item no-lines
+                    *ngIf="( LoginForm.get('phone').hasError('minlength') || LoginForm.get('phone').hasError('maxlength') ||LoginForm.get('phone').hasError('pattern') ||LoginForm.get('phone').hasError('required') ) && LoginForm.get('phone').touched">
+            <div class="error" *ngIf="LoginForm.get('phone').hasError('phone') && LoginForm.get('phone').touched">
+              Please input your phone
+            </div>
+            <div class="error" *ngIf="LoginForm.get('phone').hasError('minlength') && LoginForm.get('phone').touched">
+              Minimum 10 Number
+            </div>
+            <div class="error" *ngIf="LoginForm.get('phone').hasError('maxlength') && LoginForm.get('phone').touched">
+              Maximum 10 Number
+            </div>
+            <div class="error" *ngIf="LoginForm.get('phone').hasError('pattern') && LoginForm.get('phone').touched">
+              Just use Number
+            </div>
+          </ion-item>
+
+
+          <ion-item>
+            <ion-label floating>IPIN Number:</ion-label>
+            <ion-input type="number" maxlength="4" minlength="4" max="4" min="4" [(ngModel)]="userData.IPIN" formControlName="IPIN"
+                       [class.error1]="!LoginForm.controls.IPIN.valid && LoginForm.controls.IPIN.dirty"></ion-input>
+          </ion-item>
+
+          <ion-item no-lines
+                    *ngIf="( LoginForm.get('IPIN').hasError('minlength') || LoginForm.get('IPIN').hasError('maxlength') ||LoginForm.get('IPIN').hasError('pattern') ||LoginForm.get('IPIN').hasError('required') ) && LoginForm.get('IPIN').touched">
+            <div class="error" *ngIf="LoginForm.get('IPIN').hasError('IPIN') && signupform.get('IPIN').touched">
+              Please input your ipin
+            </div>
+            <div class="error" *ngIf="LoginForm.get('IPIN').hasError('minlength') && LoginForm.get('IPIN').touched">
+              Minimum 4 Number
+            </div>
+            <div class="error" *ngIf="LoginForm.get('IPIN').hasError('maxlength') && LoginForm.get('IPIN').touched">
+              Maximum 4 Number
+            </div>
+            <div class="error" *ngIf="LoginForm.get('IPIN').hasError('pattern') && LoginForm.get('IPIN').touched">
+              Just use Number
+            </div>
+          </ion-item>
+
+        </form>
+      </ion-list>
+      <button ion-button block (click)="login()">Login</button>
+      <button ion-button block (click)="Registrtion()">Registertion</button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

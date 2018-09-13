@@ -7,12 +7,49 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <h3>Ionic Menu Starter</h3>
+<ion-content class="card-background-page" >      
+  <ion-card class="test">
+    <!-- <img src="." /> -->
+    <div> 
+        <ion-grid fixed>
+          <ion-row>
+            <div col-4>
+              <ion-img style="width :100% ; height: 100%; border-radius: 20%;" src="../../assets/imgs/payment.png" (click)="payment()"></ion-img> 
+            </div>
+            <div col-4>
+              <ion-img style="width :100% ; height: 100%; border-radius: 20%;" src="../../assets/imgs/transfer.png"></ion-img>
+            </div>
+            <div col-4>
+              <ion-img style="width :100% ; height: 100%; border-radius: 20%;" src="../../assets/imgs/purchase2.png"></ion-img>
+            </div>
+          </ion-row>
 
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
+                
 
-  <button ion-button secondary menuToggle>Toggle Menu</button>
-</ion-content>
+          <ion-row>
+            <div col-4>
+              <ion-img style="width :100% ; height: 100%; border-radius: 20%;" src="../../assets/imgs/balance.png"></ion-img> 
+            </div>
+            <div col-4>
+              <ion-img style="width :100% ; height: 100%; border-radius: 20%;" src="../../assets/imgs/government.png"></ion-img>
+            </div>
+            <div col-4>
+              <ion-img style="width :100% ; height: 100%; border-radius: 20%;" src="../../assets/imgs/agent.png"></ion-img>
+            </div>
+          </ion-row>
+
+          <ion-row>
+            <div col-4>
+              <ion-img style="width :100% ; height: 100%; border-radius: 20%;" src="../../assets/imgs/contac.png"></ion-img> 
+            </div>
+            <div col-4>
+              <ion-img style="width :100% ; height: 100%; border-radius: 20%;" src="../../assets/imgs/management.png"></ion-img>
+            </div>
+            <div col-4>
+              <ion-img style="width :100% ; height: 100%; border-radius: 20%;" src="../../assets/imgs/atm.png"></ion-img>
+            </div>
+          </ion-row>
+        </ion-grid>               
+    </div>
+  </ion-card>       
+</ion-content> 

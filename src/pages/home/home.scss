@@ -1,3 +1,33 @@
 page-home {
+  background-image: url("../../assets/imgs/pay.jpg");
+  .card-background-page{
+      height: 100%;
+      width: 100%;
+      background-color: rgba($color: #000000, $alpha: 0.3) !important;
+      ion-card{
+          border: none !important;
+// ÷          box-shadow: none;
+      }
+      .test{
+        margin: 6%;
+        background-color: rgba($color: #000000, $alpha: 0.0) !important;
+        border: none !important;
+        // webkit-box-shadow: none;
+        box-shadow: none;
+      }
 
+      div{
+        background-color: rgba($color: #000000, $alpha: 0.0) !important;
+        border: none;
+      }
+      ion-grid{
+          padding-top: 30%;
+          padding-bottom: 30%;
+      }
+      ion-row{
+          div{
+              border-radius: 50%; 
+          }
+      }
+  }
 }

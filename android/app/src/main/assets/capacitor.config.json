@@ -1,0 +1,6 @@
+{
+  "appId": "com.sadadpayment.Pay",
+  "appName": "SadadPayment",
+  "bundledWebRuntime": false,
+  "webDir": "www"
+}

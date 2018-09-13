@@ -1,0 +1,31 @@
+page-payment {
+    background-image: url("../../assets/imgs/money_payment.jpeg"); 
+    // background-size: auto;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+.home{
+    ion-card{
+        background: transparent;
+        box-shadow: none !important;
+        -webkit-box-shadow: none !important;
+    }
+    ion-grid{
+        box-shadow: none !important;
+    }
+    p{
+        color: #ffffff;
+    }
+        height: 100%;
+        width: 100%;
+        background-color: rgba($color: #000000, $alpha: 0.3) !important;
+    ion-col div {
+        border: none !important;
+
+        // background-color: #f0f5ff;
+        border-radius: 2px;
+        padding: 5px;
+        text-align: center;
+    }
+}
+
+}
