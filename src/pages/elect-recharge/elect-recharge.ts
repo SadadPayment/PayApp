@@ -1,6 +1,6 @@
-import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams} from 'ionic-angular';
-import {PaymentProvider} from "../../providers/payment/payment";
+import { Component } from '@angular/core';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { PaymentProvider } from "../../providers/payment/payment";
 
 
 @IonicPage()
@@ -10,24 +10,31 @@ import {PaymentProvider} from "../../providers/payment/payment";
 })
 export class ElectRechargePage {
 
-    Meter: number;
-    Amount: number;
-    Ipin: number;
+    // Meter: number;
+    // Amount: number;
+    // Ipin: number;
     data: any;
+    electData = { "METER": "", "amount": "", "IPIN": "" }
 
     constructor(public navCtrl: NavController,
-                public navParams: NavParams,
-                public electBack: PaymentProvider) {
+        public navParams: NavParams,
+        public electBack: PaymentProvider) {
     }
 
     ionViewDidLoad() {
-        console.log('ionViewDidLoad ElectRechargePage');
     }
-//moragaaa
-    Send() {
-        this.electBack.ElectricityRequest(this.Meter, this.Amount, this.Ipin).then(reg => {
-            this.data = reg
-        })
+    //moragaaa
+    SendElectRequest() {
+        this.electBack.ElectricityRequestProvider(this.electData).then(data => {
+            if (this.data.error == false || 'false') {
+                //Sus
+            }
+            if (this.data.error == true || 'true') {
+                //file
+            }
+        }).catch((erorr => {
+            console.log("Data Error: ", erorr)
+        }))
     }
 
 }

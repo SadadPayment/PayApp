@@ -9,7 +9,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = 'HomeTabsPage';       
+  rootPage: any = 'HomePage';       
 
   pages: Array<{title: string, component: any, icon:string}>;
 

@@ -1,5 +1,5 @@
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Injectable} from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class PaymentProvider {
@@ -31,17 +31,17 @@ export class PaymentProvider {
 
 
     TopUpRequestProvider(data) {
-   
+
         let body = {
-            'phone': phone,
-            'biller': biller,
-            'amount': amount,
-            'ipin': ipin
+            'phone': data.phone,
+            'biller': data.biller,
+            'amount': data.amount,
+            'ipin': data.IPIN
         };
 
         return new Promise((resolve, reject) => {
 
-            this.http.post(this.TopUpUrl, {body}, {
+            this.http.post(this.TopUpUrl, { body }, {
                 headers: new HttpHeaders().set('Content-Type', 'application/json')
                     .set('Authorization', "Bearer " + this.token),
             }).subscribe(res => {
@@ -59,7 +59,7 @@ export class PaymentProvider {
 
         return new Promise((resolve, reject) => {
 
-            this.http.post(this.PaymentUrl, {service}, {
+            this.http.post(this.PaymentUrl, { service }, {
                 headers: new HttpHeaders().set('Content-Type', 'application/json')
                     .set('Authorization', "Bearer " + this.token),
             }).subscribe(res => {
@@ -78,7 +78,7 @@ export class PaymentProvider {
 
         return new Promise((resolve, reject) => {
 
-            this.http.post(this.BalanceInquiryUrl, {body}, {
+            this.http.post(this.BalanceInquiryUrl, { body }, {
                 headers: new HttpHeaders().set('Content-Type', 'application/json')
                     .set('Authorization', "Bearer " + this.token),
             }).subscribe(res => {
@@ -89,16 +89,16 @@ export class PaymentProvider {
         });
     }
 
-    ElectricityRequest(meter, amount, ipin) {
+    ElectricityRequestProvider(data) {
         let body = {
-            'meter': meter,
-            'amount': amount,
-            'ipin': ipin
+            'meter': data.METER,
+            'amount': data.amount,
+            'ipin': data.IPIN
         };
 
         return new Promise((resolve, reject) => {
 
-            this.http.post(this.electricityUrl, {body}, {
+            this.http.post(this.electricityUrl, { body }, {
                 headers: new HttpHeaders().set('Content-Type', 'application/json')
                     .set('Authorization', "Bearer " + this.token),
             }).subscribe(res => {
@@ -119,7 +119,7 @@ export class PaymentProvider {
 
         return new Promise((resolve, reject) => {
 
-            this.http.post(this.CardTransferUrl, {body}, {
+            this.http.post(this.CardTransferUrl, { body }, {
                 headers: new HttpHeaders().set('Content-Type', 'application/json')
                     .set('Authorization', "Bearer " + this.token),
             }).subscribe(res => {
