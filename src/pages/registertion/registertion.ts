@@ -31,7 +31,7 @@ export class RegistertionPage {
       phone: new FormControl('', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(10), Validators.maxLength(10)]),
       password: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(25)]),
       fullName: new FormControl('', [Validators.required, Validators.pattern('([a-zA-Z ]+)'), Validators.minLength(4), Validators.maxLength(30)]),
-      panNumber: new FormControl('', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(16), Validators.maxLength(16)]),
+      panNumber: new FormControl('', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(16), Validators.maxLength(19)]),
       Ipin: new FormControl('', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(4), Validators.maxLength(4)]),
       expDate: new FormControl('', [Validators.required])
       // email: new FormControl('', [Validators.required, Validators.pattern(EMAILPATTERN)]),

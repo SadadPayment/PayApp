@@ -9,7 +9,10 @@ import {StatusBar} from '@ionic-native/status-bar';
 import { ComponentsModule } from '../components/components.module';
 import {BackendProvider} from "../providers/backend/backend";
 import {UsersProvider} from "../providers/users/users";
-import {HttpClientModule} from "@angular/common/http";
+import { HttpClientModule } from "@angular/common/http";
+import { AngularSvgIconModule } from 'angular-svg-icon';
+import { E15ProcessProvider } from '../providers/e15-process/e15-process';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -18,6 +21,7 @@ import {HttpClientModule} from "@angular/common/http";
     BrowserModule,
     ComponentsModule,
     HttpClientModule,
+    AngularSvgIconModule,
     IonicModule.forRoot(MyApp),
   ],
   bootstrap: [IonicApp],
@@ -28,7 +32,8 @@ import {HttpClientModule} from "@angular/common/http";
     StatusBar,
     BackendProvider,
     UsersProvider,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    E15ProcessProvider
   ]
 })
 export class AppModule {

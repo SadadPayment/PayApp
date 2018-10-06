@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {Component} from '@angular/core';
+import {IonicPage, NavController, NavParams} from 'ionic-angular';
 
 
 @IonicPage()
@@ -9,7 +9,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class PaymentPage {
 
-  AccountNumber :string ="199XXXXXX"; 
+  AccountNumber: string = "199XXXXXX";
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
@@ -19,13 +19,19 @@ export class PaymentPage {
   }
 
 
-  MobilBiil(){
+  MobilBiil() {
     this.navCtrl.push('MobileBillPage');
   }
-  MobilRecharge(){
+
+  MobilRecharge() {
     this.navCtrl.push('MobilRechargePage');
   }
-  E15Receipt(){
-    this.navCtrl.push('E15ReceiptPage'); 
-  } 
+
+  E15Payment() {
+    this.navCtrl.push('E15PaymentPage');
+  }
+
+  E15query() {
+    this.navCtrl.push('E15InqueryPage');
+  }
 }

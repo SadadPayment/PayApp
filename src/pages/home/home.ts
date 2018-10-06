@@ -14,5 +14,8 @@ export class HomePage {
   payment(){
     console.log("Payment Is Pressed`");
   }
+  newxt(){
+    this.navCtrl.push('TestDesingPage')
+  }
 
 }

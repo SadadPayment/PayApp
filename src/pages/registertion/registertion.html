@@ -12,7 +12,7 @@
     <form novalidate (ngSubmit)="register()" [formGroup]="signupform">
       <ion-item>
         <ion-label floating>Username</ion-label>
-        <ion-input type="text" maxlength="30" minlength="4" [(ngModel)]="userData.username" formControlName="username"
+        <ion-input type="text" maxlength="30" minlength="4" [(ngModel)]="userData.username" value="Omer" formControlName="username"
                    [class.error1]="!signupform.controls.username.valid && signupform.controls.username.dirty"></ion-input>
       </ion-item>
 
@@ -37,7 +37,7 @@
 
       <ion-item>
         <ion-label floating>Phone:</ion-label>
-        <ion-input type="text" maxlength="10" minlength="10" [(ngModel)]="userData.phone" formControlName="phone"
+        <ion-input type="text" maxlength="10" minlength="10" [(ngModel)]="userData.phone" value="0917321783" formControlName="phone"
                    [class.error1]="!signupform.controls.phone.valid && signupform.controls.phone.dirty"></ion-input>
       </ion-item>
 
@@ -83,7 +83,7 @@
 
       <ion-item>
         <ion-label floating>Full Name</ion-label>
-        <ion-input type="text" [(ngModel)]="userData.fullName" formControlName="fullName"
+        <ion-input type="text" [(ngModel)]="userData.fullName" formControlName="fullName" value="Omer Ali"
                    [class.error1]="!signupform.controls.fullName.valid && signupform.controls.fullName.dirty"></ion-input>
       </ion-item>
 
@@ -108,8 +108,8 @@
 
       <ion-item>
         <ion-label floating>Pan Number:</ion-label>
-        <ion-input type="number" maxlength="30" minlength="4" [(ngModel)]="userData.panNumber"
-                   formControlName="panNumber"
+        <ion-input type="number" maxlength="19" minlength="4" [(ngModel)]="userData.panNumber"
+                   formControlName="panNumber" value="9888061010278131317"
                    [class.error1]="!signupform.controls.panNumber.valid && signupform.controls.panNumber.dirty"></ion-input>
       </ion-item>
 
@@ -136,7 +136,7 @@
 
       <ion-item>
         <ion-label floating>IPIN Number:</ion-label>
-        <ion-input type="number" maxlength="4" minlength="4" [(ngModel)]="userData.Ipin" formControlName="Ipin"
+        <ion-input type="number" maxlength="4" minlength="4" [(ngModel)]="userData.Ipin" formControlName="Ipin" value="0000"
                    [class.error1]="!signupform.controls.Ipin.valid && signupform.controls.Ipin.dirty"></ion-input>
       </ion-item>
 
