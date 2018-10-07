@@ -9,9 +9,9 @@ import { StatusBar } from '@ionic-native/status-bar';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = 'HomePage';       
+  rootPage: any = 'TestDesingPage';
 
-  pages: Array<{title: string, component: any, icon:string}>;
+  pages: Array<{ title: string, component: any, icon: string }>;
 
   constructor(public platform: Platform, public statusBar: StatusBar) {
     this.initializeApp();
@@ -19,8 +19,8 @@ export class MyApp {
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Home', component: 'HomePage', icon: "home" },
-      { title: 'HomeTabsPage', component: 'HomeTabsPage', icon: "person"  },
-      { title: 'LoginPage', component: 'LoginPage', icon: "person"  }
+      { title: 'HomeTabsPage', component: 'HomeTabsPage', icon: "person" },
+      { title: 'LoginPage', component: 'LoginPage', icon: "person" }
     ];
 
   }

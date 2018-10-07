@@ -1,0 +1,37 @@
+<!--
+  Generated template for the E15ReceiptPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="one">
+    <ion-title>E15 Receipt</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-item>
+    <ion-label floating>phone Number:</ion-label>
+    <ion-input type="number" max="10" min="10" value="0917321783" [(ngModel)]="Phone"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label floating>Amount:</ion-label>
+    <ion-input type="number" min="1" [(ngModel)]="Amount"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label floating>IPIN:</ion-label>
+    <ion-input type="password" max="4" min="4" [(ngModel)]="Ipin"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label floating>invoiceNo:</ion-label>
+    <ion-input type="number" max="18" min="18" value="123456780000000006" [(ngModel)]="InvouisNumber"></ion-input>
+  </ion-item>
+
+  <ion-card>
+    <button ion-button full (click)="Check()">Check</button>
+  </ion-card>
+</ion-content>

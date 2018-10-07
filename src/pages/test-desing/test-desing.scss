@@ -1,3 +1,111 @@
 page-test-desing {
 
+    background-color: rgb(187, 170, 16);
+    // background-image: url("../../assets/imgs/pay.jpg");
+
+    .card-background-page {
+      // height: 100%;
+      // width: 100%;
+      // background-color: rgba($color: #e0b31e6c, $alpha: 0.3) !important;
+      // background-color: rgba($color: #000000, $alpha: 0.3) !important;
+
+      ion-card {
+        border: none !important;
+        // ÷          box-shadow: none;
+      }
+
+
+
+      .test {
+        margin: 6%;
+        background-color: rgba($color: #000000, $alpha: 0.0) !important;
+        border: none !important;
+        // webkit-box-shadow: none;
+        box-shadow: none;
+        text-align: center;
+
+        ion-img {
+          width: 100%;
+          height: 100%;
+          border-radius: 20%;
+          display: inline-block;
+          min-width: 20px;
+          min-height: 75x;
+          background: rgb(0, 188, 212);
+          contain: strict;
+        }
+
+        img {
+          margin-top: 10%;
+        }
+      }
+
+      div {
+        background-color: rgba($color: #000000, $alpha: 0.0) !important;
+        border: none;
+      }
+
+      ion-grid {
+        padding-top: 30%;
+        padding-bottom: 30%;
+      }
+
+      ion-row {
+        div {
+          border-radius: 50%;
+        }
+      }
+    }
+  
+
+  // .circles {
+  //   height: 90px;
+  //   width: 100px;
+  //   background-color: #bbb;
+  //   border-radius: 50%;
+  //   display: inline-block;
+  //   margin: auto;
+  //   text-align: center;
+
+  //   ion-img {
+  //     width: 66px;
+  //     height: 87px;
+  //     border-radius: 50%;
+  //     margin-top: -7%;
+  //     margin-left: -5%;
+
+  //     img {
+  //       margin-top: 20%
+  //     }
+  //   }
+  // }
+
+  // .ion-col {
+  //   height: 22vw;
+  //   width: 5vw;
+  //   border: 2px solid #fff;
+  //   border-radius: 50%;
+  //   box-shadow: 0 0 5px gray;
+  //   background: red;
+  //   display: inline-block;
+  //   margin-left: auto;
+  //   margin-right: auto;
+  // }
+
+  // .circle-pic {
+  //   width: 50px;
+  //   height: 50px;
+  //   -webkit-border-radius: 50%;
+  //   border-radius: 50%;
+  // }
+
+  // row {
+  //   background: rebeccapurple;
+
+  //   ion-col {
+  //     border: 2px solid #fff;
+  //     border-radius: 50%;
+  //     box-shadow: 0 0 5px gray; 
+  //   }
+  // }
 }

@@ -1,10 +1,84 @@
-<!--
-  Generated template for the TestDesingPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
+  <ion-navbar color="one">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Home</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="card-background-page">
+  <div ></div>
+  <ion-card class="test">
+    <!-- <img src="." /> -->
+    <div>
+      <ion-grid fixed>
+        <ion-row>
+          <div col-4>
+            <ion-img src="../../assets/imgs/payment.png" height="64" width="64" (click)="payment()"></ion-img>
+            <h2>دفع فوري</h2>
+          </div>
+          <div col-4>
+            <ion-img src="../../assets/imgs/transfer.png" height="64" width="64"></ion-img>
+<h2>دفع فوري</h2>
+          </div>
+          <div col-4>
+            <ion-img src="../../assets/imgs/purchase2.png" height="64" width="64"></ion-img>
+<h2>البطاقة</h2>
+          </div>
+        </ion-row>
+
+
+
+        <ion-row>
+          <div col-4>
+            <ion-img src="../../assets/imgs/balance.png" height="64" width="64"></ion-img>
+<h2>الرصيد الحالي</h2>
+
+
+          </div>
+          <div col-4>
+            <ion-img src="../../assets/imgs/government.png" height="64" width="64"></ion-img>
+<h2>دفع المؤسسة الحكومية</h2>
+
+          </div>
+          <div col-4>
+            <ion-img src="../../assets/imgs/agent.png" height="64" width="64"></ion-img>
+<h2>العملاء</h2>
+
+          </div>
+        </ion-row>
+
+        <ion-row>
+          <div col-4>
+            <ion-img src="../../assets/imgs/contac.png" height="64" width="64"></ion-img>
+<h2>الاتصال بنأ</h2>
+          </div>
+          <div col-4>
+            <ion-img src="../../assets/imgs/management.png" height="64" width="64"></ion-img>
+<h2>إدارة الحساب</h2>
+
+          </div>
+          <div col-4>
+            <ion-img src="../../assets/imgs/atm.png" height="64" width="64"></ion-img>
+<h2>الصراف الالي</h2>
+
+          </div>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </ion-card>
+</ion-content>
+
+
+
+
+
+
+
+
+
+<!-- <ion-header>
 
   <ion-navbar>
     <ion-title>TestDesing</ion-title>
@@ -14,5 +88,20 @@
 
 
 <ion-content padding>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-3>
+        <ion-avatar item-left>
+        <img src="../../assets/imgs/payment.png" (click)="payment()">
+</ion-avatar>
 
-</ion-content>
+        One
+      </ion-col>
+      <ion-col col-3> <img src="../../assets/imgs/payment.png" (click)="payment()">
+      </ion-col>
+      <ion-col col-3><img src="../../assets/imgs/payment.png" (click)="payment()">
+        three</ion-col>
+
+    </ion-row>
+  </ion-grid>
+</ion-content> -->
