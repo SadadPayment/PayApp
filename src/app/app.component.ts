@@ -1,6 +1,6 @@
-import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
-import { StatusBar } from '@ionic-native/status-bar';
+import {Component, ViewChild} from '@angular/core';
+import {Nav, Platform} from 'ionic-angular';
+import {StatusBar} from '@ionic-native/status-bar';
 
 
 @Component({
@@ -9,7 +9,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = 'TestDesingPage';
+  rootPage: any = 'HomeTabsPage';
 
   pages: Array<{ title: string, component: any, icon: string }>;
 
@@ -18,9 +18,10 @@ export class MyApp {
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Home', component: 'HomePage', icon: "home" },
-      { title: 'HomeTabsPage', component: 'HomeTabsPage', icon: "person" },
-      { title: 'LoginPage', component: 'LoginPage', icon: "person" }
+      {title: 'Home', component: 'HomePage', icon: "home"},
+      {title: 'HomeTabsPage', component: 'HomeTabsPage', icon: "person"},
+      {title: 'HistoryUserPage', component: 'HistoryUserPage', icon: "home"},
+      {title: 'LoginPage', component: 'LoginPage', icon: "person"}
     ];
 
   }

@@ -1,23 +1,44 @@
 page-payment {
-    background-image: url("../../assets/imgs/money_payment.jpeg"); 
-    // background-size: auto;
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
+
+    //background-image: url("../../assets/imgs/money_payment.jpeg");
+    //// background-size: auto;
+    //background-size: 100% 100%;
+    //background-repeat: no-repeat;
+  background-color: white;
 .home{
+  ion-slides{
+    height: 100px;
+  }
+  .no-scroll .scroll-content{
+    overflow: hidden;
+  }
+  ion-icon{
+    font-size: 3.0em;
+
+  }
+  ion-buttons{
+    background-color: transparent !important;
+
+  }
+  button{
+    background-color: transparent !important;
+  }
     ion-card{
-        background: transparent;
-        box-shadow: none !important;
-        -webkit-box-shadow: none !important;
+        //background: transparent;
+        //box-shadow: none !important;
+        //-webkit-box-shadow: none !important;
+      box-shadow: 0 2px 4px rgb(0, 0, 0);
     }
     ion-grid{
-        box-shadow: none !important;
+        //box-shadow: none !important;
     }
     p{
-        color: #ffffff;
+        color: black;
+        //color: #ffffff;
     }
         height: 100%;
         width: 100%;
-        background-color: rgba($color: #000000, $alpha: 0.3) !important;
+        //background-color: rgba($color: #000000, $alpha: 0.3) !important;
     ion-col div {
         border: none !important;
 

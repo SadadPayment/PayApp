@@ -1,0 +1,88 @@
+<!--
+  Generated template for the CardTransfermPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>CardTransferm</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    <form novalidate (ngSubmit)="sendData()" [formGroup]="ElectForm">
+
+      <ion-item>
+        <ion-label fixed>to:</ion-label>
+        <ion-input type="number" placeholder="to Number" [(ngModel)]="cardInfo.to"
+                   value="5818582780482178"
+                   formControlName="to"
+                   [class.error1]="!ElectForm.controls.to.valid && ElectForm.controls.to.dirty"></ion-input>
+      </ion-item>
+
+      <ion-item no-lines
+                *ngIf="( ElectForm.get('to').hasError('minlength') || ElectForm.get('to').hasError('maxlength') ||ElectForm.get('to').hasError('pattern') ||ElectForm.get('to').hasError('required') ) && ElectForm.get('to').touched">
+        <div class="error" *ngIf="ElectForm.get('to').hasError('to') && ElectForm.get('to').touched">
+          ادخل الوحدات
+        </div>
+        <div class="error" *ngIf="ElectForm.get('to').hasError('minlength') && ElectForm.get('to').touched">
+          اقل عدد 1
+        </div>
+        <div class="error" *ngIf="ElectForm.get('to').hasError('pattern') && ElectForm.get('to').touched">
+          فقط ارقام
+        </div>
+      </ion-item>
+
+
+      <ion-item>
+        <ion-label fixed>amount:</ion-label>
+        <ion-input type="number" placeholder="amount Number" [(ngModel)]="cardInfo.amount"
+                   formControlName="amount"
+                   [class.error1]="!ElectForm.controls.amount.valid && ElectForm.controls.amount.dirty"></ion-input>
+      </ion-item>
+
+      <ion-item no-lines
+                *ngIf="( ElectForm.get('amount').hasError('minlength') || ElectForm.get('amount').hasError('maxlength') ||ElectForm.get('amount').hasError('pattern') ||ElectForm.get('amount').hasError('required') ) && ElectForm.get('amount').touched">
+        <div class="error" *ngIf="ElectForm.get('amount').hasError('amount') && ElectForm.get('amount').touched">
+          ادخل الوحدات
+        </div>
+        <div class="error" *ngIf="ElectForm.get('amount').hasError('minlength') && ElectForm.get('amount').touched">
+          اقل عدد 1
+        </div>
+        <div class="error" *ngIf="ElectForm.get('amount').hasError('pattern') && ElectForm.get('amount').touched">
+          فقط ارقام
+        </div>
+      </ion-item>
+
+      <ion-item>
+        <ion-label fixed>IPIN:</ion-label>
+        <ion-input type="number" placeholder="IPIN Number" [(ngModel)]="cardInfo.IPIN"
+                   formControlName="IPIN"
+                   [class.error1]="!ElectForm.controls.IPIN.valid && ElectForm.controls.IPIN.dirty"></ion-input>
+      </ion-item>
+
+      <ion-item no-lines
+                *ngIf="( ElectForm.get('IPIN').hasError('minlength') || ElectForm.get('IPIN').hasError('maxlength') ||ElectForm.get('IPIN').hasError('pattern') ||ElectForm.get('IPIN').hasError('required') ) && ElectForm.get('IPIN').touched">
+        <div class="error" *ngIf="ElectForm.get('IPIN').hasError('IPIN') && ElectForm.get('IPIN').touched">
+          ادخل الرقم السري
+        </div>
+        <div class="error" *ngIf="ElectForm.get('IPIN').hasError('minlength') && ElectForm.get('IPIN').touched">
+          اقل عدد 4
+        </div>
+        <div class="error" *ngIf="ElectForm.get('IPIN').hasError('maxlength') && ElectForm.get('IPIN').touched">
+          لايمكن اضافة اكثر من 6 رقم
+        </div>
+        <div class="error" *ngIf="ElectForm.get('IPIN').hasError('pattern') && ElectForm.get('IPIN').touched">
+          فقط ارقام
+        </div>
+      </ion-item>
+
+      <button type="submit" ion-button block color="primary" [disabled]="ElectForm.invalid">شحن</button>
+    </form>
+  </ion-list>
+</ion-content>

@@ -43,7 +43,7 @@ export class UsersProvider {
   // RegistrationProvider(fullName, userName, phone, password, panNumber, Ipin, expDate) {
   RegistrationProvider(data) {
     // console.log("data to Provider: " + data.panNumber)
-    console.log("data to Provider: " + data.fullName) 
+    console.log("data to Provider: " + data.fullName)
     let body = {
       "fullName": data.fullName,
       "userName": data.username,
@@ -60,7 +60,7 @@ export class UsersProvider {
         resolve(res)
       }, (err) => {
         reject(err)
-      }); 
+      });
     });
 
 

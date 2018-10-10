@@ -1,0 +1,28 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>HistoryUser</ion-title>
+  </ion-navbar>
+
+</ion-header>
+<!--Response:-->
+<!--created_at: "2018-10-08 15:17:49"-->
+<!--id: 1-->
+<!--responseCode: "0"-->
+<!--responseMessage: "Approved"-->
+<!--responseStatus: "Successful"-->
+<!--transaction_id: 1-->
+<!--updated_at: "2018-10-08 15:17:49"-->
+<!--__proto__: Object-->
+<!--type: "Electericity"-->
+
+<ion-content padding>
+  <ion-list *ngIf="data">
+
+    <ion-item  *ngFor="let item of data">
+      <h1 *ngIf="item.Response !== null">{{item.Response.id}}</h1>
+      <h1 *ngIf="item.Response !== null">{{item.Response.responseMessage}}</h1>
+      <h1 *ngIf="item.type !== null">{{item.type}}</h1>
+    </ion-item>
+  </ion-list>
+</ion-content>

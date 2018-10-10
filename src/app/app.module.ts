@@ -12,6 +12,8 @@ import {UsersProvider} from "../providers/users/users";
 import { HttpClientModule } from "@angular/common/http";
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { E15ProcessProvider } from '../providers/e15-process/e15-process';
+import {PaymentProvider} from "../providers/payment/payment";
+import {HistoryPaymentProvider} from "../providers/history/HistoryPayment";
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { E15ProcessProvider } from '../providers/e15-process/e15-process';
     BackendProvider,
     UsersProvider,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    E15ProcessProvider
+    E15ProcessProvider,
+    PaymentProvider,
+    HistoryPaymentProvider
   ]
 })
 export class AppModule {

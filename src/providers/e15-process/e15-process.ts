@@ -6,7 +6,9 @@ export class E15ProcessProvider {
   url = "http://197.251.5.100:8000/api/";
   token = localStorage.getItem('token');
 
+
   constructor(public http: HttpClient) {
+    console.log(this.token);
   }
 
   PayE15Provider(body) {
@@ -25,6 +27,7 @@ export class E15ProcessProvider {
   }
 
   GetE15Provider(body) {
+    console.log("data: ", body);
     return new Promise((resolve, reject) => {
 
       this.http.post(this.url + 'e15_inquery', JSON.stringify(body), {
