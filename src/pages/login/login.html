@@ -1,7 +1,7 @@
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>Login</ion-title>
+  <ion-navbar color="one">
+    <ion-title>تسجيل الدخول</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -9,62 +9,66 @@
 
 <ion-content padding class="auth-page">
   <!--<ion-card>-->
-    <!--<ion-card-header>-->
-      <!--Login-->
-    <!--</ion-card-header>-->
-    <!--<ion-card-content>-->
-      <ion-list class="list-form">
-        <form novalidate (ngSubmit)="login()" [formGroup]="LoginForm">
+  <!--<ion-card-header>-->
+  <!--Login-->
+  <!--</ion-card-header>-->
+  <!--<ion-card-content>-->
+  <ion-list class="list-form">
+    <form novalidate (ngSubmit)="login()" [formGroup]="LoginForm">
 
-          <ion-item>
-            <ion-label floating>Phone:</ion-label>
-            <ion-input type="number" maxlength="10" minlength="10" max="10" min="10" [(ngModel)]="userData.phone" formControlName="phone"
-                       [class.error1]="!LoginForm.controls.phone.valid && LoginForm.controls.phone.dirty"></ion-input>
-          </ion-item>
+      <ion-item>
+        <ion-label floating>رقم الهاتف:</ion-label>
+        <ion-input type="number" maxlength="10" minlength="10" max="10" min="10" [(ngModel)]="userData.phone"
+                   formControlName="phone"
+                   [class.error1]="!LoginForm.controls.phone.valid && LoginForm.controls.phone.dirty"></ion-input>
+      </ion-item>
 
-          <ion-item no-lines
-                    *ngIf="( LoginForm.get('phone').hasError('minlength') || LoginForm.get('phone').hasError('maxlength') ||LoginForm.get('phone').hasError('pattern') ||LoginForm.get('phone').hasError('required') ) && LoginForm.get('phone').touched">
-            <div class="error" *ngIf="LoginForm.get('phone').hasError('phone') && LoginForm.get('phone').touched">
-              Please input your phone
-            </div>
-            <div class="error" *ngIf="LoginForm.get('phone').hasError('minlength') && LoginForm.get('phone').touched">
-              Minimum 10 Number
-            </div>
-            <div class="error" *ngIf="LoginForm.get('phone').hasError('maxlength') && LoginForm.get('phone').touched">
-              Maximum 10 Number
-            </div>
-            <div class="error" *ngIf="LoginForm.get('phone').hasError('pattern') && LoginForm.get('phone').touched">
-              Just use Number
-            </div>
-          </ion-item>
+      <ion-item no-lines
+                *ngIf="( LoginForm.get('phone').hasError('minlength') || LoginForm.get('phone').hasError('maxlength') ||LoginForm.get('phone').hasError('pattern') ||LoginForm.get('phone').hasError('required') ) && LoginForm.get('phone').touched">
+        <div class="error" *ngIf="LoginForm.get('phone').hasError('phone') && LoginForm.get('phone').touched">
+          الرجاء ادخال رقم الهاتف
+        </div>
+        <div class="error" *ngIf="LoginForm.get('phone').hasError('minlength') && LoginForm.get('phone').touched">
+          اقل عدد لرقم الهاتف 10 ارقام
+        </div>
+        <div class="error" *ngIf="LoginForm.get('phone').hasError('maxlength') && LoginForm.get('phone').touched">
+          لا يمكن اضافة اكثر من 10 اعداد لرقم الهاتف
+        </div>
+        <div class="error" *ngIf="LoginForm.get('phone').hasError('pattern') && LoginForm.get('phone').touched">
+          فقط ارقام -
+          تبدا بـ 09 - 01
+        </div>
+      </ion-item>
 
 
-          <ion-item>
-            <ion-label floating>IPIN Number:</ion-label>
-            <ion-input type="number" maxlength="4" minlength="4" max="4" min="4" [(ngModel)]="userData.IPIN" formControlName="IPIN"
-                       [class.error1]="!LoginForm.controls.IPIN.valid && LoginForm.controls.IPIN.dirty"></ion-input>
-          </ion-item>
+      <ion-item>
+        <ion-label floating>الرقم السري:</ion-label>
+        <ion-input type="password" maxlength="4" minlength="4" max="4" min="4" [(ngModel)]="userData.IPIN"
+                   formControlName="IPIN"
+                   [class.error1]="!LoginForm.controls.IPIN.valid && LoginForm.controls.IPIN.dirty"></ion-input>
+      </ion-item>
 
-          <ion-item no-lines
-                    *ngIf="( LoginForm.get('IPIN').hasError('minlength') || LoginForm.get('IPIN').hasError('maxlength') ||LoginForm.get('IPIN').hasError('pattern') ||LoginForm.get('IPIN').hasError('required') ) && LoginForm.get('IPIN').touched">
-            <div class="error" *ngIf="LoginForm.get('IPIN').hasError('IPIN') && signupform.get('IPIN').touched">
-              Please input your ipin
-            </div>
-            <div class="error" *ngIf="LoginForm.get('IPIN').hasError('minlength') && LoginForm.get('IPIN').touched">
-              Minimum 4 Number
-            </div>
-            <div class="error" *ngIf="LoginForm.get('IPIN').hasError('maxlength') && LoginForm.get('IPIN').touched">
-              Maximum 4 Number
-            </div>
-            <div class="error" *ngIf="LoginForm.get('IPIN').hasError('pattern') && LoginForm.get('IPIN').touched">
-              Just use Number
-            </div>
-          </ion-item>
+      <ion-item no-lines
+                *ngIf="( LoginForm.get('IPIN').hasError('minlength') || LoginForm.get('IPIN').hasError('maxlength') ||LoginForm.get('IPIN').hasError('pattern') ||LoginForm.get('IPIN').hasError('required') ) && LoginForm.get('IPIN').touched">
+        <div class="error" *ngIf="LoginForm.get('IPIN').hasError('IPIN') && signupform.get('IPIN').touched">
+          الرجاء ادخال الرقم السري
+        </div>
+        <div class="error" *ngIf="LoginForm.get('IPIN').hasError('minlength') && LoginForm.get('IPIN').touched">
+          اقل عدد 4 لكلمة المرور
+        </div>
+        <div class="error" *ngIf="LoginForm.get('IPIN').hasError('maxlength') && LoginForm.get('IPIN').touched">
+          لا يمكن اضافة اكثر من 6 ارقام لكلمة المرور
+        </div>
+        <div class="error" *ngIf="LoginForm.get('IPIN').hasError('pattern') && LoginForm.get('IPIN').touched">
+          فقط استخدم الارقام(0-9)
+        </div>
+      </ion-item>
 
-        </form>
-      </ion-list>
-      <button ion-button block (click)="login()">Login</button>
-      <button ion-button block (click)="Registrtion()">Registertion</button>
-    <!--</ion-card-content>-->
+      <button type="submit" ion-button block color="one" [disabled]="LoginForm.invalid">دخول</button>
+    </form>
+  </ion-list>
+
+  <button ion-button clear round (click)="Registrtion()">تسجيل عضوية جديدة</button>
+  <!--</ion-card-content>-->
   <!--</ion-card>-->
 </ion-content>

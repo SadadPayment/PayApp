@@ -1,7 +1,7 @@
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>استعلم عن الرصيد</ion-title>
+  <ion-navbar color="one">
+    <ion-title>استعلام عن الرصيد</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -12,7 +12,7 @@
 
     <ion-item>
       <ion-label fixed>الرقم السري:</ion-label>
-      <ion-input type="number" placeholder="IPIN Number" [(ngModel)]="formData.IPIN"
+      <ion-input type="password" placeholder="IPIN" [(ngModel)]="formData.IPIN"
                  formControlName="IPIN"
                  [class.error1]="!BalanceForm.controls.IPIN.valid && BalanceForm.controls.IPIN.dirty"></ion-input>
     </ion-item>
@@ -26,14 +26,17 @@
         اقل عدد 4
       </div>
       <div class="error" *ngIf="BalanceForm.get('IPIN').hasError('maxlength') && BalanceForm.get('IPIN').touched">
-        لايمكن اضافة اكثر من 6 رقم
+        لايمكن اضافة اكثر من 4 رقم
       </div>
       <div class="error" *ngIf="BalanceForm.get('IPIN').hasError('pattern') && BalanceForm.get('IPIN').touched">
         فقط ارقام
       </div>
     </ion-item>
-    <button type="submit" ion-button block>تحقق</button>
+    <button type="submit" ion-button block color="one" [disabled]="BalanceForm.invalid">تحقق</button>
 
   </form>
 
+  <ion-item *ngIf="dis == false">
+    <h1><ion-badge color="one">الرصيد الحالي: {{Message.balance.available}}</ion-badge></h1>
+  </ion-item>
 </ion-content>

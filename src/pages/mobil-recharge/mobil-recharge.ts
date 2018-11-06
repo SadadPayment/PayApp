@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams, ToastController} from 'ionic-angular';
+import {AlertController, IonicPage, LoadingController, NavController, NavParams, ToastController} from 'ionic-angular';
 import {MobilePaymentModel} from "../../models/MobilePaymentModel";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {PaymentProvider} from '../../providers/payment/payment';
@@ -15,15 +15,21 @@ export class MobilRechargePage {
   data: any;
   RechargeData = {"phone": "", "amount": "", "IPIN": "", "biller": ""};
   RechargeForm: FormGroup;
+  error: any;
+  private errorP: number;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private toastCtrl: ToastController,
-    private payProv: PaymentProvider) {
+    private payProv: PaymentProvider,
+    private loadingCtrl: LoadingController,
+    private alertCtrl:AlertController
+  ) {
     this.RechargeForm = new FormGroup({
-      phone: new FormControl('', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(10), Validators.maxLength(10)]),
-      amount: new FormControl('', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(1), Validators.maxLength(4)]),
+      phone: new FormControl('', [Validators.required, Validators.pattern('^(?:0|\\(?\\09\\)?\\s?|01\\s?)[1-79](?:[\\.\\-\\s]?\\d\\d){4}$'), Validators.minLength(10), Validators.maxLength(10)]),
+      // ^(?:0|\(?\+33\)?\s?|0033\s?)[1-79](?:[\.\-\s]?\d\d){4}$
+    amount: new FormControl('', [Validators.required, Validators.pattern('^[1-9][0-9 \.]*'), Validators.minLength(1), Validators.maxLength(4)]),
       IPIN: new FormControl('', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(4), Validators.maxLength(4)]),
       biller: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z]*'), Validators.maxLength(6)]),
 
@@ -35,46 +41,87 @@ export class MobilRechargePage {
   }
 
   SendRecharge() {
-    this.payProv.TopUpRequestProvider(this.RechargeData).then(data => {
-      console.log(this.data = data);
-      if (this.data.error == false) {
-        this.TopUpSToast()
-      }
+    // let phon = this.RechargeData.phone;
+    // let bil = this.RechargeData.amount;
+    // let z = bil.charAt(0);
+    // let f = phon.charAt(0);
+    // if (f !== "0") {
+    //   console.log("pass:",this.errorP = 1);
+    // }
+    // if (f == "0") {
+    //   console.log("pass:",this.errorP = 2);
+    // }
+    // if (z !== "0") {
+    //   console.log("pass:", this.error = 2);
+    // }
+    // if (z == "0") {
+    //   console.log("not pass: ", this.error = 1);
+    // }
+    // if (this.errorP == 2 && this.error == 2)
+    // {
 
-      else if (this.data.error == '') {
-        this.TopUpEToast(this.data.message);
-      }
-    }).catch((error => {
-      console.log("Error Data: ", error)
-    }));
 
+      // else {
+      //   console.log("test2");
+      //   this.error = 2
+      // }
+
+
+      let loading = this.loadingCtrl.create({
+        content: 'الرجاء الإنتظار لإتمام المعاملة'
+      });
+      loading.present();
+      this.payProv.TopUpRequestProvider(this.RechargeData).then(data => {
+        console.log(this.data = data);
+        if (this.data.error == false) {
+          this.TopUpSToast()
+        }
+
+        else if (this.data.error == '') {
+          this.TopUpEToast(this.data.message);
+        }
+        loading.dismiss();
+      }).catch((error => {
+        console.log("Error Data: ", error);
+        loading.dismiss();
+      }));
+
+    // else {
+    //   console.log("error")
+    //   alert('خطا في المدخلات')
+    // }
   }
+
 
   TopUpSToast() {
-    let toast = this.toastCtrl.create({
-      message: 'تم الشحن بنجاح',
-      duration: 4000,
-      position: 'top'
+    let alert = this.alertCtrl.create({
+      title: 'نجحت العملية',
+      subTitle:
+        'تم الشحن بنجاح'
+      ,
+      buttons: ['تم'],
+      cssClass: 'alertOne'
     });
-
-    toast.onDidDismiss(() => {
-
-    });
-
-    toast.present();
+    alert.present();
   }
 
-  TopUpEToast(message) {
-    let toast = this.toastCtrl.create({
-      message: message,
-      duration: 5000,
-      position: 'midll'
+
+
+TopUpEToast(meassge) {
+    let alert = this.alertCtrl.create({
+      title: 'خطأ',
+      subTitle:
+      meassge
+      ,
+      buttons: ['تم'],
+      cssClass: 'alertTwo'
     });
-
-    toast.onDidDismiss(() => {
-
-    });
-
-    toast.present();
+    alert.present();
   }
+
+  applyCategoryFilter() {
+    console.log("Filter")
+  }
+
+
 }

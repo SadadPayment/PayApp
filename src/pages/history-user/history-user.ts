@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams} from 'ionic-angular';
+import {IonicPage, LoadingController, NavController, NavParams} from 'ionic-angular';
 import {HistoryPaymentProvider} from "../../providers/history/HistoryPayment";
 
 
@@ -15,24 +15,34 @@ export class HistoryUserPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    private historyProv: HistoryPaymentProvider) {
+    private historyProv: HistoryPaymentProvider,
+    private loadingCtrl: LoadingController) {
   }
 
   ionViewDidLoad() {
-    console.log("Data :",this.data);
+    console.log("Data :", this.data);
     this.getData();
   }
 
   getData() {
+    let loading = this.loadingCtrl.create({
+      content: 'الرجاء الإنتظار لإتمام المعاملة'
+    });
+    loading.present();
     this.historyProv.getAllHistoryProvider()
       .then(data => {
         console.log("value: ", data);
         this.data = data;
         this.data = this.data.data;
+        loading.dismiss();
       })
       .catch(err => {
         console.log("Error: ", err);
+        loading.dismiss();
       })
   }
 
+  openDetails(item) {
+    this.navCtrl.push('HistoryDitelsPage', {"data": item})
+  }
 }

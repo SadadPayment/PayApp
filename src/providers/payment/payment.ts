@@ -1,9 +1,9 @@
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Injectable} from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class PaymentProvider {
-  url = "http://197.251.5.100:8000/api/";
+  url = "http://sadad.cf:8000/api/";
   TopUpPath = "topUp";
   TopUpUrl: string;
 
@@ -59,7 +59,7 @@ export class PaymentProvider {
 
     return new Promise((resolve, reject) => {
 
-      this.http.post(this.PaymentUrl, {service}, {
+      this.http.post(this.PaymentUrl, { service }, {
         headers: new HttpHeaders().set('Content-Type', 'application/json')
           .set('Authorization', "Bearer " + this.token),
       }).subscribe(res => {
@@ -71,13 +71,11 @@ export class PaymentProvider {
   }
 
   BalanceInquiryRequest(ipin) {
-
+    console.log(ipin);
     let body = {
-      'IPIN': ipin
+      "IPIN": ipin
     };
-
     return new Promise((resolve, reject) => {
-
       this.http.post(this.BalanceInquiryUrl, JSON.stringify(body), {
         headers: new HttpHeaders().set('Content-Type', 'application/json')
           .set('Authorization', "Bearer " + this.token),

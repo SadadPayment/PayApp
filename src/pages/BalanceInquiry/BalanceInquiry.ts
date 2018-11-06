@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {AlertController, IonicPage, NavController, NavParams} from 'ionic-angular';
+import {AlertController, IonicPage, LoadingController, NavController, NavParams} from 'ionic-angular';
 
 import {PaymentProvider} from "../../providers/payment/payment";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
@@ -13,48 +13,66 @@ export class BalanceInquiryPage {
 
   Data: any;
   private Message: any;
-  formData={"IPIN": ""};
+  formData = {"IPIN": ""};
+  dis = true;
+
   BalanceForm: FormGroup;
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private payProv: PaymentProvider,
-    private alertCtrl: AlertController) {
+    private alertCtrl: AlertController,
+    private loadingCtrl: LoadingController) {
     this.BalanceForm = new FormGroup({
-      IPIN: new FormControl('', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(4), Validators.maxLength(4)]),
+      IPIN: new FormControl('', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(4), Validators.maxLength(4)])
     });
-    }
+  }
 
 
   ionViewDidLoad() {
-    // console.log('ionViewDidLoad MobileBillPage');
   }
 
   getBalance() {
-    this.payProv.BalanceInquiryRequest(this.formData)
+    let loading = this.loadingCtrl.create({
+      content: 'الرجاء الإنتظار لإتمام المعاملة'
+    });
+
+    loading.present();
+    this.payProv.BalanceInquiryRequest(this.formData.IPIN)
       .then(data => {
         console.log(this.Message = data);
         if (this.Message.error == false) {
+          this.dis = this.Message.error;
           this.presentAlert();
         }
-        else if (this.Message.error == true) {
+        else if (this.Message.message == "Wrong IPIN Code") {
           this.presentEAlert();
+
         }
+        loading.dismiss();
+
       })
       .catch(err => {
-        console.log("errorS: ", err)
+        console.log("errorS: ", err);
+        this.presentEAlert();
+
+        loading.dismiss();
+
       })
+    this.BalanceForm.reset();
+
   }
 
   presentAlert() {
     let alert = this.alertCtrl.create({
       title: 'الرصيد',
-      subTitle: "الرصيد المتاح: " +
+      subTitle: "الرصيد المتاح هو: " +
         "<br>" +
         this.Message.balance.available +
         " :SDG" +
         "<br>" +
-        "حاجة كدا: " +
+        "leger: " +
         "<br>" +
         this.Message.balance.leger
       ,
@@ -66,19 +84,31 @@ export class BalanceInquiryPage {
 
   presentEAlert() {
     let alert = this.alertCtrl.create({
-      title: 'خطاء',
+      title: 'خطأ',
       subTitle: "" +
         "<br>" +
-        "<span style='color:red '>" +
-        "خطاء في الرقم السري" +
+        "<p>" +
+        "خطأ في الرقم السري" +
         "<br>" +
-        "</span>"
+        "</p>"
 
       ,
-      buttons: ['تم']
+      buttons: ['تم'],
+      cssClass: 'alertTwo'
     });
     alert.present();
   }
 
+
+  // LodingPro() {
+  //   let loading = this.loadingCtrl.create({
+  //     content: 'الرجاء الإنتظار لإتمام المعاملة ...'
+  //   });
+  //
+  //   loading.present();
+  //
+  //   loading.dismiss();
+  //   // console.log("data ", this.salon = salon.data)
+  // }
 
 }

@@ -1,6 +1,6 @@
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color="one">
     <ion-title>شحن الكهرباء</ion-title>
   </ion-navbar>
 
@@ -58,7 +58,7 @@
 
       <ion-item>
         <ion-label fixed>الرقم السري:</ion-label>
-        <ion-input type="number" placeholder="IPIN Number" [(ngModel)]="electData.IPIN"
+        <ion-input type="password" placeholder="الرقم السري" [(ngModel)]="electData.IPIN"
         formControlName="IPIN"
         [class.error1]="!ElectForm.controls.IPIN.valid && ElectForm.controls.IPIN.dirty"></ion-input>
       </ion-item>
@@ -79,7 +79,7 @@
         </div>
       </ion-item>
 
-      <button type="submit" ion-button block color="primary" [disabled]="ElectForm.invalid">شحن</button>
+      <button type="submit" ion-button block color="one" [disabled]="ElectForm.invalid">شحن</button>
 
     </form>
   </ion-list>

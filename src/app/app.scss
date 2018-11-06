@@ -1,5 +1,13 @@
+*{
+  font-family: DroidKufi-Regular, sans-serif;
+}
+
 ion-navbar {
   background-color: rgb(0, 188, 212);
+}
+
+.alert-md .alert-radio-icon {
+  right: -20px
 }
 
 //toolbar-background {
@@ -109,10 +117,21 @@ ion-icon {
   .alert-message {
     color: white; // text color for confirm alerts
   }
+  p {
+    color: white;
+  }
   .alert-wrapper {
-    background-color: color($colors, dark, base);
+    background-color: color($colors, danger, base);
   }
   .alert-sub-title {
     color: white !important;
   }
+}
+
+ion-content {
+  direction: rtl;
+}
+
+ion-navbar {
+  direction: rtl;
 }

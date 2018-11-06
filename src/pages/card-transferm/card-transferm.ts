@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {AlertController, IonicPage, NavController, NavParams} from 'ionic-angular';
+import {AlertController, IonicPage, LoadingController, NavController, NavParams} from 'ionic-angular';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {PaymentProvider} from "../../providers/payment/payment";
 
@@ -20,10 +20,11 @@ export class CardTransfermPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     private payProv: PaymentProvider,
-    private alertCtrl: AlertController) {
+    private alertCtrl: AlertController,
+    private loadingCtrl: LoadingController) {
     this.ElectForm = new FormGroup({
       to: new FormControl('', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(16), Validators.maxLength(19)]),
-      amount: new FormControl('', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(1)]),
+      amount: new FormControl('', [Validators.required, Validators.pattern('^[1-9][0-9 \.]*'), Validators.minLength(1), Validators.maxLength(15)]),
       IPIN: new FormControl('', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(4), Validators.maxLength(4)]),
 
     });
@@ -35,20 +36,33 @@ export class CardTransfermPage {
 
   sendData() {
 
+    let loading = this.loadingCtrl.create({
+      content: 'الرجاء الإنتظار لإتمام المعاملة'
+    });
+
+    loading.present();
     this.payProv.CardTransferRequest(this.cardInfo)
       .then(data => {
-        this.data = data;
+        console.log("Data: ", this.data = data);
+        this.Message = this.data;
         if (this.data.error == false) {
           this.presentAlert();
         }
-        else if (this.data.error == true) {
+        //: }
+        // else if (this.data.message == "Wrong IPIN Code")
+        else {
           this.presentEAlert();
         }
-        console.log("data: ", this.data)
+        console.log("data: ", this.data);
+        loading.dismiss();
       })
       .catch(err => {
-        console.log("error: ", err)
+        this.presentEAlert();
+        console.log("error: ", err);
+        loading.dismiss();
       })
+    this.ElectForm.reset();
+
   }
 
   // balance:
@@ -58,7 +72,7 @@ export class CardTransfermPage {
 
   presentAlert() {
     let alert = this.alertCtrl.create({
-      title: 'نجحة العملية',
+      title: 'نجحت العملية',
       subTitle: "الرصيد: " +
         "<br>" +
         this.Message.balance.available +
@@ -75,7 +89,10 @@ export class CardTransfermPage {
   presentEAlert() {
     let alert = this.alertCtrl.create({
       title: 'خطأ',
-      subTitle: "فشلة العملية"
+      subTitle: "فشلت العملية"+
+        "<br> "+
+        "خطأ، الرجاء المحاولة لاحقا"
+        // this.Message.message
       ,
       buttons: ['تم'],
       cssClass: 'alertTwo'

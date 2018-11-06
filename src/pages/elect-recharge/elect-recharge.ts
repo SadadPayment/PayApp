@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams, AlertController} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, AlertController, LoadingController} from 'ionic-angular';
 import {PaymentProvider} from "../../providers/payment/payment";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 
@@ -22,10 +22,11 @@ export class ElectRechargePage {
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public electBack: PaymentProvider,
-              private alertCtrl: AlertController) {
+              private alertCtrl: AlertController,
+              private loadingCtrl: LoadingController) {
     this.ElectForm = new FormGroup({
       METER: new FormControl('', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(11), Validators.maxLength(11)]),
-      amount: new FormControl('', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(1)]),
+      amount: new FormControl('', [Validators.required, Validators.pattern('^[1-9][0-9 \.]*'), Validators.minLength(1), Validators.maxLength(15)]),
       IPIN: new FormControl('', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(4), Validators.maxLength(4)]),
 
     });
@@ -37,19 +38,25 @@ export class ElectRechargePage {
   //moragaaa
   SendElectRequest() {
     console.log("electData: ", this.electData);
+    let loading = this.loadingCtrl.create({
+      content: 'الرجاء الإنتظار لإتمام المعاملة'
+    });
+    loading.present();
     this.electBack.ElectricityRequestProvider(this.electData).then(data => {
       console.log("data: ", data);
       this.data = data;
       if (this.data.error == false || 'false') {
-        //Sus
         this.Message = this.data.info;
         this.presentAlert();
       }
       if (this.data.error == true || 'true') {
-        //file
+        this.Aerror();
       }
+      loading.dismiss();
     }).catch((erorr => {
-      console.log("Data Error: ", erorr)
+      console.log("Data Error: ", erorr);
+      this.Aerror();
+      loading.dismiss();
     }))
   }
 
@@ -60,7 +67,7 @@ export class ElectRechargePage {
         "<br>" +
         this.Message.token +
         "<br>" +
-        "صحب العداد: " +
+        "صاحب العداد: " +
         "<br>" +
         this.Message.customerName +
         "<br>" +
@@ -75,4 +82,14 @@ export class ElectRechargePage {
     alert.present();
   }
 
+
+  Aerror() {
+    let alert = this.alertCtrl.create({
+      title: 'خطأ',
+      subTitle: "خطأ، الرجاء المحاولة لاحقا"
+      ,
+      buttons: ['تم']
+    });
+    alert.present();
+  }
 }
