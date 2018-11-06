@@ -1,6 +1,6 @@
 import {UsersProvider} from '../../providers/users/users';
 import {Component} from '@angular/core';
-import {IonicPage, LoadingController, NavController, NavParams, ToastController} from 'ionic-angular';
+import {IonicPage, LoadingController, NavController, NavParams, ToastController, MenuController} from 'ionic-angular';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {UsersDataModel} from "../../models/UsersModel";
 
@@ -21,7 +21,10 @@ export class LoginPage {
     public navParams: NavParams,
     public LoginProvider: UsersProvider,
     private toastCtrl: ToastController,
-    private loadingCtrl: LoadingController) {
+    private loadingCtrl: LoadingController,
+    public menu: MenuController) {
+      this.menu.enable(false) 
+
     this.LoginForm = new FormGroup({
       phone: new FormControl('', [Validators.required, Validators.pattern('^(?:0|\\(?\\09\\)?\\s?|01\\s?)[1-79](?:[\\.\\-\\s]?\\d\\d){4}$'), Validators.minLength(10), Validators.maxLength(10)]),
       IPIN: new FormControl('', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(4), Validators.maxLength(6)]),
