@@ -1,6 +1,6 @@
 import {UsersProvider} from './../../providers/users/users';
 import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams, ToastController} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, ToastController, MenuController} from 'ionic-angular';
 import {Validators, FormGroup, FormControl} from '@angular/forms';
 
 
@@ -22,7 +22,9 @@ export class RegistertionPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public Usersprovider: UsersProvider,
-    private toastCtrl: ToastController) {
+    private toastCtrl: ToastController,
+    public menu: MenuController) {
+      this.menu.enable(false) 
 
     // }
 
