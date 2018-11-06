@@ -1,16 +1,137 @@
-// http://ionicframework.com/docs/theming/
+*{
+  font-family: DroidKufi-Regular, sans-serif;
+}
 
+ion-navbar {
+  background-color: rgb(0, 188, 212);
+}
 
-// App Global Sass
-// --------------------------------------------------
-// Put style rules here that you want to apply globally. These
-// styles are for the entire app and not just one component.
-// Additionally, this file can be also used as an entry point
-// to import other Sass files to be included in the output CSS.
-//
-// Shared Sass variables, which can be used to adjust Ionic's
-// default Sass variables, belong in "theme/variables.scss".
-//
-// To declare rules for a specific mode, create a child rule
-// for the .md, .ios, or .wp mode classes. The mode class is
-// automatically applied to the <body> element in the app.
+.alert-md .alert-radio-icon {
+  right: -20px
+}
+
+//toolbar-background {
+//  background-color: blue;
+//}
+toolbar {
+  background-color: rgb(0, 188, 212);
+}
+
+ion-navbar {
+  color: #007aff;
+}
+
+ion-icon {
+  &[class*="i-"] {
+    mask-size: contain;
+    mask-position: 50% 50%;
+    mask-repeat: no-repeat;
+    background: currentColor;
+    width: 1em;
+    height: 1em;
+  }
+
+  &[class*="i-trans"] {
+    mask-image: url(../assets/svg/md-paper-plane.svg);
+  }
+  &[class*="i-flash"] {
+    mask-image: url(../assets/svg/flashlight.svg);
+  }
+  &[class*="i-gov"] {
+    mask-image: url(../assets/svg/ios-business.svg);
+  }
+  &[class*="i-wife"] {
+    //mask-image: url(../assets/img/svg/husband.svg);
+  }
+  &[class*="i-wife2"] {
+    //mask-image: url(../assets/img/svg/husband2.svg);
+  }
+
+}
+
+.auth-page {
+  background-color: #fff;
+  &::after {
+    content: "";
+    background: url("../assets/bg.jpg") no-repeat;
+    background-size: cover;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: 0;
+  }
+}
+
+.list-form {
+  padding: 0;
+  margin-bottom: 0;
+
+  ion-item {
+    background: none;
+    padding: 0;
+
+    &:first-child {
+      border-top: none;
+    }
+
+    &:after {
+      display: none;
+    }
+
+    ion-label {
+      font-size: 1em;
+      color: color($colors, primary);
+    }
+
+    input {
+      color: color($colors, primary);
+    }
+  }
+}
+
+.alertOne {
+  color: white; // text color for basic alerts
+  button {
+    color: white !important;
+    background-color: color($colors, secondary, base) !important;
+  }
+  .alert-message {
+    color: white; // text color for confirm alerts
+  }
+  .alert-wrapper {
+    background-color: color($colors, dark, base);
+  }
+  .alert-sub-title {
+    color: white !important;
+  }
+}
+
+.alertTwo {
+  color: white; // text color for basic alerts
+  button {
+    color: white !important;
+    background-color: color($colors, secondary, base) !important;
+  }
+  .alert-message {
+    color: white; // text color for confirm alerts
+  }
+  p {
+    color: white;
+  }
+  .alert-wrapper {
+    background-color: color($colors, danger, base);
+  }
+  .alert-sub-title {
+    color: white !important;
+  }
+}
+
+ion-content {
+  direction: rtl;
+}
+
+ion-navbar {
+  direction: rtl;
+}

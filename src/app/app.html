@@ -1,16 +1,25 @@
-<ion-menu [content]="content">
+<ion-menu [content]="content"  type="push" side="right">
   <ion-header>
 <ion-toolbar color="one">
-      <ion-title>Menu</ion-title>
+      <ion-title>SADAD</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <ion-content>
+  <ion-content dir="rtl">
     <ion-list>
       <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-        {{p.title}}
+        <ion-icon color="one" name="{{p.icon}}"></ion-icon>
+
+        <span>{{p.title}}</span>
       </button>
+
+      <button menuClose ion-item (click)="lgoOut()">
+        <ion-icon color="one" name="log-in"></ion-icon>
+تسجيل الخروج
+      </button>
+
     </ion-list>
+
   </ion-content>
 
 </ion-menu>

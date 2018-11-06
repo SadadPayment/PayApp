@@ -1,0 +1,42 @@
+<ion-header>
+
+  <ion-navbar color="one">
+    <ion-title>استعلام عن الرصيد</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <form novalidate (ngSubmit)="getBalance()" [formGroup]="BalanceForm">
+
+    <ion-item>
+      <ion-label fixed>الرقم السري:</ion-label>
+      <ion-input type="password" placeholder="IPIN" [(ngModel)]="formData.IPIN"
+                 formControlName="IPIN"
+                 [class.error1]="!BalanceForm.controls.IPIN.valid && BalanceForm.controls.IPIN.dirty"></ion-input>
+    </ion-item>
+
+    <ion-item no-lines
+              *ngIf="( BalanceForm.get('IPIN').hasError('minlength') || BalanceForm.get('IPIN').hasError('maxlength') ||BalanceForm.get('IPIN').hasError('pattern') ||BalanceForm.get('IPIN').hasError('required') ) && BalanceForm.get('IPIN').touched">
+      <div class="error" *ngIf="BalanceForm.get('IPIN').hasError('IPIN') && BalanceForm.get('IPIN').touched">
+        ادخل الرقم السري
+      </div>
+      <div class="error" *ngIf="BalanceForm.get('IPIN').hasError('minlength') && BalanceForm.get('IPIN').touched">
+        اقل عدد 4
+      </div>
+      <div class="error" *ngIf="BalanceForm.get('IPIN').hasError('maxlength') && BalanceForm.get('IPIN').touched">
+        لايمكن اضافة اكثر من 4 رقم
+      </div>
+      <div class="error" *ngIf="BalanceForm.get('IPIN').hasError('pattern') && BalanceForm.get('IPIN').touched">
+        فقط ارقام
+      </div>
+    </ion-item>
+    <button type="submit" ion-button block color="one" [disabled]="BalanceForm.invalid">تحقق</button>
+
+  </form>
+
+  <ion-item *ngIf="dis == false">
+    <h1><ion-badge color="one">الرصيد الحالي: {{Message.balance.available}}</ion-badge></h1>
+  </ion-item>
+</ion-content>

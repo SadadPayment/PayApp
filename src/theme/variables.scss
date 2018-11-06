@@ -5,15 +5,12 @@
 // roboto, and noto sans fonts
 $font-path: "../assets/fonts";
 
-
 // The app direction is used to include
 // rtl styles in your app. For more info, please see:
 // http://ionicframework.com/docs/theming/rtl-support/
-$app-direction: ltr;
-
+$app-direction: rtl;
 
 @import "ionic.globals";
-
 
 // Shared Variables
 // --------------------------------------------------
@@ -21,9 +18,6 @@ $app-direction: ltr;
 // the Sass variables found in Ionic's source scss files.
 // To view all the possible Ionic variables, see:
 // http://ionicframework.com/docs/theming/overriding-ionic-variables/
-
-
-
 
 // Named Color Variables
 // --------------------------------------------------
@@ -33,37 +27,29 @@ $app-direction: ltr;
 // colors so you can add, rename and remove colors as needed.
 // The "primary" color is the only required color in the map.
 
-$colors: (primary: #488aff,
-fore: rgb(33, 150, 243),
-secondary: #32db64,
-danger: #f53d3d,
-light: #f4f4f4,
-dark: #222,
-one: rgb(0, 188, 212),
-two: #84120a,
-three: rgba(79, 141, 150, 0.295));
-
+$colors: (
+  primary: #488aff,
+  fore: rgb(33, 150, 243),
+  secondary: #32db64,
+  danger: #f53d3d,
+  light: #f4f4f4,
+  dark: #222,
+  one: rgb(0, 188, 212),
+  two: #84120a,
+  three: rgba(79, 141, 150, 0.295),
+  five:#673ab7);
 
 // App iOS Variables
 // --------------------------------------------------
 // iOS only Sass variables can go here
 
-
-
-
 // App Material Design Variables
 // --------------------------------------------------
 // Material Design only Sass variables can go here
 
-
-
-
 // App Windows Variables
 // --------------------------------------------------
 // Windows only Sass variables can go here
-
-
-
 
 // App Theme
 // --------------------------------------------------
@@ -74,7 +60,6 @@ three: rgba(79, 141, 150, 0.295));
 
 @import "ionic.theme.default";
 
-
 // Ionicons
 // --------------------------------------------------
 // The premium icon font for Ionic. For more info, please see:
@@ -82,9 +67,22 @@ three: rgba(79, 141, 150, 0.295));
 
 @import "ionic.ionicons";
 
-
 // Fonts
 // --------------------------------------------------
-
+//
 @import "roboto";
 @import "noto-sans";
+
+@font-face {
+  font-family: DroidKufi-Bold;
+  src: url("../assets/fonts/DroidKufi-Bold.ttf")
+}
+
+@font-face {
+  font-family: DroidKufi-Regular;
+  src: url("../assets/fonts/DroidKufi-Regular.ttf")
+}
+
+*{
+  font-family: DroidKufi-Bold sans-serif;
+}

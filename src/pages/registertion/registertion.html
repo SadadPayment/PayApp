@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Registertion</ion-title>
+    <ion-title>تسجيل عضو جديد</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -11,8 +11,9 @@
   <ion-list>
     <form novalidate (ngSubmit)="register()" [formGroup]="signupform">
       <ion-item>
-        <ion-label floating>Username</ion-label>
-        <ion-input type="text" maxlength="30" minlength="4" [(ngModel)]="userData.username" value="Omer" formControlName="username"
+        <ion-label floating>اللقب</ion-label>
+        <ion-input type="text" maxlength="30" placeholder="Like: OXaltyab" minlength="4" [(ngModel)]="userData.username"
+                   formControlName="username"
                    [class.error1]="!signupform.controls.username.valid && signupform.controls.username.dirty"></ion-input>
       </ion-item>
 
@@ -20,46 +21,48 @@
                 *ngIf="( signupform.get('username').hasError('minlength') || signupform.get('username').hasError('maxlength') ||signupform.get('username').hasError('pattern') ||signupform.get('username').hasError('required') ) && signupform.get('username').touched">
         <div class="error"
              *ngIf="signupform.get('username').hasError('required') && signupform.get('username').touched">
-          Please input your Username
+          الرجاء ادخال اللق
         </div>
         <div class="error"
              *ngIf="signupform.get('username').hasError('minlength') && signupform.get('username').touched">
-          Minimum 4 characters
+          اقل عدد للحروف 4
         </div>
         <div class="error"
              *ngIf="signupform.get('username').hasError('maxlength') && signupform.get('username').touched">
-          Maximum 30 characters
+          لا يمكن اضافة اكثر من 30 حرف
         </div>
         <div class="error" *ngIf="signupform.get('username').hasError('pattern') && signupform.get('username').touched">
-          Just use alphabet character
+          فقط حروف
         </div>
       </ion-item>
 
       <ion-item>
-        <ion-label floating>Phone:</ion-label>
-        <ion-input type="text" maxlength="10" minlength="10" [(ngModel)]="userData.phone" value="0917321783" formControlName="phone"
+        <ion-label floating>رقم الهاتف:</ion-label>
+        <ion-input type="text" maxlength="10" minlength="10" [(ngModel)]="userData.phone"
+                   placeholder="09XXXX 01XXXXX"
+                   formControlName="phone"
                    [class.error1]="!signupform.controls.phone.valid && signupform.controls.phone.dirty"></ion-input>
       </ion-item>
 
       <ion-item no-lines
                 *ngIf="( signupform.get('phone').hasError('minlength') || signupform.get('phone').hasError('maxlength') ||signupform.get('phone').hasError('pattern') ||signupform.get('phone').hasError('required') ) && signupform.get('phone').touched">
         <div class="error" *ngIf="signupform.get('phone').hasError('phone') && signupform.get('phone').touched">
-          Please input your phone
+          الرجاء ادخال رقم الهاتف
         </div>
         <div class="error" *ngIf="signupform.get('phone').hasError('minlength') && signupform.get('phone').touched">
-          Minimum 10 Number
+          اقل عدد 10
         </div>
         <div class="error" *ngIf="signupform.get('phone').hasError('maxlength') && signupform.get('phone').touched">
-          Maximum 10 Number
+          اقصى عدد 10
         </div>
         <div class="error" *ngIf="signupform.get('phone').hasError('pattern') && signupform.get('phone').touched">
-          Just use Number
+          فقط يمكنك اضافة ارقام
         </div>
       </ion-item>
 
 
       <ion-item>
-        <ion-label floating>Password</ion-label>
+        <ion-label floating>كلمة المرور:</ion-label>
         <ion-input type="password" [(ngModel)]="userData.password" formControlName="password"
                    [class.error1]="!signupform.controls.password.valid && signupform.controls.password.dirty"></ion-input>
       </ion-item>
@@ -68,11 +71,11 @@
                 *ngIf="( signupform.get('password').hasError('minlength') || signupform.get('password').hasError('maxlength') ||signupform.get('password').hasError('required') ) && signupform.get('password').touched">
         <div class="error"
              *ngIf="signupform.get('password').hasError('required') && signupform.get('password').touched">
-          Please input your password
+          قم بادخال كلمة السر
         </div>
         <div class="error"
              *ngIf="signupform.get('password').hasError('minlength') && signupform.get('password').touched">
-          Minimum 6 characters
+          اقل عدد
         </div>
         <div class="error"
              *ngIf="signupform.get('password').hasError('maxlength') && signupform.get('password').touched">
@@ -82,7 +85,7 @@
 
 
       <ion-item>
-        <ion-label floating>Full Name</ion-label>
+        <ion-label floating>الاسم الكامل:</ion-label>
         <ion-input type="text" [(ngModel)]="userData.fullName" formControlName="fullName" value="Omer Ali"
                    [class.error1]="!signupform.controls.fullName.valid && signupform.controls.fullName.dirty"></ion-input>
       </ion-item>
@@ -91,23 +94,23 @@
                 *ngIf="( signupform.get('fullName').hasError('minlength') || signupform.get('fullName').hasError('maxlength') ||signupform.get('fullName').hasError('pattern') ||signupform.get('fullName').hasError('required') ) && signupform.get('fullName').touched">
         <div class="error"
              *ngIf="signupform.get('fullName').hasError('required') && signupform.get('fullName').touched">
-          Please input your FullName
+          الرجاء ادخال اسم الكامل
         </div>
         <div class="error"
              *ngIf="signupform.get('fullName').hasError('minlength') && signupform.get('fullName').touched">
-          Minimum 4 characters
+          لا يمكن ضافة اقل من 4 حروف للاسم
         </div>
         <div class="error"
              *ngIf="signupform.get('fullName').hasError('maxlength') && signupform.get('fullName').touched">
-          Maximum 30 characters
+          لا يمكن اضافة اكثر من 30 حرف للاسم
         </div>
         <div class="error" *ngIf="signupform.get('fullName').hasError('pattern') && signupform.get('fullName').touched">
-          Just use alphabet character
+          فقط حروف
         </div>
       </ion-item>
 
       <ion-item>
-        <ion-label floating>Pan Number:</ion-label>
+        <ion-label floating>رقم البطاقة:</ion-label>
         <ion-input type="number" maxlength="19" minlength="4" [(ngModel)]="userData.panNumber"
                    formControlName="panNumber" value="9888061010278131317"
                    [class.error1]="!signupform.controls.panNumber.valid && signupform.controls.panNumber.dirty"></ion-input>
@@ -117,95 +120,52 @@
                 *ngIf="( signupform.get('panNumber').hasError('minlength') || signupform.get('panNumber').hasError('maxlength') ||signupform.get('panNumber').hasError('pattern') ||signupform.get('panNumber').hasError('required') ) && signupform.get('panNumber').touched">
         <div class="error"
              *ngIf="signupform.get('panNumber').hasError('panNumber') && signupform.get('panNumber').touched">
-          Please input your phone
+          الرجاء ادخال رقم البطاقة
         </div>
         <div class="error"
              *ngIf="signupform.get('panNumber').hasError('minlength') && signupform.get('panNumber').touched">
-          Minimum 16 Number
+          اقل عدد لرقم البطاقة 16
         </div>
         <div class="error"
              *ngIf="signupform.get('panNumber').hasError('maxlength') && signupform.get('panNumber').touched">
-          Maximum 16 Number
+          لا بمكن اضافة اكثر من 19 رقم
         </div>
         <div class="error"
              *ngIf="signupform.get('panNumber').hasError('pattern') && signupform.get('panNumber').touched">
-          Just use Number
+          فقط ارقام
         </div>
       </ion-item>
 
 
       <ion-item>
-        <ion-label floating>IPIN Number:</ion-label>
-        <ion-input type="number" maxlength="4" minlength="4" [(ngModel)]="userData.Ipin" formControlName="Ipin" value="0000"
+        <ion-label floating>الرقم السري</ion-label>
+        <ion-input type="number" maxlength="4" minlength="4" [(ngModel)]="userData.Ipin" formControlName="Ipin"
+                   value="0000"
                    [class.error1]="!signupform.controls.Ipin.valid && signupform.controls.Ipin.dirty"></ion-input>
       </ion-item>
 
       <ion-item no-lines
                 *ngIf="( signupform.get('Ipin').hasError('minlength') || signupform.get('Ipin').hasError('maxlength') ||signupform.get('Ipin').hasError('pattern') ||signupform.get('Ipin').hasError('required') ) && signupform.get('Ipin').touched">
         <div class="error" *ngIf="signupform.get('Ipin').hasError('Ipin') && signupform.get('Ipin').touched">
-          Please input your phone
+          الرجاء ادخال الرقم السر المكونة من 4 اراقم الخاص بالبطاقة
         </div>
         <div class="error" *ngIf="signupform.get('Ipin').hasError('minlength') && signupform.get('Ipin').touched">
-          Minimum 4 Number
+          اقل عدد 4
         </div>
         <div class="error" *ngIf="signupform.get('Ipin').hasError('maxlength') && signupform.get('Ipin').touched">
-          Maximum 4 Number
+          لا يمكن اضافة اكثر من 4 ارقام
         </div>
         <div class="error" *ngIf="signupform.get('Ipin').hasError('pattern') && signupform.get('Ipin').touched">
-          Just use Number
+          فقط ارقام
         </div>
       </ion-item>
 
       <ion-item>
-        <ion-label floating>Expiration Date:</ion-label>
+        <ion-label floating>تاريخ انتهاء البطاقة</ion-label>
         <ion-datetime displayFormat="D MMM, YY" pickerFormat="DD MMM YYYY" [(ngModel)]="userData.expDate"
                       formControlName="expDate"></ion-datetime>
       </ion-item>
-      <button type="submit" ion-button block color="primary" [disabled]="signupform.invalid">SIGNUP</button>
+      <button type="submit" ion-button block color="primary" [disabled]="signupform.invalid">تسجل</button>
     </form>
   </ion-list>
 </ion-content>
-
-
-<!--<ion-content padding>-->
-<!--<ion-card>-->
-<!--<ion-card-header>-->
-<!--Registertion-->
-<!--</ion-card-header>-->
-<!--<ion-card-content>-->
-<!--<ion-item>-->
-<!--<ion-label stacked> Full Name</ion-label>-->
-<!--<ion-input type="text" [(ngModel)]="fullname"></ion-input>-->
-<!--</ion-item>-->
-<!--<ion-item>-->
-<!--<ion-label stacked> Username</ion-label>-->
-<!--<ion-input type="text" [(ngModel)]="username"></ion-input>-->
-<!--</ion-item>-->
-<!--<ion-item>-->
-<!--<ion-label stacked> Phone Number</ion-label>-->
-<!--<ion-input type="number" [(ngModel)]="phone"></ion-input>-->
-<!--</ion-item>-->
-<!--<ion-item>-->
-<!--<ion-label stacked> Password </ion-label>-->
-<!--<ion-input type="password" [(ngModel)]="password"></ion-input>-->
-<!--</ion-item>-->
-
-<!--<ion-item>-->
-<!--<ion-label stacked> PAN Number</ion-label>-->
-<!--<ion-input type="number" [(ngModel)]="panNumber"></ion-input>-->
-<!--</ion-item>-->
-
-<!--<ion-item>-->
-<!--<ion-label stacked>IPIN</ion-label>-->
-<!--<ion-input type="number" [(ngModel)]="Ipin"></ion-input>-->
-<!--</ion-item>-->
-
-<!--<ion-item>-->
-<!--<ion-label stacked> Phone Number</ion-label>-->
-<!--<ion-input type="date" [(ngModel)]="expDate"></ion-input>-->
-<!--</ion-item>-->
-
-<!--<button ion-button block (click)="register()">Registertion</button>-->
-<!--</ion-card-content>-->
-<!--</ion-card>-->
-<!--</ion-content>-->

@@ -4,6 +4,16 @@ page-test-desing {
     // background-image: url("../../assets/imgs/pay.jpg");
 
     .card-background-page {
+      image-icon{
+        background-size: cover;
+
+
+      }
+      .img-con{
+        background-size: cover;
+        min-height: border-box;
+      }
+
       // height: 100%;
       // width: 100%;
       // background-color: rgba($color: #e0b31e6c, $alpha: 0.3) !important;
@@ -30,7 +40,7 @@ page-test-desing {
           border-radius: 20%;
           display: inline-block;
           min-width: 20px;
-          min-height: 75x;
+          min-height: 75px;
           background: rgb(0, 188, 212);
           contain: strict;
         }

@@ -1,9 +1,9 @@
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Injectable} from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class UsersProvider {
-  url = "http://197.251.5.100:8000/api";
+  url = "http://sadad.cf:8000/api";
   urlLogin = "/login";
   urlRegs = "/register";
   urlActivation = "/activate";
@@ -43,7 +43,7 @@ export class UsersProvider {
   // RegistrationProvider(fullName, userName, phone, password, panNumber, Ipin, expDate) {
   RegistrationProvider(data) {
     // console.log("data to Provider: " + data.panNumber)
-    console.log("data to Provider: " + data.fullName) 
+    console.log("data to Provider: " + data.fullName)
     let body = {
       "fullName": data.fullName,
       "userName": data.username,
@@ -60,7 +60,7 @@ export class UsersProvider {
         resolve(res)
       }, (err) => {
         reject(err)
-      }); 
+      });
     });
 
 

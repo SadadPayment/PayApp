@@ -1,13 +1,17 @@
 <ion-header>
+  <ion-navbar dir="rtl" color="one">
 
-  <ion-navbar color="one">
-    <ion-title>Payment</ion-title>
-    <br>
+    <ion-buttons left>
+      <button ion-button menuToggle>
+        <ion-icon color="#ffff" name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>SADAD</ion-title>
   </ion-navbar>
-  <ion-title text-center>{{AccountNumber}}</ion-title>
+  <!--<ion-title text-center>{{AccountNumber}}</ion-title>-->
 </ion-header>
 
-<ion-content padding class="home">
+<ion-content no-bounce padding class="home">
   <ion-card>
 
     <ion-grid>
@@ -15,25 +19,25 @@
         <ion-col>
           <div>
             <button ion-button icon-only (click)="E15Payment()">
-              <ion-icon name="ios-card" ></ion-icon>
+              <ion-icon color="danger" name="i-gov"></ion-icon>
             </button>
-            <p>E15 Payment</p>
+            <p>دفع E15</p>
           </div>
         </ion-col>
         <ion-col>
           <div>
             <button ion-button icon-only (click)="E15query()">
-              <ion-icon name="ios-phone-portrait-outline"></ion-icon>
+              <ion-icon color="secondary" name="i-gov"></ion-icon>
             </button>
-            <p>E15 inQuery</p>
+            <p>تحقق من E15</p>
           </div>
         </ion-col>
         <ion-col>
           <div>
-            <button ion-button icon-only (click)="MobilRecharge()">
-              <ion-icon name="ios-phone-landscape-outline"></ion-icon>
+            <button ion-button icon-only (click)="MobilBiil()">
+              <ion-icon color="primary" name="phone-portrait"></ion-icon>
             </button>
-            <p>Mobil Recharge </p>
+            <p>شحن الهاتف</p>
           </div>
         </ion-col>
       </ion-row>
@@ -41,26 +45,26 @@
       <ion-row>
         <ion-col>
           <div>
-            <button ion-button icon-only>
-              <ion-icon name="home"></ion-icon>
+            <button ion-button icon-only (click)="cardTrans()">
+              <ion-icon color="dark" name="i-trans"></ion-icon>
             </button>
-            <p>pay</p>
+            <p>تحويل من بطاقة</p>
           </div>
         </ion-col>
         <ion-col>
           <div>
-            <button ion-button icon-only>
-              <ion-icon name="home"></ion-icon>
+            <button ion-button icon-only (click)="ElectPay()">
+              <ion-icon color="one" name="i-flash"></ion-icon>
             </button>
-            <p>pay</p>
+            <p>شحن الكهرباء</p>
           </div>
         </ion-col>
         <ion-col>
           <div>
-            <button ion-button icon-only>
-              <ion-icon name="home"></ion-icon>
+            <button ion-button icon-only (click)="BalanceInquiry()">
+              <ion-icon color="two" name="home"></ion-icon>
             </button>
-            <p>pay </p>
+            <p>معرفة الرصيد</p>
           </div>
         </ion-col>
       </ion-row>
@@ -75,17 +79,17 @@
         <ion-col>
           <div>
             <button ion-button icon-only large>
-              <ion-icon name="barcode"></ion-icon>
+              <ion-icon color="two" style="font-size: 2em" name="barcode"></ion-icon>
             </button>
-            <p>Get </p>
+            <p>جلب </p>
           </div>
         </ion-col>
         <ion-col>
           <div>
             <button ion-button icon-only large>
-              <ion-icon name="barcode"></ion-icon>
+              <ion-icon color="five" style="font-size: 2em" name="barcode"></ion-icon>
             </button>
-            <p>Send </p>
+            <p>ارسال </p>
           </div>
         </ion-col>
       </ion-row>
@@ -93,16 +97,12 @@
   </ion-card>
 
 
-  <div>
-      <ion-grid>
-        <ion-row>
-          <ion-col>
-            <div>
-              <img src="../../assets/imgs/pay.jpg" alt="" srcset="" width=100% height="90">
-              <p>Send </p>
-            </div>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </div>
+  <ion-slides dir="rtl" pager autoplay="2000">
+    <ion-slide>
+      <img src="../../assets/imgs/pay.jpg" alt="" srcset="" width=100% height="90">
+    </ion-slide>
+    <ion-slide>
+      <img src="../../assets/imgs/pay.jpg" alt="" srcset="" width=100% height="90">
+    </ion-slide>
+  </ion-slides>
 </ion-content>

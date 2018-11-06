@@ -13,6 +13,7 @@ export class RegistertionPage {
 
 
   data: any;
+  messages= [];
 
   signupform: FormGroup;
   userData = {"username": "", "phone": "", "password": "", "fullName": "", "panNumber": "", "Ipin": "", "expDate": ""};
@@ -50,7 +51,16 @@ export class RegistertionPage {
         this.navCtrl.push('ActivatePage', {phone: this.userData.phone});
       }
       if (this.data.error == true) {
-        // console.log("Error True: ", this.data.message);
+        console.log("Error True: ", this.data.errors);
+        let MessageContainer;
+        for (let message in this.data.errors) {
+
+          MessageContainer = this.data.errors[message];
+          for (let error of MessageContainer) {
+            console.log("Error True3: ", error);
+            this.messages += error," \n";
+          }
+        }
         this.ErrorToast();
       }
 
@@ -79,9 +89,9 @@ export class RegistertionPage {
 
   ErrorToast() {
     let toast = this.toastCtrl.create({
-      message: this.data.message,
-      duration: 1000,
-      position: 'top'
+      message: this.messages.toString(),
+      duration: 4000,
+      position: 'middle'
     });
 
     toast.onDidDismiss(() => {

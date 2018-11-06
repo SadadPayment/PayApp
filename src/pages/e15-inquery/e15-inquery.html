@@ -1,31 +1,118 @@
 <ion-header>
 
   <ion-navbar color="one">
-    <ion-title>E15 Query</ion-title>
+    <ion-title>تحقق من E15</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-  <ion-item>
-    <ion-label floating>phone Number:</ion-label>
-    <ion-input type="number" max="10" min="10" value="0917321783" [(ngModel)]="Phone"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label floating>Amount:</ion-label>
-    <ion-input type="number" min="1" [(ngModel)]="Amount"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label floating>IPIN:</ion-label>
-    <ion-input type="password" max="4" min="4" [(ngModel)]="Ipin"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label floating>invoiceNo:</ion-label>
-    <ion-input type="number" max="18" min="18" value="123456780000000006" [(ngModel)]="InvouisNumber"></ion-input>
-  </ion-item>
+  <ion-list>
+    <form novalidate (ngSubmit)="Check()" [formGroup]="E15Form">
+
+      <ion-item>
+        <ion-label floating>رقم الهاتف:</ion-label>
+        <ion-input type="number" maxlength="10" minlength="10" max="10" min="10" [(ngModel)]="E15Data.Phone"
+                   formControlName="phone"
+                   [class.error1]="!E15Form.controls.phone.valid && E15Form.controls.phone.dirty"></ion-input>
+      </ion-item>
+
+      <ion-item no-lines
+                *ngIf="( E15Form.get('phone').hasError('minlength') || E15Form.get('phone').hasError('maxlength') ||E15Form.get('phone').hasError('pattern') ||E15Form.get('phone').hasError('required') ) && E15Form.get('phone').touched">
+        <div class="error" *ngIf="E15Form.get('phone').hasError('phone') && E15Form.get('phone').touched">
+          الرجاء اداخل رقم الهاتف
+        </div>
+        <div class="error" *ngIf="E15Form.get('phone').hasError('minlength') && E15Form.get('phone').touched">
+          اقل عدد 10
+        </div>
+        <div class="error" *ngIf="E15Form.get('phone').hasError('maxlength') && E15Form.get('phone').touched">
+          لا يمكن اضافة اكثر من 10 ارقام
+        </div>
+        <div class="error" *ngIf="E15Form.get('phone').hasError('pattern') && E15Form.get('phone').touched">
+          فقط يمكنك اداخل ارقام-
+          09XXXXX 01XXXXX
+        </div>
+      </ion-item>
+      <ion-item>
+        <ion-label fixed>القيمة:</ion-label>
+        <ion-input type="number" placeholder="القيمة" [(ngModel)]="E15Data.Amount"
+                   formControlName="amount"
+                   [class.error1]="!E15Form.controls.amount.valid && E15Form.controls.amount.dirty"></ion-input>
+      </ion-item>
+
+      <ion-item no-lines
+                *ngIf="( E15Form.get('amount').hasError('minlength') || E15Form.get('amount').hasError('maxlength') ||E15Form.get('amount').hasError('pattern') ||E15Form.get('amount').hasError('required') ) && E15Form.get('amount').touched">
+        <div class="error" *ngIf="E15Form.get('amount').hasError('amount') && E15Form.get('amount').touched">
+          الرجاء ادخال القيمة
+        </div>
+        <div class="error" *ngIf="E15Form.get('amount').hasError('minlength') && E15Form.get('amount').touched">
+          اقل عدد 1
+        </div>
+        <div class="error" *ngIf="E15Form.get('amount').hasError('pattern') && E15Form.get('amount').touched">
+          فقط ارقام
+        </div>
+      </ion-item>
+
+      <ion-item>
+        <ion-label fixed>الرقم السري:</ion-label>
+        <ion-input type="password" placeholder="IPIN" [(ngModel)]="E15Data.IPIN"
+                   formControlName="IPIN"
+                   [class.error1]="!E15Form.controls.IPIN.valid && E15Form.controls.IPIN.dirty"></ion-input>
+      </ion-item>
+
+      <ion-item no-lines
+                *ngIf="( E15Form.get('IPIN').hasError('minlength') || E15Form.get('IPIN').hasError('maxlength') ||E15Form.get('IPIN').hasError('pattern') ||E15Form.get('IPIN').hasError('required') ) && E15Form.get('IPIN').touched">
+        <div class="error" *ngIf="E15Form.get('IPIN').hasError('IPIN') && E15Form.get('IPIN').touched">
+          ادخل الرقم السري
+        </div>
+        <div class="error" *ngIf="E15Form.get('IPIN').hasError('minlength') && E15Form.get('IPIN').touched">
+          اقل عدد 4
+        </div>
+        <div class="error" *ngIf="E15Form.get('IPIN').hasError('maxlength') && E15Form.get('IPIN').touched">
+          لايمكن اضافة اكثر من 4 رقم
+        </div>
+        <div class="error" *ngIf="E15Form.get('IPIN').hasError('pattern') && E15Form.get('IPIN').touched">
+          فقط ارقام
+        </div>
+      </ion-item>
+
+
+      <ion-item>
+        <ion-label fixed>رقم الفاتورة:</ion-label>
+        <ion-input type="number" placeholder="رقم الفاتورة" [(ngModel)]="E15Data.InvouisNumber"
+                   formControlName="InvouisNumber"
+                   [class.error1]="!E15Form.controls.InvouisNumber.valid && E15Form.controls.InvouisNumber.dirty"></ion-input>
+      </ion-item>
+
+      <ion-item no-lines
+                *ngIf="( E15Form.get('InvouisNumber').hasError('minlength') || E15Form.get('InvouisNumber').hasError('maxlength') ||E15Form.get('InvouisNumber').hasError('pattern') ||E15Form.get('InvouisNumber').hasError('required') ) && E15Form.get('InvouisNumber').touched">
+        <div class="error"
+             *ngIf="E15Form.get('InvouisNumber').hasError('InvouisNumber') && E15Form.get('InvouisNumber').touched">
+          ادخل رقم الفاتورة
+        </div>
+        <div class="error"
+             *ngIf="E15Form.get('InvouisNumber').hasError('minlength') && E15Form.get('InvouisNumber').touched">
+          يجب ان لا يقل رقم الفاتورة عن 18
+        </div>
+        <div class="error"
+             *ngIf="E15Form.get('InvouisNumber').hasError('maxlength') && E15Form.get('InvouisNumber').touched">
+          يجب ان لا يزيد رقم الفاتورة عن 18
+        </div>
+        <div class="error"
+             *ngIf="E15Form.get('InvouisNumber').hasError('pattern') && E15Form.get('InvouisNumber').touched">
+          فقط ارقام
+        </div>
+      </ion-item>
+      <button type="submit" ion-button block color="one" [disabled]="E15Form.invalid">تحقق</button>
+    </form>
+  </ion-list>
 
   <ion-card>
-    <button ion-button full (click)="Check()">Check</button>
+    <br>
+
+    <h2>الحالة: </h2>
+    <ion-badge *ngIf="ebs !== null">{{ebs}}</ion-badge>
+    <br>
   </ion-card>
 </ion-content>

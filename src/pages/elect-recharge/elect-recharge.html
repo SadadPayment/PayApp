@@ -1,31 +1,87 @@
 <ion-header>
 
-    <ion-navbar>
-        <ion-title>ElectRecharge</ion-title>
-    </ion-navbar>
+  <ion-navbar color="one">
+    <ion-title>شحن الكهرباء</ion-title>
+  </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-    <ion-item>
-        <ion-label fixed>Meter</ion-label>
-        <ion-input type="number" placeholder="Meter Number" [(ngModel)]="Meter"></ion-input>
-        <!--<ion-input type="number" placeholder="Meter Number" maxlength="12" minlength="12"-->
-                   [
-    </ion-item>
 
-    <ion-item>
-        <ion-label fixed>Amount:</ion-label>
-        <ion-input type="number" placeholder="Amount" maxlength="4" minlength="1" [(ngModel)]="Amount"></ion-input>
-    </ion-item>
+  <ion-list>
+    <form novalidate (ngSubmit)="SendElectRequest()" [formGroup]="ElectForm">
 
-    <ion-item>
-        <ion-label fixed>ipin</ion-label>
-        <ion-input type="password" placeholder="ipin Number" maxlength="4" minlength="4" [(ngModel)]="Ipin"></ion-input>
-    </ion-item>
+      <ion-item>
+        <ion-label fixed>رقم العداد:</ion-label>
+        <ion-input
+        formControlName="METER" type="number" placeholder="Meter Number" [(ngModel)]="electData.METER"
+        [class.error1]="!ElectForm.controls.METER.valid && ElectForm.controls.METER.dirty"></ion-input>
+      </ion-item>
 
-    <ion-card>
-        <button ion-button block (click)="Send()">Check</button>
-    </ion-card>
+      <ion-item no-lines
+                *ngIf="( ElectForm.get('METER').hasError('minlength') || ElectForm.get('METER').hasError('maxlength') ||ElectForm.get('METER').hasError('pattern') ||ElectForm.get('METER').hasError('required') ) && ElectForm.get('METER').touched">
+        <div class="error" *ngIf="ElectForm.get('METER').hasError('METER') && ElectForm.get('METER').touched">
+          ادخل رقم العداد
+        </div>
+        <div class="error" *ngIf="ElectForm.get('METER').hasError('minlength') && ElectForm.get('METER').touched">
+          اقل عدد 11
+        </div>
+        <div class="error" *ngIf="ElectForm.get('METER').hasError('maxlength') && ElectForm.get('METER').touched">
+          لايمكن اضافة اكثر من 12 رقم
+        </div>
+        <div class="error" *ngIf="ElectForm.get('METER').hasError('pattern') && ElectForm.get('METER').touched">
+          فقط ارقام
+        </div>
+      </ion-item>
+
+
+      <ion-item>
+        <ion-label fixed>القيمة:</ion-label>
+        <ion-input type="number" placeholder="amount Number" [(ngModel)]="electData.amount"
+        formControlName="amount"
+        [class.error1]="!ElectForm.controls.amount.valid && ElectForm.controls.amount.dirty"></ion-input>
+      </ion-item>
+
+      <ion-item no-lines
+                *ngIf="( ElectForm.get('amount').hasError('minlength') || ElectForm.get('amount').hasError('maxlength') ||ElectForm.get('amount').hasError('pattern') ||ElectForm.get('amount').hasError('required') ) && ElectForm.get('amount').touched">
+        <div class="error" *ngIf="ElectForm.get('amount').hasError('amount') && ElectForm.get('amount').touched">
+          ادخل الوحدات
+        </div>
+        <div class="error" *ngIf="ElectForm.get('amount').hasError('minlength') && ElectForm.get('amount').touched">
+          اقل عدد 1
+        </div>
+        <div class="error" *ngIf="ElectForm.get('amount').hasError('pattern') && ElectForm.get('amount').touched">
+          فقط ارقام
+        </div>
+      </ion-item>
+
+      <ion-item>
+        <ion-label fixed>الرقم السري:</ion-label>
+        <ion-input type="password" placeholder="الرقم السري" [(ngModel)]="electData.IPIN"
+        formControlName="IPIN"
+        [class.error1]="!ElectForm.controls.IPIN.valid && ElectForm.controls.IPIN.dirty"></ion-input>
+      </ion-item>
+
+      <ion-item no-lines
+                *ngIf="( ElectForm.get('IPIN').hasError('minlength') || ElectForm.get('IPIN').hasError('maxlength') ||ElectForm.get('IPIN').hasError('pattern') ||ElectForm.get('IPIN').hasError('required') ) && ElectForm.get('IPIN').touched">
+        <div class="error" *ngIf="ElectForm.get('IPIN').hasError('IPIN') && ElectForm.get('IPIN').touched">
+          ادخل الرقم السري
+        </div>
+        <div class="error" *ngIf="ElectForm.get('IPIN').hasError('minlength') && ElectForm.get('IPIN').touched">
+          اقل عدد 4
+        </div>
+        <div class="error" *ngIf="ElectForm.get('IPIN').hasError('maxlength') && ElectForm.get('IPIN').touched">
+          لايمكن اضافة اكثر من 6 رقم
+        </div>
+        <div class="error" *ngIf="ElectForm.get('IPIN').hasError('pattern') && ElectForm.get('IPIN').touched">
+          فقط ارقام
+        </div>
+      </ion-item>
+
+      <button type="submit" ion-button block color="one" [disabled]="ElectForm.invalid">شحن</button>
+
+    </form>
+  </ion-list>
+
 </ion-content>
