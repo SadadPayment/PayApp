@@ -1,12 +1,23 @@
 <ion-header>
 
   <ion-navbar color="one">
-    <ion-title>الملف الشخصي</ion-title>
+    <ion-title text-center>الملف الشخصي</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+  <!--{{data.id}}-->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title *ngIf="data !== null">
+        اسم المشترك: {{data.fullName}}
+      </ion-card-title>
+      <h2 text-center="">{{data.phone}}</h2>
+    </ion-card-header>
+    <ion-card-content>
 
+    </ion-card-content>
+  </ion-card>
 </ion-content>
