@@ -14,7 +14,7 @@
     <form novalidate (ngSubmit)="SendRecharge()" [formGroup]="RechargeForm">
       <ion-item>
         <ion-label>اختار الشبكة:</ion-label>
-        <ion-select [(ngModel)]="RechargeData.biller" formControlName="biller" (ionChange)="applyCategoryFilter()" >
+        <ion-select [(ngModel)]="RechargeData.biller" formControlName="biller" (ionChange)="applyCategoryFilter()">
           <ion-option value="MTN">MTN</ion-option>
           <ion-option value="Sudani">Sudani</ion-option>
           <ion-option value="Zain">Zain</ion-option>
@@ -109,7 +109,7 @@
         </div>
       </ion-item>
 
-      <button type="submit" ion-button block color="one" [disabled]="RechargeForm.invalid">Recharge</button>
+      <button type="submit" ion-button block color="one" [disabled]="RechargeForm.invalid">شحن</button>
 
     </form>
   </ion-list>

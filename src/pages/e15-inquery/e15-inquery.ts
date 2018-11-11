@@ -1,7 +1,7 @@
-import {Component} from '@angular/core';
-import {AlertController, IonicPage, LoadingController, NavController, NavParams} from 'ionic-angular';
-import {E15ProcessProvider} from "../../providers/e15-process/e15-process";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import { Component } from '@angular/core';
+import { AlertController, IonicPage, LoadingController, NavController, NavParams } from 'ionic-angular';
+import { E15ProcessProvider } from "../../providers/e15-process/e15-process";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
 
 @IonicPage()
 @Component({
@@ -15,7 +15,7 @@ export class E15InqueryPage {
   InvouisNumber: number;
   data: any;
   E15Form: FormGroup;
-  E15Data = {"Phone": "", "IPIN": "", "Amount": "", "InvouisNumber": ""};
+  E15Data = { "Phone": "", "IPIN": "", "Amount": "", "InvouisNumber": "" };
   private Message: any;
   private ebs: any;
 
@@ -54,9 +54,12 @@ export class E15InqueryPage {
         this.data = data;
         console.log("DataE15: ", this.data);
         this.Message = this.data;
+        if(this.Message.ebs.responseMessage){
         this.ebs = this.Message.ebs.responseMessage;
+        
         console.log("ebs: ", this.ebs);
-        console.log("ebs: ", this.Message.ebs);
+        console.log("ebs: full ", this.Message.ebs);
+        }
         if (this.data.error == false) {
           this.pass(this.data.message, this.data.response);
         }
@@ -77,19 +80,22 @@ export class E15InqueryPage {
     let alert = this.alertCtrl.create({
       title: 'نجحت العملية',
       subTitle:
-      message
-      +
-      '<br>'
-      +
-      response.PayerName
-      + '<br>'
-      + response.ReferenceId
-      + '<br>'
-      + response.ServiceName
-      + '<br>'
-      + response.TotalAmount
-      + '<br>'
-      + response.UnitName      ,
+        '<br>'
+        +
+        "الاسم: " +
+        response.PayerName
+        + '<br>' +
+        "الرقم المرجعي : " +
+        + response.ReferenceId
+        + '<br>' +
+        "اسم الخدمة: " +
+        + response.ServiceName
+        + '<br>' +
+        "القيمة الاجمالية: " +
+        + response.TotalAmount
+        + '<br>' +
+        "اسم الوحدة: "
+        + response.UnitName,
       buttons: ['تم'],
       cssClass: 'alertOne'
     });
@@ -102,8 +108,9 @@ export class E15InqueryPage {
       subTitle: "فشلت العملية" +
         "<br> " +
         this.Message.message +
-        "<br> " +
-        this.ebs
+        "<br> "
+        
+      // this.ebs
       ,
       buttons: ['تم'],
       cssClass: 'alertTwo'

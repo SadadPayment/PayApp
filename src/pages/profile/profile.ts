@@ -1,12 +1,7 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {Component} from '@angular/core';
+import {IonicPage, NavController, NavParams} from 'ionic-angular';
+import {UsersProvider} from "../../providers/users/users";
 
-/**
- * Generated class for the ProfilePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -15,11 +10,27 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ProfilePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private profilePro: UsersProvider) {
+    this.getProfile();
+
   }
+
+  data: any={'username':'user', 'phone':'09XXXXXXX', 'email':"", "fullName":"xxx"};
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ProfilePage');
   }
 
+  getProfile() {
+    this.profilePro.getUsersProfileProvider()
+      .then(response => {
+        this.data = response;
+        console.log(this.data);
+      })
+      .catch(err => {
+        console.log('error Server Side: ', err);
+      })
+  }
 }

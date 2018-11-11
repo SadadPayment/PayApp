@@ -1,21 +1,25 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Injectable} from '@angular/core';
 
 @Injectable()
 export class UsersProvider {
   url = "http://sadad.cf:8000/api";
+  url2 = "http://localhost:8000/api";
   urlLogin = "/login";
   urlRegs = "/register";
   urlActivation = "/activate";
-  LoginPath: any;
-  RegPath: any;
-  ActivationPath: any;
+  LoginPath: string;
+  RegPath: string;
+  ActivationPath: string;
+  getProfileUrl: string;
 
 
   constructor(public http: HttpClient) {
     this.LoginPath = this.url + this.urlLogin;
     this.RegPath = this.url + this.urlRegs;
     this.ActivationPath = this.url + this.urlActivation;
+    // this.getProfileUrl = this.url + '/user/profile';
+    this.getProfileUrl = this.url2 + '/user/profile';
 
   }
 
@@ -82,6 +86,19 @@ export class UsersProvider {
       });
     });
 
+  }
+
+
+  getUsersProfileProvider() {
+    return new Promise((resolve, reject) => {
+      this.http.get(this.getProfileUrl, {
+        headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      }).subscribe(res => {
+        resolve(res)
+      }, (err) => {
+        reject(err)
+      });
+    });
   }
 
 }
