@@ -14,6 +14,7 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
 import { E15ProcessProvider } from '../providers/e15-process/e15-process';
 import {PaymentProvider} from "../providers/payment/payment";
 import {HistoryPaymentProvider} from "../providers/history/HistoryPayment";
+import {AccountProvider} from "../providers/users/Account";
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import {HistoryPaymentProvider} from "../providers/history/HistoryPayment";
     StatusBar,
     BackendProvider,
     UsersProvider,
+    AccountProvider,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     E15ProcessProvider,
     PaymentProvider,

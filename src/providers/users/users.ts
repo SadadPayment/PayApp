@@ -3,8 +3,9 @@ import {Injectable} from '@angular/core';
 
 @Injectable()
 export class UsersProvider {
+  token = localStorage.getItem('token');
   url = "http://sadad.cf:8000/api";
-  url2 = "http://localhost:8000/api";
+  // url2 = "http://localhost:8000/api";
   urlLogin = "/login";
   urlRegs = "/register";
   urlActivation = "/activate";
@@ -19,7 +20,7 @@ export class UsersProvider {
     this.RegPath = this.url + this.urlRegs;
     this.ActivationPath = this.url + this.urlActivation;
     // this.getProfileUrl = this.url + '/user/profile';
-    this.getProfileUrl = this.url2 + '/user/profile';
+    this.getProfileUrl = this.url + '/user/profile';
 
   }
 
@@ -59,7 +60,8 @@ export class UsersProvider {
     };
     return new Promise((resolve, reject) => {
       this.http.post(this.RegPath, JSON.stringify(body), {
-        headers: new HttpHeaders().set('Content-Type', 'application/json'),
+        headers: new HttpHeaders().set('Content-Type', 'application/json')
+          .set('Authorization', "Bearer " + this.token),
       }).subscribe(res => {
         resolve(res)
       }, (err) => {

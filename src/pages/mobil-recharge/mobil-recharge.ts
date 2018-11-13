@@ -1,7 +1,7 @@
-import {Component} from '@angular/core';
-import {AlertController, IonicPage, LoadingController, NavController, NavParams, ToastController} from 'ionic-angular';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {PaymentProvider} from '../../providers/payment/payment';
+import { Component } from '@angular/core';
+import { AlertController, IonicPage, LoadingController, NavController, NavParams } from 'ionic-angular';
+import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { PaymentProvider } from '../../providers/payment/payment';
 
 @IonicPage()
 @Component({
@@ -12,7 +12,7 @@ export class MobilRechargePage {
 
   // RechargeModel: MobilePaymentModel;
   data: any;
-  RechargeData = {"phone": "", "amount": "", "IPIN": "", "biller": ""};
+  RechargeData = { "phone": "", "amount": "", "IPIN": "", "biller": "" };
   RechargeForm: FormGroup;
   error: any;
 
@@ -21,7 +21,6 @@ export class MobilRechargePage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    private toastCtrl: ToastController,
     private payProv: PaymentProvider,
     private loadingCtrl: LoadingController,
     private alertCtrl: AlertController
@@ -79,7 +78,7 @@ export class MobilRechargePage {
     let alert = this.alertCtrl.create({
       title: 'خطأ',
       subTitle:
-      meassge
+        meassge
       ,
       buttons: ['تم'],
       cssClass: 'alertTwo'

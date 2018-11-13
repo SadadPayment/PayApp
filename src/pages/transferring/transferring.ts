@@ -1,13 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-/**
- * Generated class for the TransferringPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-transferring',
@@ -19,7 +12,17 @@ export class TransferringPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad TransferringPage');
   }
 
+  Ewalt() {
+  console.log('Ew')
+    this.navCtrl.push('CreditCardPage')
+  }
+
+  editInfo() {
+
+  }
+  local_agent(){
+
+  }
 }

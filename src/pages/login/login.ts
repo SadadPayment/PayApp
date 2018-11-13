@@ -2,7 +2,6 @@ import {UsersProvider} from '../../providers/users/users';
 import {Component} from '@angular/core';
 import {IonicPage, LoadingController, NavController, NavParams, ToastController, MenuController} from 'ionic-angular';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {UsersDataModel} from "../../models/UsersModel";
 
 
 @IonicPage()
@@ -14,7 +13,6 @@ export class LoginPage {
   LoginForm: FormGroup;
   userData = {"phone": "", "IPIN": ""};
   data: any;
-  userM: UsersDataModel;
 
   constructor(
     public navCtrl: NavController,
@@ -34,7 +32,7 @@ export class LoginPage {
       this.navCtrl.setRoot('HomeTabsPage')
     }
     else {
-      alert('login');
+      // alert('login');
     }
   }
 

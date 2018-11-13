@@ -1,7 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
-import { AlertController, Nav, Platform } from 'ionic-angular';
+import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
-// import {Network} from "@ionic-native/network";
 
 
 @Component({
@@ -19,9 +18,6 @@ export class MyApp {
   constructor(
     public platform: Platform,
     public statusBar: StatusBar,
-    // private network: Network,
-    private alertCtrl: AlertController,
-
   ) {
     this.initializeApp();
 
@@ -51,7 +47,7 @@ export class MyApp {
       this.statusBar.backgroundColorByHexString('#00bcd4');
       //Check Connation
       // this.listenConnection();
-      // this.statusBar.styleDefault();
+      this.statusBar.styleDefault();
     });
   }
 
