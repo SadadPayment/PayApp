@@ -14,6 +14,11 @@ export class AboutUsPage {
   ) {
   }
 
+  goBack(){
+    this.navCtrl.setRoot('HomeTabsPage')
+  }
+
+
   ionViewDidLoad() {
   }
 }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {IonicPage, MenuController, NavController, NavParams} from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -8,12 +8,17 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class TransferringPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public menuCtrl: MenuController) {
   }
 
   ionViewDidLoad() {
   }
-
+  menue(){
+    this.menuCtrl.open('right');
+  }
   Ewalt() {
   console.log('Ew')
     this.navCtrl.push('CreditCardPage')

@@ -12,6 +12,14 @@
   <ion-list>
     <form novalidate (ngSubmit)="SendElectRequest()" [formGroup]="ElectForm">
 
+
+      <ion-item>
+        <ion-label>اختار المحفظة:</ion-label>
+        <ion-select [(ngModel)]="electData.id" formControlName="id">
+          <ion-option *ngFor="let item of PAN"  value="{{item.id}}">{{item.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+
       <ion-item>
         <ion-label fixed>رقم العداد:</ion-label>
         <ion-input
@@ -58,7 +66,7 @@
 
       <ion-item>
         <ion-label fixed>الرقم السري:</ion-label>
-        <ion-input type="password" placeholder="الرقم السري" [(ngModel)]="electData.IPIN"
+        <ion-input type="password" placeholder="IPIN number" [(ngModel)]="electData.IPIN"
         formControlName="IPIN"
         [class.error1]="!ElectForm.controls.IPIN.valid && ElectForm.controls.IPIN.dirty"></ion-input>
       </ion-item>

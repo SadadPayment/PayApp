@@ -2,6 +2,7 @@ import {UsersProvider} from '../../providers/users/users';
 import {Component} from '@angular/core';
 import {IonicPage, LoadingController, NavController, NavParams, ToastController, MenuController} from 'ionic-angular';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {AccountProvider} from "../../providers/users/Account";
 
 
 @IonicPage()
@@ -11,21 +12,23 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 })
 export class LoginPage {
   LoginForm: FormGroup;
-  userData = {"phone": "", "IPIN": ""};
+  userData = {"phone": "", "password": ""};
   data: any;
+  account:any;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
+    private bankPro:AccountProvider,
     public LoginProvider: UsersProvider,
     private toastCtrl: ToastController,
     private loadingCtrl: LoadingController,
     public menu: MenuController) {
-      this.menu.enable(false) 
+      this.menu.enable(false);
 
     this.LoginForm = new FormGroup({
       phone: new FormControl('', [Validators.required, Validators.pattern('^(?:0|\\(?\\09\\)?\\s?|01\\s?)[1-79](?:[\\.\\-\\s]?\\d\\d){4}$'), Validators.minLength(10), Validators.maxLength(10)]),
-      IPIN: new FormControl('', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(4), Validators.maxLength(6)]),
+      password: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(25)]),
     });
     let to = localStorage.getItem('token');
     if (to != null) {
@@ -57,7 +60,26 @@ export class LoginPage {
         else if (this.data.error == false) {
           lod.dismiss();
           localStorage.setItem('token', this.data.token);
-          this.navCtrl.push('HomeTabsPage');
+          this.bankPro.get_bank_account_Provider()
+            .then(data=>{
+              this.account = data;
+              if (localStorage.getItem('account') == null) {
+                localStorage.setItem('account', JSON.stringify(this.account));
+              }
+              else {
+                localStorage.removeItem('account');
+                localStorage.setItem('account', JSON.stringify(this.account));
+              }
+              console.log('data: ',this.account);
+              lod.dismiss();
+
+            })
+            .catch(err=> {
+              console.log("server Error: ", err);
+              lod.dismiss();
+
+            });
+          this.navCtrl.setRoot('HomeTabsPage');
           this.LoginToast()
         }
       }, error => {
@@ -74,7 +96,7 @@ export class LoginPage {
 
   LoginToast() {
     let toast = this.toastCtrl.create({
-      message: 'Login successfully',
+      message: 'تم تسجيل الدخول بنجاح',
       duration: 2000,
       position: 'top'
     });

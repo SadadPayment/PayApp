@@ -42,7 +42,11 @@ export class HistoryUserPage {
       })
   }
 
+  goBack(){
+    this.navCtrl.setRoot('HomeTabsPage')
+  }
+
   openDetails(item) {
-    this.navCtrl.push('HistoryDitelsPage', {"data": item})
+    // this.navCtrl.push('HistoryDitelsPage', {"data": item})
   }
 }

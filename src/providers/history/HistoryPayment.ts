@@ -1,10 +1,11 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Injectable} from '@angular/core';
 
 @Injectable()
 export class HistoryPaymentProvider {
 
   url = "http://sadad.cf:8000/api/";
+  // url = "http://localhost:8000/api/";
   getUserUrl = "getByUsers";
   getAllUserTransactionUrl = "getAllTransaction";
   token = localStorage.getItem('token');

@@ -15,6 +15,11 @@ import { E15ProcessProvider } from '../providers/e15-process/e15-process';
 import {PaymentProvider} from "../providers/payment/payment";
 import {HistoryPaymentProvider} from "../providers/history/HistoryPayment";
 import {AccountProvider} from "../providers/users/Account";
+import {SplashScreen} from "@ionic-native/splash-screen";
+import { HardwareButtons } from '@scaffold-digital/ionic-hardware-buttons';
+
+import { NgxQRCodeModule } from 'ngx-qrcode2';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 
 @NgModule({
   declarations: [
@@ -25,6 +30,7 @@ import {AccountProvider} from "../providers/users/Account";
     ComponentsModule,
     HttpClientModule,
     AngularSvgIconModule,
+    NgxQRCodeModule,
     IonicModule.forRoot(MyApp),
   ],
   bootstrap: [IonicApp],
@@ -34,12 +40,15 @@ import {AccountProvider} from "../providers/users/Account";
   providers: [
     StatusBar,
     BackendProvider,
+    SplashScreen,
     UsersProvider,
     AccountProvider,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     E15ProcessProvider,
     PaymentProvider,
-    HistoryPaymentProvider
+    HardwareButtons,
+    HistoryPaymentProvider,
+    BarcodeScanner,
   ]
 })
 export class AppModule {

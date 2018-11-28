@@ -17,7 +17,7 @@ export class HomeTabsPage {
 
   paymentRoot = 'PaymentPage';
   transferringRoot = 'TransferringPage';
-  accountRoot = 'AccountPage';
+  // accountRoot = 'AccountPage';
 
 
 

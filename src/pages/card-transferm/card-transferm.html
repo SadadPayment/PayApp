@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar color="one">
-    <ion-title>تحوبل من بطاقة</ion-title>
+    <ion-title>تحويل من بطاقة</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -11,13 +11,31 @@
   <ion-list>
     <form novalidate (ngSubmit)="sendData()" [formGroup]="ElectForm">
 
+
+      <ion-item>
+        <ion-label>اختار المحفظة:</ion-label>
+        <ion-select [(ngModel)]="cardInfo.id" formControlName="id">
+          <ion-option *ngFor="let item of PAN"  value="{{item.id}}">{{item.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <!--<ion-item *ngIf="cardPan == null">-->
       <ion-item>
         <ion-label fixed>الي:</ion-label>
-        <ion-input type="number" placeholder="رقم البطاقة المرسل اليها" [(ngModel)]="cardInfo.to"
-                   value="5818582780482178"
+        <ion-input type="number" placeholder="رقم الحساب المرسل اليه" [(ngModel)]="cardInfo.to"
+                   value="{{cardPan}}"
                    formControlName="to"
                    [class.error1]="!ElectForm.controls.to.valid && ElectForm.controls.to.dirty"></ion-input>
       </ion-item>
+
+      <!--<ion-item *ngIf="cardPan !=null">-->
+        <!--<h2 text-center="">الي:-->
+          <!--<p>{{cardInfo.to}}</p></h2>-->
+        <!--<ion-input hidden type="number" placeholder="رقم الحساب المرسل اليه" [(ngModel)]="cardInfo.to"-->
+                   <!--value="{{cardPan}}"-->
+                   <!--formControlName="to"-->
+                   <!--[class.error1]="!ElectForm.controls.to.valid && ElectForm.controls.to.dirty"></ion-input>-->
+      <!--</ion-item>-->
 
       <ion-item no-lines
                 *ngIf="( ElectForm.get('to').hasError('minlength') || ElectForm.get('to').hasError('maxlength') ||ElectForm.get('to').hasError('pattern') ||ElectForm.get('to').hasError('required') ) && ElectForm.get('to').touched">
@@ -37,7 +55,7 @@
 
       <ion-item>
         <ion-label fixed>القيمة:</ion-label>
-        <ion-input type="number" placeholder="قيمة الشحن" [(ngModel)]="cardInfo.amount"
+        <ion-input type="number" placeholder="القيمة" [(ngModel)]="cardInfo.amount"
                    formControlName="amount"
                    [class.error1]="!ElectForm.controls.amount.valid && ElectForm.controls.amount.dirty"></ion-input>
       </ion-item>
@@ -78,7 +96,8 @@
         </div>
       </ion-item>
 
-      <button type="submit" ion-button block color="one" [disabled]="ElectForm.invalid">تحويل</button>
+      <!--<button type="submit" ion-button block color="one" [disabled]="ElectForm.invalid">تحويل</button>-->
+      <button type="submit" ion-button block color="one">تحويل</button>
     </form>
   </ion-list>
 </ion-content>

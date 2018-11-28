@@ -12,9 +12,10 @@ export class MobilRechargePage {
 
   // RechargeModel: MobilePaymentModel;
   data: any;
-  RechargeData = { "phone": "", "amount": "", "IPIN": "", "biller": "" };
+  RechargeData = { "phone": "", "amount": "", "IPIN": "", "biller": "", "id": "" };
   RechargeForm: FormGroup;
   error: any;
+  PAN:any;
 
   // private errorP: number;
 
@@ -28,6 +29,7 @@ export class MobilRechargePage {
     this.RechargeForm = new FormGroup({
       phone: new FormControl('', [Validators.required, Validators.pattern('^(?:0|\\(?\\09\\)?\\s?|01\\s?)[1-79](?:[\\.\\-\\s]?\\d\\d){4}$'), Validators.minLength(10), Validators.maxLength(10)]),
       // ^(?:0|\(?\+33\)?\s?|0033\s?)[1-79](?:[\.\-\s]?\d\d){4}$
+      id: new FormControl('', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(1)]),
       amount: new FormControl('', [Validators.required, Validators.pattern('^[1-9][0-9 \.]*'), Validators.minLength(1), Validators.maxLength(4)]),
       IPIN: new FormControl('', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(4), Validators.maxLength(4)]),
       biller: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z]*'), Validators.maxLength(6)]),
@@ -36,7 +38,11 @@ export class MobilRechargePage {
   }
 
   ionViewDidLoad() {
-    // console.log('ionViewDidLoad MobilRechargePage');
+    this.getBanckAccount();
+  }
+  getBanckAccount() {
+    let ac = localStorage.getItem('account');
+    this.PAN = JSON.parse(ac);
   }
 
   SendRecharge() {

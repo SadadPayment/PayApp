@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
-import {App, IonicPage, NavController, NavParams} from 'ionic-angular';
+import {App, IonicPage, MenuController, NavController, NavParams, Platform} from 'ionic-angular';
+import { BackButton } from '@scaffold-digital/ionic-hardware-buttons';
 
 
 @IonicPage()
@@ -9,14 +10,23 @@ import {App, IonicPage, NavController, NavParams} from 'ionic-angular';
 })
 export class PaymentPage {
 
-  AccountNumber: string = "199XXXXXX";
-
-  constructor(public navCtrl: NavController, public navParams: NavParams,private app: App) {
+  constructor(
+    public platform: Platform,
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private app: App,
+    public menuCtrl: MenuController
+  ) {
+    this.menuCtrl.enable(true);
   }
 
   ionViewDidLoad() {
   }
 
+menue(){
+  this.menuCtrl.open('')
+  // this.menuCtrl.open('right');
+}
   ngAfterViewInit(){
     // this.app.setScrollDisabled(true);
     this.app._setDisableScroll(true)
@@ -44,4 +54,20 @@ export class PaymentPage {
   BalanceInquiry(){
     this.navCtrl.push('BalanceInquiryPage')
   }
+
+  @BackButton()
+  public onBackButton() {
+    // alert('bak');
+    this.platform.exitApp();
+    return true;
+  }
+
+
+  openMyQr(){
+    this.navCtrl.push('CreateQrPage');
+  }
+  openPayQr(){
+    this.navCtrl.push('GetPaymentQrPage');
+  }
+
 }

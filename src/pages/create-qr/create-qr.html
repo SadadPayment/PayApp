@@ -1,0 +1,24 @@
+<ion-header>
+
+  <ion-navbar color="one">
+    <ion-title text-center="">استلام سريع</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<!--(ionChange)="createCode()"-->
+<ion-content padding>
+  <ion-item>
+    <ion-label>اختار الحساب:</ion-label>
+    <ion-select [(ngModel)]="qrData" (ionChange)="createCode()">
+      <ion-option  *ngFor="let item of data" value="{{item.PAN}}">{{item.name}}</ion-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-card *ngIf="createdCode">
+    <ngx-qrcode [qrc-value]="createdCode"></ngx-qrcode>
+    <ion-card-content>
+      <p text-center="">رقم البطاقة: {{ createdCode }}</p>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

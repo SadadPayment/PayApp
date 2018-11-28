@@ -1,18 +1,99 @@
-<!--
-  Generated template for the EditCreditCardPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>EditCreditCard</ion-title>
+  <ion-navbar color="one">
+    <ion-title>اضافة بطاقة</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content no-bounce>
+  <ion-list>
+    <form novalidate (ngSubmit)="saveCard()" [formGroup]="accountForm">
+      <ion-item>
+        <ion-label floating>الأسم</ion-label>
+        <ion-input type="text" maxlength="30" minlength="4" [(ngModel)]="accountData.name"
+                   formControlName="name"
+                   [class.error1]="!accountForm.controls.name.valid && accountForm.controls.name.dirty"></ion-input>
+      </ion-item>
 
+      <ion-item no-lines
+                *ngIf="( accountForm.get('name').hasError('minlength') || accountForm.get('name').hasError('maxlength') ||accountForm.get('name').hasError('pattern') ||accountForm.get('name').hasError('required') ) && accountForm.get('name').touched">
+        <div class="error"
+             *ngIf="accountForm.get('name').hasError('required') && accountForm.get('name').touched">
+          الرجاء اضافة اسم
+        </div>
+        <div class="error"
+             *ngIf="accountForm.get('name').hasError('minlength') && accountForm.get('name').touched">
+          اقل عدد للحروف 4
+        </div>
+        <div class="error"
+             *ngIf="accountForm.get('name').hasError('maxlength') && accountForm.get('name').touched">
+          لا يمكن اضافة اكثر من 30 حرف
+        </div>
+        <div class="error" *ngIf="accountForm.get('name').hasError('pattern') && accountForm.get('name').touched">
+          فقط حروف
+        </div>
+      </ion-item>
+
+
+      <ion-item>
+        <ion-label floating>رقم البطاقة:</ion-label>
+        <ion-input type="number" maxlength="19" minlength="4" [(ngModel)]="accountData.PAN"
+                   formControlName="PAN"
+                   [class.error1]="!accountForm.controls.PAN.valid && accountForm.controls.PAN.dirty"></ion-input>
+      </ion-item>
+
+      <ion-item no-lines
+                *ngIf="( accountForm.get('PAN').hasError('minlength') || accountForm.get('PAN').hasError('maxlength') ||accountForm.get('PAN').hasError('pattern') ||accountForm.get('PAN').hasError('required') ) && accountForm.get('PAN').touched">
+        <div class="error"
+             *ngIf="accountForm.get('PAN').hasError('PAN') && accountForm.get('PAN').touched">
+          الرجاء ادخال رقم البطاقة
+        </div>
+        <div class="error"
+             *ngIf="accountForm.get('PAN').hasError('minlength') && accountForm.get('PAN').touched">
+          اقل عدد لرقم البطاقة 16
+        </div>
+        <div class="error"
+             *ngIf="accountForm.get('PAN').hasError('maxlength') && accountForm.get('PAN').touched">
+          لا بمكن اضافة اكثر من 19 رقم
+        </div>
+        <div class="error"
+             *ngIf="accountForm.get('PAN').hasError('pattern') && accountForm.get('PAN').touched">
+          فقط ارقام
+        </div>
+      </ion-item>
+
+
+      <ion-item>
+        <ion-label floating>الرقم السري</ion-label>
+        <ion-input type="password" maxlength="4" minlength="4" [(ngModel)]="accountData.IPIN" formControlName="IPIN"
+
+                   [class.error1]="!accountForm.controls.IPIN.valid && accountForm.controls.IPIN.dirty"></ion-input>
+      </ion-item>
+
+      <ion-item no-lines
+                *ngIf="( accountForm.get('IPIN').hasError('minlength') || accountForm.get('IPIN').hasError('maxlength') ||accountForm.get('IPIN').hasError('pattern') ||accountForm.get('IPIN').hasError('required') ) && accountForm.get('IPIN').touched">
+        <div class="error" *ngIf="accountForm.get('IPIN').hasError('IPIN') && accountForm.get('IPIN').touched">
+          الرجاء ادخال الرقم السر المكونة من 4 اراقم الخاص بالبطاقة
+        </div>
+        <div class="error" *ngIf="accountForm.get('IPIN').hasError('minlength') && accountForm.get('IPIN').touched">
+          اقل عدد 4
+        </div>
+        <div class="error" *ngIf="accountForm.get('IPIN').hasError('maxlength') && accountForm.get('IPIN').touched">
+          لا يمكن اضافة اكثر من 4 ارقام
+        </div>
+        <div class="error" *ngIf="accountForm.get('IPIN').hasError('pattern') && accountForm.get('IPIN').touched">
+          فقط ارقام
+        </div>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>تاريخ انتهاء البطاقة</ion-label>
+        <ion-datetime displayFormat="D MMM, YY" pickerFormat="DD MMM YYYY" [(ngModel)]="accountData.expDate"
+                      formControlName="expDate"></ion-datetime>
+      </ion-item>
+      <button type="submit" ion-button block color="one" [disabled]="accountForm.invalid">حفظ</button>
+    </form>
+  </ion-list>
 </ion-content>

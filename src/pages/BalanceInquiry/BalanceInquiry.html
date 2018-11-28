@@ -10,8 +10,15 @@
 <ion-content padding>
   <form novalidate (ngSubmit)="getBalance()" [formGroup]="BalanceForm">
 
+      <ion-item>
+        <ion-label>اختار المحفظة:</ion-label>
+        <ion-select [(ngModel)]="formData.id" formControlName="id">
+          <ion-option *ngFor="let item of PAN"  value="{{item.id}}">{{item.name}}</ion-option>
+        </ion-select>
+      </ion-item>
     <ion-item>
-      <ion-label fixed>الرقم السري:</ion-label>
+
+    <ion-label fixed>الرقم السري:</ion-label>
       <ion-input type="password" placeholder="IPIN" [(ngModel)]="formData.IPIN"
                  formControlName="IPIN"
                  [class.error1]="!BalanceForm.controls.IPIN.valid && BalanceForm.controls.IPIN.dirty"></ion-input>

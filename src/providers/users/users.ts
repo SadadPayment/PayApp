@@ -5,7 +5,7 @@ import {Injectable} from '@angular/core';
 export class UsersProvider {
   token = localStorage.getItem('token');
   url = "http://sadad.cf:8000/api";
-  // url2 = "http://localhost:8000/api";
+  // url = "http://localhost:8000/api";
   urlLogin = "/login";
   urlRegs = "/register";
   urlActivation = "/activate";
@@ -28,7 +28,7 @@ export class UsersProvider {
   LoginProvider(data) {
     let body = {
       "phone": data.phone,
-      "IPIN": data.IPIN
+      "password": data.password
     };
 
     return new Promise((resolve, reject) => {

@@ -9,13 +9,14 @@ import { FormControl, FormGroup, Validators } from "@angular/forms";
   templateUrl: 'e15-inquery.html',
 })
 export class E15InqueryPage {
-  Phone: number;
-  Ipin: number;
-  Amount: number;
-  InvouisNumber: number;
+  // Phone: number;
+  // Ipin: number;
+  // Amount: number;
+  // InvouisNumber: number;
   data: any;
+  PAN:any;
   E15Form: FormGroup;
-  E15Data = { "Phone": "", "IPIN": "", "Amount": "", "InvouisNumber": "" };
+  E15Data = { "Phone": "", "IPIN": "", "Amount": "", "InvouisNumber": "", "id":"" };
   private Message: any;
   private ebs: any;
 
@@ -32,18 +33,24 @@ export class E15InqueryPage {
       amount: new FormControl('', [Validators.required, Validators.pattern('^[1-9][0-9 \.]*'), Validators.minLength(1), Validators.maxLength(15)]),
       IPIN: new FormControl('', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(4), Validators.maxLength(4)]),
       InvouisNumber: new FormControl('', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(18), Validators.maxLength(18)]),
-      //  IPIN: new FormControl('', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(4), Validators.maxLength(4)]),
+      id: new FormControl('', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(1)]),
     });
   }
 
-  // ionViewDidLoad() {
-  // }
+  ionViewDidLoad() {
+    this.getBanckAccount();
+  }
+  getBanckAccount() {
+    let ac = localStorage.getItem('account');
+    this.PAN = JSON.parse(ac);
+  }
   Check() {
     let body = {
       "phone": this.E15Data.Phone,
       "IPIN": this.E15Data.IPIN,
       "amount": this.E15Data.Amount,
-      "invoiceNo": this.E15Data.InvouisNumber
+      "invoiceNo": this.E15Data.InvouisNumber,
+      "id": this.E15Data.id
     };
     let loading = this.loadingCtrl.create({
       content: 'الرجاء الإنتظار لإتمام المعاملة'
@@ -75,6 +82,8 @@ export class E15InqueryPage {
       }));
     this.E15Form.reset();
   }
+
+
 
   pass(message, response) {
     let alert = this.alertCtrl.create({

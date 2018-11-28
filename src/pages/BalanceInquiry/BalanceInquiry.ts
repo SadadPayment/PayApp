@@ -13,8 +13,9 @@ export class BalanceInquiryPage {
 
   Data: any;
   private Message: any;
-  formData = {"IPIN": ""};
+  formData = {"IPIN": "", "id":""};
   dis = true;
+  PAN:any;
 
   BalanceForm: FormGroup;
 
@@ -25,12 +26,14 @@ export class BalanceInquiryPage {
     private alertCtrl: AlertController,
     private loadingCtrl: LoadingController) {
     this.BalanceForm = new FormGroup({
+      id: new FormControl('', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(1)]),
       IPIN: new FormControl('', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(4), Validators.maxLength(4)])
     });
   }
 
 
   ionViewDidLoad() {
+    this.getBanckAccount();
   }
 
   getBalance() {
@@ -46,7 +49,7 @@ export class BalanceInquiryPage {
           this.dis = this.Message.error;
           this.presentAlert();
         }
-        else if (this.Message.message == "Wrong IPIN Code") {
+        else if (this.Message.error == true) {
           this.presentEAlert();
 
         }
@@ -64,6 +67,10 @@ export class BalanceInquiryPage {
 
   }
 
+  getBanckAccount() {
+    let ac = localStorage.getItem('account');
+    this.PAN = JSON.parse(ac);
+  }
   presentAlert() {
     let alert = this.alertCtrl.create({
       title: 'الرصيد',
@@ -88,7 +95,7 @@ export class BalanceInquiryPage {
       subTitle: "" +
         "<br>" +
         "<p>" +
-        "خطأ في الرقم السري" +
+        "حاول لاحقا" +
         "<br>" +
         "</p>"
 

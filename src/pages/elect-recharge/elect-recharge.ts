@@ -11,12 +11,9 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 })
 export class ElectRechargePage {
 
-  // Meter: number;
-  // Amount: number;
-  // Ipin: number;
   data: any;
   Message: any;
-  electData = {"METER": "", "amount": "", "IPIN": ""};
+  electData = {"METER": "", "amount": "", "IPIN": "", "id": ""};
   ElectForm: FormGroup;
 
   constructor(public navCtrl: NavController,
@@ -28,11 +25,18 @@ export class ElectRechargePage {
       METER: new FormControl('', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(11), Validators.maxLength(11)]),
       amount: new FormControl('', [Validators.required, Validators.pattern('^[1-9][0-9 \.]*'), Validators.minLength(1), Validators.maxLength(15)]),
       IPIN: new FormControl('', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(4), Validators.maxLength(4)]),
+      id: new FormControl('', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(1)]),
 
     });
   }
+  PAN:any;
 
   ionViewDidLoad() {
+    this.getBanckAccount();
+  }
+  getBanckAccount() {
+    let ac = localStorage.getItem('account');
+    this.PAN = JSON.parse(ac);
   }
 
   //moragaaa
@@ -45,11 +49,11 @@ export class ElectRechargePage {
     this.electBack.ElectricityRequestProvider(this.electData).then(data => {
       console.log("data: ", data);
       this.data = data;
-      if (this.data.error == false || 'false') {
+      if (this.data.error == false) {
         this.Message = this.data.info;
         this.presentAlert();
       }
-      if (this.data.error == true || 'true') {
+      if (this.data.error == true) {
         this.Aerror();
       }
       loading.dismiss();

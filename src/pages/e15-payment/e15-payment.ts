@@ -12,9 +12,9 @@ export class E15PaymentPage {
   data: any;
   private Message: any;
 
-  // E15Data = {"phone": "", "amount": "", "IPIN": "", "invoiceNo": ""};
-  E15Data = { "Phone": "", "IPIN": "", "Amount": "", "InvouisNumber": "" };
+  E15Data = { "Phone": "", "IPIN": "", "Amount": "", "InvouisNumber": "", "id":"" };
   E15Form: FormGroup;
+  PAN:any;
 
   constructor(
     private alertCtrl: AlertController,
@@ -24,6 +24,7 @@ export class E15PaymentPage {
     private loadingCtrl: LoadingController
   ) {
     this.E15Form = new FormGroup({
+      id: new FormControl('', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(1)]),
       phone: new FormControl('', [Validators.required, Validators.pattern('^(?:0|\\(?\\09\\)?\\s?|01\\s?)[1-79](?:[\\.\\-\\s]?\\d\\d){4}$'), Validators.minLength(10), Validators.maxLength(10)]),
       amount: new FormControl('', [Validators.required, Validators.pattern('^[1-9][0-9 \.]*'), Validators.minLength(1), Validators.maxLength(15)]),
       IPIN: new FormControl('', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(4), Validators.maxLength(4)]),
@@ -32,6 +33,7 @@ export class E15PaymentPage {
   }
 
   ionViewDidLoad() {
+    this.getBanckAccount();
   }
 
   e15Payment() {
@@ -39,7 +41,8 @@ export class E15PaymentPage {
       "phone": this.E15Data.Phone,
       "amount": this.E15Data.Amount,
       "IPIN": this.E15Data.IPIN,
-      "invoiceNo": this.E15Data.InvouisNumber
+      "invoiceNo": this.E15Data.InvouisNumber,
+      "id": this.E15Data.id
     };
     let loading = this.loadingCtrl.create({
       content: 'الرجاء الإنتظار لإتمام المعاملة'
@@ -66,23 +69,27 @@ export class E15PaymentPage {
   }
 
 
+  getBanckAccount() {
+    let ac = localStorage.getItem('account');
+    this.PAN = JSON.parse(ac);
+  }
   pass(message, response) {
     let alert = this.alertCtrl.create({
       title: 'نجحت العملية',
       subTitle:
-        message
-        +
-        '<br>'
-        +
-        response.PayerName
-        + '<br>'
-        + response.ReferenceId
-        + '<br>'
-        + response.ServiceName
-        + '<br>'
-        + response.TotalAmount
-        + '<br>'
-        + response.UnitName
+     "الاسم: " + response.PayerName
+          + '<br>' +
+          "الرقم المرجعي : " +
+          + response.ReferenceId
+          + '<br>' +
+          "اسم الخدمة: " +
+          + response.ServiceName
+          + '<br>' +
+          "القيمة الاجمالية: " +
+          + response.TotalAmount
+          + '<br>' +
+          "اسم الوحدة: "
+          + response.UnitName
       ,
       buttons: ['تم'],
       cssClass: 'alertOne'

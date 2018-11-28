@@ -1,7 +1,12 @@
 <ion-header>
 
   <ion-navbar color="one">
-    <ion-title>Transferring</ion-title>
+    <ion-buttons right>
+      <button ion-button (click)="menue()">
+        <ion-icon style="font-size: 2.2em;" color="#ffff" name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title text-center="">العمليات</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -11,18 +16,17 @@
     <ion-list>
       <ion-card style="border-radius: 2px">
         <ion-item (click)="Ewalt()">
-          <ion-icon name="leaf" item-start></ion-icon>
-            المحفظة الألكترونية
-          <ion-icon name="rose" item-end></ion-icon>
+          <ion-icon color="danger" name="i-wallet" item-start></ion-icon>
+            المحفظة الإلكترونية
+          <!--<ion-icon name="rose" item-end></ion-icon>-->
         </ion-item>
         <ion-item (click)="editInfo()">
-          <ion-icon name="leaf" item-start></ion-icon>
+          <ion-icon name="information-circle" color="one" item-start></ion-icon>
             تعديل البيانات
-          <ion-icon name="rose" item-end></ion-icon>
         </ion-item>
         <ion-item (click)="local_agent()">
-          <ion-icon name="leaf" item-start></ion-icon>
-العملاء          <ion-icon name="rose" item-end></ion-icon>
+          <ion-icon name="map" color="secondary" item-start></ion-icon>
+العملاء
         </ion-item>
 
       </ion-card>

@@ -10,6 +10,13 @@
 <ion-content padding>
   <ion-list>
     <form novalidate (ngSubmit)="e15Payment()" [formGroup]="E15Form">
+      <ion-item>
+        <ion-label>اختار المحفظة:</ion-label>
+        <ion-select [(ngModel)]="E15Data.id" formControlName="id">
+          <ion-option *ngFor="let item of PAN"  value="{{item.id}}">{{item.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+
 
       <ion-item>
         <ion-label floating>رقم الهاتف:</ion-label>

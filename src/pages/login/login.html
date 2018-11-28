@@ -43,23 +43,23 @@
 
       <ion-item>
         <ion-label floating>الرقم السري:</ion-label>
-        <ion-input type="password" maxlength="4" minlength="4" max="4" min="4" [(ngModel)]="userData.IPIN"
-                   formControlName="IPIN"
-                   [class.error1]="!LoginForm.controls.IPIN.valid && LoginForm.controls.IPIN.dirty"></ion-input>
+        <ion-input type="password" maxlength="30" minlength="6" max="30" min="6" [(ngModel)]="userData.password"
+                   formControlName="password"
+                   [class.error1]="!LoginForm.controls.password.valid && LoginForm.controls.password.dirty"></ion-input>
       </ion-item>
 
       <ion-item no-lines
-                *ngIf="( LoginForm.get('IPIN').hasError('minlength') || LoginForm.get('IPIN').hasError('maxlength') ||LoginForm.get('IPIN').hasError('pattern') ||LoginForm.get('IPIN').hasError('required') ) && LoginForm.get('IPIN').touched">
-        <div class="error" *ngIf="LoginForm.get('IPIN').hasError('IPIN') && signupform.get('IPIN').touched">
+                *ngIf="( LoginForm.get('password').hasError('minlength') || LoginForm.get('password').hasError('maxlength') ||LoginForm.get('password').hasError('pattern') ||LoginForm.get('password').hasError('required') ) && LoginForm.get('password').touched">
+        <div class="error" *ngIf="LoginForm.get('password').hasError('password') && signupform.get('password').touched">
           الرجاء ادخال الرقم السري
         </div>
-        <div class="error" *ngIf="LoginForm.get('IPIN').hasError('minlength') && LoginForm.get('IPIN').touched">
+        <div class="error" *ngIf="LoginForm.get('password').hasError('minlength') && LoginForm.get('password').touched">
           اقل عدد 4 لكلمة المرور
         </div>
-        <div class="error" *ngIf="LoginForm.get('IPIN').hasError('maxlength') && LoginForm.get('IPIN').touched">
+        <div class="error" *ngIf="LoginForm.get('password').hasError('maxlength') && LoginForm.get('password').touched">
           لا يمكن اضافة اكثر من 6 ارقام لكلمة المرور
         </div>
-        <div class="error" *ngIf="LoginForm.get('IPIN').hasError('pattern') && LoginForm.get('IPIN').touched">
+        <div class="error" *ngIf="LoginForm.get('password').hasError('pattern') && LoginForm.get('password').touched">
           فقط استخدم الارقام(0-9)
         </div>
       </ion-item>

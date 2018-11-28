@@ -34,6 +34,9 @@ ion-icon {
   &[class*="i-trans"] {
     mask-image: url(../assets/svg/md-paper-plane.svg);
   }
+  &[class*="i-wallet"] {
+    mask-image: url(../assets/svg/wallet.svg);
+  }
   &[class*="i-flash"] {
     mask-image: url(../assets/svg/flashlight.svg);
   }

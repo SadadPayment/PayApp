@@ -12,6 +12,15 @@
   <ion-list>
 
     <form novalidate (ngSubmit)="SendRecharge()" [formGroup]="RechargeForm">
+
+      <ion-item>
+        <ion-label>اختار المحفظة:</ion-label>
+        <ion-select [(ngModel)]="RechargeData.id" formControlName="id">
+          <ion-option *ngFor="let item of PAN"  value="{{item.id}}">{{item.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+
+
       <ion-item>
         <ion-label>اختار الشبكة:</ion-label>
         <ion-select [(ngModel)]="RechargeData.biller" formControlName="biller" (ionChange)="applyCategoryFilter()">

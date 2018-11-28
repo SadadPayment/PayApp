@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class PaymentProvider {
   url = "http://sadad.cf:8000/api/";
+  // url = "http://localhost:8000/api/";
   TopUpPath = "topUp";
   TopUpUrl: string;
 
@@ -36,7 +37,8 @@ export class PaymentProvider {
       'phone': data.phone,
       'biller': data.biller,
       'amount': data.amount,
-      'IPIN': data.IPIN
+      'IPIN': data.IPIN,
+      'id': data.id
     };
 
     return new Promise((resolve, reject) => {
@@ -70,13 +72,10 @@ export class PaymentProvider {
     });
   }
 
-  BalanceInquiryRequest(ipin) {
-    console.log(ipin);
-    let body = {
-      "IPIN": ipin
-    };
+  BalanceInquiryRequest(data) {
+  
     return new Promise((resolve, reject) => {
-      this.http.post(this.BalanceInquiryUrl, JSON.stringify(body), {
+      this.http.post(this.BalanceInquiryUrl, JSON.stringify(data), {
         headers: new HttpHeaders().set('Content-Type', 'application/json')
           .set('Authorization', "Bearer " + this.token),
       }).subscribe(res => {
@@ -91,7 +90,8 @@ export class PaymentProvider {
     let body = {
       'meter': data.METER,
       'amount': data.amount,
-      'IPIN': data.IPIN
+      'IPIN': data.IPIN,
+      'id': data.id
     };
     return new Promise((resolve, reject) => {
       this.http.post(this.electricityUrl, JSON.stringify(body), {
@@ -106,13 +106,15 @@ export class PaymentProvider {
   }
 
 
-  CardTransferRequest(info) {
-    console.log("data: ", info);
+  CardTransferRequest(data) {
+    console.log("data: ", data);
 
     let cardInfo = {
-      'to': info.to,
-      'amount': info.amount,
-      'IPIN': info.IPIN
+      'to': data.to,
+      'amount': data.amount,
+      'IPIN': data.IPIN,
+      'id': data.id
+
     };
 
     return new Promise((resolve, reject) => {

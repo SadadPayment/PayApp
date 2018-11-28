@@ -11,9 +11,9 @@ import {PaymentProvider} from "../../providers/payment/payment";
 export class CardTransfermPage {
   data: any;
   Message: any;
-  cardInfo = {"IPIN": "", "amount": "", "to": ""};
+  cardInfo = {"IPIN": "", "amount": "", "to": "", "id": ""};
   ElectForm: FormGroup;
-
+  cardPan:string;
   // value = "9888061010278131317";
 
   constructor(
@@ -22,16 +22,25 @@ export class CardTransfermPage {
     private payProv: PaymentProvider,
     private alertCtrl: AlertController,
     private loadingCtrl: LoadingController) {
+    this.cardPan = this.navParams.get('data');
+    // this.cardPan = '21541541213541231345543';
+    if (this.cardPan) {
+this.cardInfo.to = this.cardPan;
+    }
     this.ElectForm = new FormGroup({
       to: new FormControl('', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(16), Validators.maxLength(19)]),
       amount: new FormControl('', [Validators.required, Validators.pattern('^[1-9][0-9 \.]*'), Validators.minLength(1), Validators.maxLength(15)]),
       IPIN: new FormControl('', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(4), Validators.maxLength(4)]),
-
+      id: new FormControl('', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(1)]),
     });
   }
-
+PAN:any;
   ionViewDidLoad() {
-
+    this.getBanckAccount();
+  }
+  getBanckAccount() {
+    let ac = localStorage.getItem('account');
+    this.PAN = JSON.parse(ac);
   }
 
   sendData() {
@@ -60,14 +69,10 @@ export class CardTransfermPage {
         this.presentEAlert();
         console.log("error: ", err);
         loading.dismiss();
-      })
+      });
     this.ElectForm.reset();
 
   }
-
-  // balance:
-  //   available: 963942.92
-  // leger: -36057.08
 
 
   presentAlert() {

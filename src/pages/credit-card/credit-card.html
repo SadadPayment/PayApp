@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar color="one">
-    <ion-title text-center>الحسابات المضافة</ion-title>
+    <ion-title text-center>بطاقات سداد</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -9,10 +9,34 @@
 
 <ion-content padding>
 <ion-list>
-  <ion-item *ngFor="let item of data">
-    <h1>{{item.PAN}}</h1>
-    <p>{{item.mbr}}</p>
-    <p>{{item.expDate}}</p>
+  <ion-item style="background-color:rgb(0, 188, 212)" *ngFor="let item of data">
+
+    <h2 item-start>رقم البطاقة:
+      <p style="color: #000000;" text-center="">
+      {{item.PAN}}
+      </p>
+    {{item.name}}</h2>
+    <br>
+    <h3 item-right="">تاريخ الأنتهاء:
+      <p style="color: #000000;" text-center>{{item.expDate}}</p></h3>
+    <button color="danger" (click)="delteAccount(item.id)" item-end ion-button round style="
+    margin-left: -5%;
+    border-radius: 0%;
+    height: 100%;
+    width: 20%;
+    font-size: 100%;">
+      <ion-icon color="light" name="trash"></ion-icon>
+    </button>
   </ion-item>
 </ion-list>
+  <ion-grid>
+    <ion-row style="text-align:center">
+      <ion-col style="text-align:center">
+        <button ion-button="" [round]="" color="one" (click)="addBankAccount()">اضافة بطاقة</button>
+      </ion-col>
+      <ion-col style="text-align:center">
+        <button ion-button="" [round]="" color="secondary" disabled (click)="addBankAccount()">بطاقة</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

@@ -86,7 +86,7 @@
 
       <ion-item>
         <ion-label floating>الاسم الكامل:</ion-label>
-        <ion-input type="text" [(ngModel)]="userData.fullName" formControlName="fullName" value="Omer Ali"
+        <ion-input type="text" [(ngModel)]="userData.fullName" formControlName="fullName"
                    [class.error1]="!signupform.controls.fullName.valid && signupform.controls.fullName.dirty"></ion-input>
       </ion-item>
 
@@ -112,7 +112,7 @@
       <ion-item>
         <ion-label floating>رقم البطاقة:</ion-label>
         <ion-input type="number" maxlength="19" minlength="4" [(ngModel)]="userData.panNumber"
-                   formControlName="panNumber" value="9888061010278131317"
+                   formControlName="panNumber"
                    [class.error1]="!signupform.controls.panNumber.valid && signupform.controls.panNumber.dirty"></ion-input>
       </ion-item>
 
@@ -140,7 +140,7 @@
       <ion-item>
         <ion-label floating>الرقم السري</ion-label>
         <ion-input type="number" maxlength="4" minlength="4" [(ngModel)]="userData.Ipin" formControlName="Ipin"
-                   value="0000"
+                   
                    [class.error1]="!signupform.controls.Ipin.valid && signupform.controls.Ipin.dirty"></ion-input>
       </ion-item>
 
@@ -165,7 +165,7 @@
         <ion-datetime displayFormat="D MMM, YY" pickerFormat="DD MMM YYYY" [(ngModel)]="userData.expDate"
                       formControlName="expDate"></ion-datetime>
       </ion-item>
-      <button type="submit" ion-button block color="primary" [disabled]="signupform.invalid">تسجل</button>
+      <button type="submit" ion-button block color="one" [disabled]="signupform.invalid">تسجل</button>
     </form>
   </ion-list>
 </ion-content>
