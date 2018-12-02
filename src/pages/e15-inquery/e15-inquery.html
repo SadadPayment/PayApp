@@ -14,7 +14,7 @@
       <ion-item>
         <ion-label>اختار المحفظة:</ion-label>
         <ion-select [(ngModel)]="E15Data.id" formControlName="id">
-          <ion-option *ngFor="let item of PAN"  value="{{item.id}}">{{item.name}}</ion-option>
+          <ion-option *ngFor="let item of PAN" value="{{item.id}}">{{item.name}}</ion-option>
         </ion-select>
       </ion-item>
 
@@ -44,8 +44,7 @@
       </ion-item>
       <ion-item>
         <ion-label fixed>القيمة:</ion-label>
-        <ion-input type="number" placeholder="القيمة" [(ngModel)]="E15Data.Amount"
-                   formControlName="amount"
+        <ion-input type="number" placeholder="القيمة" [(ngModel)]="E15Data.Amount" formControlName="amount"
                    [class.error1]="!E15Form.controls.amount.valid && E15Form.controls.amount.dirty"></ion-input>
       </ion-item>
 
@@ -64,8 +63,7 @@
 
       <ion-item>
         <ion-label fixed>الرقم السري:</ion-label>
-        <ion-input type="password" placeholder="IPIN" [(ngModel)]="E15Data.IPIN"
-                   formControlName="IPIN"
+        <ion-input type="password" placeholder="IPIN" [(ngModel)]="E15Data.IPIN" formControlName="IPIN"
                    [class.error1]="!E15Form.controls.IPIN.valid && E15Form.controls.IPIN.dirty"></ion-input>
       </ion-item>
 
@@ -105,7 +103,7 @@
         </div>
         <div class="error"
              *ngIf="E15Form.get('InvouisNumber').hasError('maxlength') && E15Form.get('InvouisNumber').touched">
-          يجب ان لا يزيد رقم الفاتورة عن 18
+          يجب ان لا يزيد رقم الفاتورة عن 30
         </div>
         <div class="error"
              *ngIf="E15Form.get('InvouisNumber').hasError('pattern') && E15Form.get('InvouisNumber').touched">
@@ -116,11 +114,12 @@
     </form>
   </ion-list>
 
-  <ion-card>
-    <br>
-
-    <h2>الحالة: </h2>
-    <ion-badge *ngIf="ebs !== null">{{ebs}}</ion-badge>
-    <br>
-  </ion-card>
+  <!--<ion-item  *ngIf="dis == false">-->
+  <!--<p>الاسم:{{ data.response.PayerName}}</p>-->
+  <!--<p> الرقم المرجعي: {{data.response.ReferenceId}}</p>-->
+  <!--<p> اسم الخدمة: {{ data.response.ServiceName}}</p>-->
+  <!--<p>القيمة الاجمالية:{{data.response.TotalAmount}} </p>-->
+  <!--<p>اسم الوحدة: {{data.response.UnitName}}</p>-->
+  <!--<p>اسم الوحدة: {{data.response.UnitName}}</p>-->
+  <!--</ion-item>-->
 </ion-content>

@@ -103,7 +103,7 @@
         </div>
         <div class="error"
              *ngIf="E15Form.get('InvouisNumber').hasError('maxlength') && E15Form.get('InvouisNumber').touched">
-          يجب ان لا يزيد رقم الفاتورة عن 18
+          يجب ان لا يزيد رقم الفاتورة عن 30
         </div>
         <div class="error"
              *ngIf="E15Form.get('InvouisNumber').hasError('pattern') && E15Form.get('InvouisNumber').touched">
@@ -113,7 +113,13 @@
       <button type="submit" ion-button block color="one" [disabled]="E15Form.invalid">تحقق</button>
     </form>
   </ion-list>
-
-  <ion-card>
-  </ion-card>
+  
+<!-- 
+  <ion-card *ngIf"data">
+      <p>الاسم:{{ data.response.PayerName}}</p>
+      <p> الرقم المرجعي: {{data.response.ReferenceId}}</p>
+      <p> اسم الخدمة: {{ data.response.ServiceName}}</p>
+      <p>القيمة الاجمالية:{{data.response.TotalAmount}}</p>
+      <p>اسم الوحدة: {{data.response.UnitName}}</p>
+    </ion-card> -->
 </ion-content>

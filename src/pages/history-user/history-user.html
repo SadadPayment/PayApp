@@ -13,11 +13,11 @@
     <ion-item *ngFor="let item of data">
       <ion-card (click)="openDetails(item)">
         <ion-icon icon-left color="two" name="trash" class="text-white"></ion-icon>
-            <h1 *ngIf="item.type !== null">نوع المعاملة:
-              {{item.type}}</h1>
-        <h1 *ngIf="item.Response !== null">#رقم: {{item.Response.id}}</h1>
-        <div *ngIf="item.Response == undefined"><p style="color: red">خطا - فشلة العملية</p></div>
-        <p *ngIf="item.Response !== null">الحالة: {{item.Response.responseMessage}}</p>
+            <h3 text-center *ngIf="item.type !== null">نوع المعاملة:
+              {{item.type}}</h3>
+        <h1 text-center *ngIf="item.Response !== null">#رقم: {{item.Response.id}}</h1>
+        <div text-center *ngIf="item.Response == undefined"><p style="color: red">خطا - فشلة العملية</p></div>
+        <p text-center *ngIf="item.Response !== null">الحالة: {{item.Response.responseMessage}}</p>
         <ion-icon color="two" name="time" class="text-white"></ion-icon>
         <span ion-text *ngIf="item.Response !== null">بتاريخ: {{item.Response.created_at | date : 'short'}}</span>
       </ion-card>

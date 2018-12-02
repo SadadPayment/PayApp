@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
-import { AlertController, IonicPage, LoadingController, NavController, NavParams } from 'ionic-angular';
-import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { PaymentProvider } from '../../providers/payment/payment';
+import {Component} from '@angular/core';
+import {AlertController, IonicPage, LoadingController, NavController, NavParams} from 'ionic-angular';
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {PaymentProvider} from '../../providers/payment/payment';
 
 @IonicPage()
 @Component({
@@ -12,10 +12,10 @@ export class MobilRechargePage {
 
   // RechargeModel: MobilePaymentModel;
   data: any;
-  RechargeData = { "phone": "", "amount": "", "IPIN": "", "biller": "", "id": "" };
+  RechargeData = {"phone": "", "amount": "", "IPIN": "", "biller": "", "id": ""};
   RechargeForm: FormGroup;
   error: any;
-  PAN:any;
+  PAN: any;
 
   // private errorP: number;
 
@@ -40,6 +40,7 @@ export class MobilRechargePage {
   ionViewDidLoad() {
     this.getBanckAccount();
   }
+
   getBanckAccount() {
     let ac = localStorage.getItem('account');
     this.PAN = JSON.parse(ac);
@@ -72,6 +73,13 @@ export class MobilRechargePage {
       title: 'نجحت العملية',
       subTitle:
         'تم الشحن بنجاح'
+        + '<br>' +
+        '<h2> مزود الخدمة</h2>'
+        + '<p>' + this.RechargeData.biller + '</p>'
+        + '<h2>رقم الهاتف</h2>'
+        + '<p>' + this.RechargeData.phone + '</p>'
+        + '<h2> قيمة الشحن </h2>'
+        + '<p>' + this.RechargeData.amount + '</p>'
       ,
       buttons: ['تم'],
       cssClass: 'alertOne'
@@ -84,7 +92,7 @@ export class MobilRechargePage {
     let alert = this.alertCtrl.create({
       title: 'خطأ',
       subTitle:
-        meassge
+      meassge
       ,
       buttons: ['تم'],
       cssClass: 'alertTwo'

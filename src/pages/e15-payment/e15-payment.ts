@@ -12,9 +12,9 @@ export class E15PaymentPage {
   data: any;
   private Message: any;
 
-  E15Data = { "Phone": "", "IPIN": "", "Amount": "", "InvouisNumber": "", "id":"" };
+  E15Data = { "Phone": "", "IPIN": "", "Amount": "", "InvouisNumber": "", "id": "" };
   E15Form: FormGroup;
-  PAN:any;
+  PAN: any;
 
   constructor(
     private alertCtrl: AlertController,
@@ -28,7 +28,7 @@ export class E15PaymentPage {
       phone: new FormControl('', [Validators.required, Validators.pattern('^(?:0|\\(?\\09\\)?\\s?|01\\s?)[1-79](?:[\\.\\-\\s]?\\d\\d){4}$'), Validators.minLength(10), Validators.maxLength(10)]),
       amount: new FormControl('', [Validators.required, Validators.pattern('^[1-9][0-9 \.]*'), Validators.minLength(1), Validators.maxLength(15)]),
       IPIN: new FormControl('', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(4), Validators.maxLength(4)]),
-      InvouisNumber: new FormControl('', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(18), Validators.maxLength(18)]),
+      InvouisNumber: new FormControl('', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(18), Validators.maxLength(30)]),
     });
   }
 
@@ -53,7 +53,7 @@ export class E15PaymentPage {
         this.data = data;
         console.log("DataE15: ", this.Message = this.data);
         if (this.data.error == false) {
-          this.pass(this.data.message, this.data.response);
+          this.pass(this.data.response);
 
         }
         else {
@@ -73,23 +73,23 @@ export class E15PaymentPage {
     let ac = localStorage.getItem('account');
     this.PAN = JSON.parse(ac);
   }
-  pass(message, response) {
+  pass(response) {
     let alert = this.alertCtrl.create({
       title: 'نجحت العملية',
       subTitle:
-     "الاسم: " + response.PayerName
-          + '<br>' +
-          "الرقم المرجعي : " +
-          + response.ReferenceId
-          + '<br>' +
-          "اسم الخدمة: " +
-          + response.ServiceName
-          + '<br>' +
-          "القيمة الاجمالية: " +
-          + response.TotalAmount
-          + '<br>' +
-          "اسم الوحدة: "
-          + response.UnitName
+        "الاسم: " + response.PayerName
+        + '<br>' +
+        "الرقم المرجعي : " +
+        + response.ReferenceId
+        + '<br>' +
+        "اسم الخدمة: " +
+        + response.ServiceName
+        + '<br>' +
+        "القيمة الاجمالية: " +
+        + response.TotalAmount
+        + '<br>' +
+        "اسم الوحدة: "
+        + response.UnitName
       ,
       buttons: ['تم'],
       cssClass: 'alertOne'
@@ -103,6 +103,11 @@ export class E15PaymentPage {
       subTitle: "فشلت العملية" +
         "<br> " +
         this.Message.message
+        + "<br>"
+        + "حالة الارسال"
+        + this.Message.ebs.responseMessage
+        + "<br>" + "حالة الطلب"
+        + this.Message.ebs.responseStatus
       ,
       buttons: ['تم'],
       cssClass: 'alertTwo'

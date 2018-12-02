@@ -42,7 +42,7 @@ export class BalanceInquiryPage {
     });
 
     loading.present();
-    this.payProv.BalanceInquiryRequest(this.formData.IPIN)
+    this.payProv.BalanceInquiryRequest(this.formData)
       .then(data => {
         console.log(this.Message = data);
         if (this.Message.error == false) {
