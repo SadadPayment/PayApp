@@ -54,7 +54,6 @@ export class E15PaymentPage {
         console.log("DataE15: ", this.Message = this.data);
         if (this.data.error == false) {
           this.pass(this.data.response);
-
         }
         else {
           this.error();
@@ -95,6 +94,7 @@ export class E15PaymentPage {
       cssClass: 'alertOne'
     });
     alert.present();
+    this.E15Form.reset();
   }
 
   error() {
@@ -103,11 +103,11 @@ export class E15PaymentPage {
       subTitle: "فشلت العملية" +
         "<br> " +
         this.Message.message
-        + "<br>"
-        + "حالة الارسال"
-        + this.Message.ebs.responseMessage
-        + "<br>" + "حالة الطلب"
-        + this.Message.ebs.responseStatus
+        // + "<br>"
+        // + "حالة الارسال"
+        // + this.Message.ebs.responseMessage
+        // + "<br>" + "حالة الطلب"
+        // + this.Message.ebs.responseStatus
       ,
       buttons: ['تم'],
       cssClass: 'alertTwo'

@@ -1,13 +1,7 @@
-import { UsersProvider } from './../../providers/users/users';
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {UsersProvider} from '../../providers/users/users';
+import {Component} from '@angular/core';
+import {AlertController, IonicPage, LoadingController, MenuController, NavController, NavParams} from 'ionic-angular';
 
-/**
- * Generated class for the ActivatePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -16,27 +10,75 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ActivatePage {
 
-  code:any;
-  phone:any;
-  data:any;
+  code: any;
+  phone: any;
+  data: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams , public UsersProvider: UsersProvider) {
-    
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private alertCtrl: AlertController,
+    private loadingCtrl: LoadingController,
+    public UsersProvider: UsersProvider,
+    public menu: MenuController) {
+    this.menu.enable(false);
     this.phone = this.navParams.get("phone");
-    console.log(this.phone);
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ActivatePage');
-  }
 
-  activate(){
-    this.UsersProvider.ActivationProvider(this.code , this.phone).then(response =>{
+  activate() {
+    let loading = this.loadingCtrl.create({
+      content: 'الرجاء الإنتظار لإتمام المعاملة'
+    });
+
+    loading.present();
+    this.UsersProvider.ActivationProvider(this.code, this.phone).then(response => {
       this.data = response;
       console.log(this.data);
-    }, error =>{
+      if (this.data.error == false) {
+        loading.dismiss();
+        this.PassAlert();
+        this.navCtrl.setRoot('LoginPage')
+      }
+      else {
+        loading.dismiss();
+        this.ErrorAlert();
+      }
+    }, error => {
+      loading.dismiss();
       console.log(error);
-    }); 
+    });
   }
+
+
+  PassAlert() {
+    let alert = this.alertCtrl.create({
+      title: 'نجاح',
+      subTitle: "تم تفعيل الحساب بنجاح"
+      ,
+      buttons: ['تم'],
+      cssClass: 'alertOne'
+    });
+    alert.present();
+  }
+
+
+  ErrorAlert() {
+    let alert = this.alertCtrl.create({
+      title: 'خطأ',
+      subTitle: "" +
+        "<br>" +
+        "<p>" +
+        "رمز التاكيد المدخل غير مطابق" +
+        "<br>" +
+        "</p>"
+
+      ,
+      buttons: ['تم'],
+      cssClass: 'alertTwo'
+    });
+    alert.present();
+  }
+
 
 }

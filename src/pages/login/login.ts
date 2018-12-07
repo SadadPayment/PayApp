@@ -35,15 +35,9 @@ export class LoginPage {
       this.navCtrl.setRoot('HomeTabsPage')
     }
     else {
-      // alert('login');
     }
   }
 
-//0969036783
-
-  // ionViewDidLoad() {
-  //   console.log('ionViewDidLoad LoginPage');
-  // }
   login() {
     let lod = this.loadingCtrl.create({
       content: 'الرجاء الإنتظار لإتمام المعاملة'
@@ -91,20 +85,16 @@ export class LoginPage {
   }
 
   Registrtion() {
-    this.navCtrl.push('RegistertionPage');
+    this.navCtrl.push('RegistrationPage');
   }
-
   LoginToast() {
     let toast = this.toastCtrl.create({
       message: 'تم تسجيل الدخول بنجاح',
       duration: 2000,
       position: 'top'
     });
-
     toast.onDidDismiss(() => {
-
     });
-
     toast.present();
   }
 
@@ -123,6 +113,3 @@ export class LoginPage {
     toast.present();
   }
 }
-
-
-// error: false message: "OK"token: "ey"

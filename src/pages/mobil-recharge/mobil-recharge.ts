@@ -1,7 +1,7 @@
-import {Component} from '@angular/core';
-import {AlertController, IonicPage, LoadingController, NavController, NavParams} from 'ionic-angular';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {PaymentProvider} from '../../providers/payment/payment';
+import { Component } from '@angular/core';
+import { AlertController, IonicPage, LoadingController, NavController, NavParams } from 'ionic-angular';
+import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { PaymentProvider } from '../../providers/payment/payment';
 
 @IonicPage()
 @Component({
@@ -12,7 +12,7 @@ export class MobilRechargePage {
 
   // RechargeModel: MobilePaymentModel;
   data: any;
-  RechargeData = {"phone": "", "amount": "", "IPIN": "", "biller": "", "id": ""};
+  RechargeData = { "phone": "", "amount": "", "IPIN": "", "biller": "", "id": "" };
   RechargeForm: FormGroup;
   error: any;
   PAN: any;
@@ -57,7 +57,7 @@ export class MobilRechargePage {
         this.TopUpSToast()
       }
 
-      else if (this.data.error == '') {
+      else if (this.data.error == true) {
         this.TopUpEToast(this.data.message);
       }
       loading.dismiss();
@@ -85,6 +85,8 @@ export class MobilRechargePage {
       cssClass: 'alertOne'
     });
     alert.present();
+    this.RechargeForm.reset();
+
   }
 
 
@@ -92,16 +94,17 @@ export class MobilRechargePage {
     let alert = this.alertCtrl.create({
       title: 'خطأ',
       subTitle:
-      meassge
+        meassge
       ,
       buttons: ['تم'],
       cssClass: 'alertTwo'
     });
     alert.present();
+    this.RechargeForm.reset();
+
   }
 
   applyCategoryFilter() {
-    console.log("Filter")
   }
 
 

@@ -20,6 +20,7 @@ import { HardwareButtons } from '@scaffold-digital/ionic-hardware-buttons';
 
 import { NgxQRCodeModule } from 'ngx-qrcode2';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import {InAppBrowser} from "@ionic-native/in-app-browser";
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
     HardwareButtons,
     HistoryPaymentProvider,
     BarcodeScanner,
+    InAppBrowser,
   ]
 })
 export class AppModule {

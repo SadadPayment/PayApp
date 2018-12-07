@@ -1,0 +1,25 @@
+<ion-header>
+
+  <ion-navbar color="one">
+    <ion-buttons left>
+      <button ion-button icon-only (click)="goBack()">
+        <ion-icon name="arrow-back"></ion-icon>رجوع
+      </button>
+    </ion-buttons>
+    <ion-title text-center>رقم الانترنت السري IPIN</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+      <button ion-button color="one" full (click)="openWebSite()">انشاء رقم جديد</button>
+    </ion-item>
+    <ion-item>
+      <button ion-button color="one" full (click)="openWebSite()">تغير كلمة السر</button>
+    </ion-item>
+  </ion-list>
+  <!--<iframe src="https://ebs-sd.com/ebs/vas/generateipin.php?lan=ar" style="width: 100%; height: 70vh;"></iframe>-->
+</ion-content>

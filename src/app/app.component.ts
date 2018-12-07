@@ -35,6 +35,7 @@ export class MyApp {
       { title: 'الرئيسية', component: 'HomeTabsPage', icon: "md-home" },
       // { title: 'ملفي الشخصي', component: 'ProfilePage', icon: "md-person" },
       { title: 'سجل العمليات', component: 'HistoryUserPage', icon: "calendar" },
+      { title: 'انشاء رقم الانترنت السري', component: 'CreateIpinPage', icon: "lock" },
       { title: 'عن التطبيق', component: 'AboutUsPage', icon: "information-circle" },
 
     ];

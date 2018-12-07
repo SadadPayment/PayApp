@@ -10,31 +10,57 @@
 <ion-content padding>
   <ion-list>
     <form novalidate (ngSubmit)="register()" [formGroup]="signupform">
+      <!--<ion-item>-->
+      <!--<ion-label floating>اللقب</ion-label>-->
+      <!--<ion-input type="text" maxlength="30" placeholder="Like: OXaltyab" minlength="4" [(ngModel)]="userData.username"-->
+      <!--formControlName="username"-->
+      <!--[class.error1]="!signupform.controls.username.valid && signupform.controls.username.dirty"></ion-input>-->
+      <!--</ion-item>-->
+
+      <!--<ion-item no-lines-->
+      <!--*ngIf="( signupform.get('username').hasError('minlength') || signupform.get('username').hasError('maxlength') ||signupform.get('username').hasError('pattern') ||signupform.get('username').hasError('required') ) && signupform.get('username').touched">-->
+      <!--<div class="error"-->
+      <!--*ngIf="signupform.get('username').hasError('required') && signupform.get('username').touched">-->
+      <!--الرجاء ادخال اللق-->
+      <!--</div>-->
+      <!--<div class="error"-->
+      <!--*ngIf="signupform.get('username').hasError('minlength') && signupform.get('username').touched">-->
+      <!--اقل عدد للحروف 4-->
+      <!--</div>-->
+      <!--<div class="error"-->
+      <!--*ngIf="signupform.get('username').hasError('maxlength') && signupform.get('username').touched">-->
+      <!--لا يمكن اضافة اكثر من 30 حرف-->
+      <!--</div>-->
+      <!--<div class="error" *ngIf="signupform.get('username').hasError('pattern') && signupform.get('username').touched">-->
+      <!--فقط حروف-->
+      <!--</div>-->
+      <!--</ion-item>-->
+
       <ion-item>
-        <ion-label floating>اللقب</ion-label>
-        <ion-input type="text" maxlength="30" placeholder="Like: OXaltyab" minlength="4" [(ngModel)]="userData.username"
-                   formControlName="username"
-                   [class.error1]="!signupform.controls.username.valid && signupform.controls.username.dirty"></ion-input>
+        <ion-label floating>الاسم الكامل:</ion-label>
+        <ion-input type="text" [(ngModel)]="userData.fullName" formControlName="fullName"
+                   [class.error1]="!signupform.controls.fullName.valid && signupform.controls.fullName.dirty"></ion-input>
       </ion-item>
 
       <ion-item no-lines
-                *ngIf="( signupform.get('username').hasError('minlength') || signupform.get('username').hasError('maxlength') ||signupform.get('username').hasError('pattern') ||signupform.get('username').hasError('required') ) && signupform.get('username').touched">
+                *ngIf="( signupform.get('fullName').hasError('minlength') || signupform.get('fullName').hasError('maxlength') ||signupform.get('fullName').hasError('pattern') ||signupform.get('fullName').hasError('required') ) && signupform.get('fullName').touched">
         <div class="error"
-             *ngIf="signupform.get('username').hasError('required') && signupform.get('username').touched">
-          الرجاء ادخال اللق
+             *ngIf="signupform.get('fullName').hasError('required') && signupform.get('fullName').touched">
+          الرجاء ادخال اسم الكامل
         </div>
         <div class="error"
-             *ngIf="signupform.get('username').hasError('minlength') && signupform.get('username').touched">
-          اقل عدد للحروف 4
+             *ngIf="signupform.get('fullName').hasError('minlength') && signupform.get('fullName').touched">
+          لا يمكن ضافة اقل من 4 حروف للاسم
         </div>
         <div class="error"
-             *ngIf="signupform.get('username').hasError('maxlength') && signupform.get('username').touched">
-          لا يمكن اضافة اكثر من 30 حرف
+             *ngIf="signupform.get('fullName').hasError('maxlength') && signupform.get('fullName').touched">
+          لا يمكن اضافة اكثر من 30 حرف للاسم
         </div>
-        <div class="error" *ngIf="signupform.get('username').hasError('pattern') && signupform.get('username').touched">
-          فقط حروف
+        <div class="error" *ngIf="signupform.get('fullName').hasError('pattern') && signupform.get('fullName').touched">
+          الاسم مكون من حروف فقط عربي - انجليزي
         </div>
       </ion-item>
+
 
       <ion-item>
         <ion-label floating>رقم الهاتف:</ion-label>
@@ -75,37 +101,11 @@
         </div>
         <div class="error"
              *ngIf="signupform.get('password').hasError('minlength') && signupform.get('password').touched">
-          اقل عدد
+          كلمة السر لا تقل عن 6 ارقام او احرف
         </div>
         <div class="error"
              *ngIf="signupform.get('password').hasError('maxlength') && signupform.get('password').touched">
-          Maximum 12 characters
-        </div>
-      </ion-item>
-
-
-      <ion-item>
-        <ion-label floating>الاسم الكامل:</ion-label>
-        <ion-input type="text" [(ngModel)]="userData.fullName" formControlName="fullName"
-                   [class.error1]="!signupform.controls.fullName.valid && signupform.controls.fullName.dirty"></ion-input>
-      </ion-item>
-
-      <ion-item no-lines
-                *ngIf="( signupform.get('fullName').hasError('minlength') || signupform.get('fullName').hasError('maxlength') ||signupform.get('fullName').hasError('pattern') ||signupform.get('fullName').hasError('required') ) && signupform.get('fullName').touched">
-        <div class="error"
-             *ngIf="signupform.get('fullName').hasError('required') && signupform.get('fullName').touched">
-          الرجاء ادخال اسم الكامل
-        </div>
-        <div class="error"
-             *ngIf="signupform.get('fullName').hasError('minlength') && signupform.get('fullName').touched">
-          لا يمكن ضافة اقل من 4 حروف للاسم
-        </div>
-        <div class="error"
-             *ngIf="signupform.get('fullName').hasError('maxlength') && signupform.get('fullName').touched">
-          لا يمكن اضافة اكثر من 30 حرف للاسم
-        </div>
-        <div class="error" *ngIf="signupform.get('fullName').hasError('pattern') && signupform.get('fullName').touched">
-          فقط حروف
+          كلمة السر لا تزيد عن 30 حرف او رقم
         </div>
       </ion-item>
 
@@ -124,23 +124,23 @@
         </div>
         <div class="error"
              *ngIf="signupform.get('panNumber').hasError('minlength') && signupform.get('panNumber').touched">
-          اقل عدد لرقم البطاقة 16
+          رقم البطاقة لا يمكن ان يكون اقل 16 رقم
         </div>
         <div class="error"
              *ngIf="signupform.get('panNumber').hasError('maxlength') && signupform.get('panNumber').touched">
-          لا بمكن اضافة اكثر من 19 رقم
+          رقم البطاقة لايمكن ان يكون اكثر من 19 رقم
         </div>
         <div class="error"
              *ngIf="signupform.get('panNumber').hasError('pattern') && signupform.get('panNumber').touched">
-          فقط ارقام
+          رقم البطاقة مكون من ارقام فقط
         </div>
       </ion-item>
 
 
       <ion-item>
-        <ion-label floating>الرقم السري</ion-label>
+        <ion-label floating>رقم الانترنت السري:</ion-label>
         <ion-input type="number" maxlength="4" minlength="4" [(ngModel)]="userData.Ipin" formControlName="Ipin"
-                   
+
                    [class.error1]="!signupform.controls.Ipin.valid && signupform.controls.Ipin.dirty"></ion-input>
       </ion-item>
 
@@ -156,16 +156,18 @@
           لا يمكن اضافة اكثر من 4 ارقام
         </div>
         <div class="error" *ngIf="signupform.get('Ipin').hasError('pattern') && signupform.get('Ipin').touched">
-          فقط ارقام
+          الرقم السري مكون من ارقام فقط
         </div>
       </ion-item>
 
       <ion-item>
         <ion-label floating>تاريخ انتهاء البطاقة</ion-label>
-        <ion-datetime displayFormat="D MMM, YY" pickerFormat="DD MMM YYYY" [(ngModel)]="userData.expDate"
+        <ion-datetime displayFormat="MM, YY" pickerFormat="MM YYYY" [(ngModel)]="userData.expDate"
+                      placeholder="شهر - عام"
+                      min="{{min}}" max="2050-10-20"
                       formControlName="expDate"></ion-datetime>
       </ion-item>
-      <button type="submit" ion-button block color="one" [disabled]="signupform.invalid">تسجل</button>
+      <button type="submit" ion-button block color="one" [disabled]="signupform.invalid">تسجيل</button>
     </form>
   </ion-list>
 </ion-content>

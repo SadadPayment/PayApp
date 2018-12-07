@@ -65,21 +65,7 @@ export class E15InqueryPage {
         else {
           this.error();
         }
-        // console.log("DataE15: ", this.data);
-        // this.Message = this.data;
-        // this.dis = this.data.error;
-        // if (this.Message.ebs.responseMessage) {
-        //   this.ebs = this.Message.ebs.responseMessage;
-        //
-        //   console.log("ebs: ", this.ebs);
-        //   console.log("ebs: full ", this.Message.ebs);
-        // }
-        // if (this.data.error == false) {
-        //   this.pass(this.data.response);
-        // }
-        // else {
-        //   this.error();
-        // }
+     
         loading.dismiss();
       })
       .catch((error => {
@@ -124,7 +110,7 @@ export class E15InqueryPage {
       title: 'خطأ',
       subTitle: "فشلت العملية" +
         "<br> " +
-        // this.Message.message
+        this.data.message
         +"<br>"
         + "حالة الارسال"
         // + this.Message.ebs.responseMessage
@@ -135,6 +121,8 @@ export class E15InqueryPage {
       cssClass: 'alertTwo'
     });
     alert.present();
+    // this.E15Form.reset();
+
   }
 
   e15Status() {
@@ -146,6 +134,9 @@ export class E15InqueryPage {
     }
     if (this.data.status == 'PAID') {
       return 'تم الدفع';
+    }
+    if(this.data.ebs.responseCode == 73){
+      return 'خطا في رقم البطاقة';
     }
     else {
       return 'غير معروف';
