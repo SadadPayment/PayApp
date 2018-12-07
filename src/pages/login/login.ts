@@ -2,7 +2,7 @@ import { UsersProvider } from '../../providers/users/users';
 import { Component } from '@angular/core';
 import { IonicPage, LoadingController, NavController, NavParams, ToastController, MenuController } from 'ionic-angular';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { AccountProvider } from "../../providers/users/Account";
+// import { AccountProvider } from "../../providers/users/Account";
 
 
 @IonicPage()
@@ -19,7 +19,7 @@ export class LoginPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    private bankPro: AccountProvider,
+    // private bankPro: AccountProvider,
     public LoginProvider: UsersProvider,
     private toastCtrl: ToastController,
     private loadingCtrl: LoadingController,
