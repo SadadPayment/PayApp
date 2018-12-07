@@ -73,8 +73,10 @@ export class LoginPage {
               lod.dismiss();
 
             });
+            if (localStorage.getItem('account') != null) {
           this.navCtrl.setRoot('HomeTabsPage');
           this.LoginToast()
+            }
         }
       }, error => {
         lod.dismiss();
