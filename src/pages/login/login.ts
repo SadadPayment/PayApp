@@ -1,8 +1,8 @@
-import {UsersProvider} from '../../providers/users/users';
-import {Component} from '@angular/core';
-import {IonicPage, LoadingController, NavController, NavParams, ToastController, MenuController} from 'ionic-angular';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {AccountProvider} from "../../providers/users/Account";
+import { UsersProvider } from '../../providers/users/users';
+import { Component } from '@angular/core';
+import { IonicPage, LoadingController, NavController, NavParams, ToastController, MenuController } from 'ionic-angular';
+import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { AccountProvider } from "../../providers/users/Account";
 
 
 @IonicPage()
@@ -12,19 +12,19 @@ import {AccountProvider} from "../../providers/users/Account";
 })
 export class LoginPage {
   LoginForm: FormGroup;
-  userData = {"phone": "", "password": ""};
+  userData = { "phone": "", "password": "" };
   data: any;
-  account:any;
+  account: any;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    private bankPro:AccountProvider,
+    private bankPro: AccountProvider,
     public LoginProvider: UsersProvider,
     private toastCtrl: ToastController,
     private loadingCtrl: LoadingController,
     public menu: MenuController) {
-      this.menu.enable(false);
+    this.menu.enable(false);
 
     this.LoginForm = new FormGroup({
       phone: new FormControl('', [Validators.required, Validators.pattern('^(?:0|\\(?\\09\\)?\\s?|01\\s?)[1-79](?:[\\.\\-\\s]?\\d\\d){4}$'), Validators.minLength(10), Validators.maxLength(10)]),
@@ -45,44 +45,53 @@ export class LoginPage {
     lod.present();
 
     this.LoginProvider.LoginProvider(this.userData).then(response => {
-        console.log("data: ", this.data = response);
-        if (this.data.error == true) {
-          this.FiallLoginToast();
-          lod.dismiss();
-          console.log("mesg: ", this.data.message);
-        }
-        else if (this.data.error == false) {
-          lod.dismiss();
-          localStorage.setItem('token', this.data.token);
-          this.bankPro.get_bank_account_Provider()
-            .then(data=>{
-              this.account = data;
-              if (localStorage.getItem('account') == null) {
-                localStorage.setItem('account', JSON.stringify(this.account));
-              }
-              else {
-                localStorage.removeItem('account');
-                localStorage.setItem('account', JSON.stringify(this.account));
-              }
-              console.log('data: ',this.account);
-              lod.dismiss();
-
-            })
-            .catch(err=> {
-              console.log("server Error: ", err);
-              lod.dismiss();
-
-            });
-            if (localStorage.getItem('account') != null) {
-          this.navCtrl.setRoot('HomeTabsPage');
-          this.LoginToast()
-            }
-        }
-      }, error => {
-        lod.dismiss();
+      console.log("data: ", this.data = response);
+      this.account = this.data.account;
+      if (this.data.error == true) {
         this.FiallLoginToast();
-        console.log("Data: ", error);
+        lod.dismiss();
+        console.log("mesg: ", this.data.message);
       }
+      else if (this.data.error == false) {
+        lod.dismiss();
+        if (localStorage.getItem('account') == null) {
+          localStorage.setItem('account', JSON.stringify(this.account));
+        }
+        else {
+          localStorage.removeItem('account');
+          localStorage.setItem('account', JSON.stringify(this.account));
+        }
+        localStorage.setItem('token', this.data.token);
+        // localStorage.setItem('account', this.data.account);
+
+        // this.bankPro.get_bank_account_Provider()
+        //   .then(data=>{
+        //     this.account = data;
+        //     if (localStorage.getItem('account') == null) {
+        //       localStorage.setItem('account', JSON.stringify(this.account));
+        //     }
+        //     else {
+        //       localStorage.removeItem('account');
+        //       localStorage.setItem('account', JSON.stringify(this.account));
+        //     }
+        //     console.log('data: ',this.account);
+        //     lod.dismiss();
+
+        //   })
+        //   .catch(err=> {
+        //     console.log("server Error: ", err);
+        //     lod.dismiss();
+
+        //   });
+        this.navCtrl.setRoot('HomeTabsPage');
+        this.LoginToast()
+        lod.dismiss();
+      }
+    }, error => {
+      lod.dismiss();
+      this.FiallLoginToast();
+      console.log("Data: ", error);
+    }
     )
   }
 
