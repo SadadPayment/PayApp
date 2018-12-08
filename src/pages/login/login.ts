@@ -48,7 +48,7 @@ export class LoginPage {
       console.log("data: ", this.data = response);
       this.account = this.data.account;
       if (this.data.error == true) {
-        // this.FiallLoginToast();
+        this.FiallLoginToast();
         lod.dismiss();
         //console.log("mesg: ", this.data.message);
       }
@@ -89,7 +89,7 @@ export class LoginPage {
       }
     }, error => {
       lod.dismiss();
-      // this.FiallLoginToast();
+      this.FiallLoginToast();
       console.log("Data: ", error);
     }
     )
