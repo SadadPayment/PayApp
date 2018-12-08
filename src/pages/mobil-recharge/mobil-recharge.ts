@@ -52,7 +52,7 @@ export class MobilRechargePage {
     });
     loading.present();
     this.payProv.TopUpRequestProvider(this.RechargeData).then(data => {
-      console.log(this.data = data);
+      this.data = data;
       if (this.data.error == false) {
         this.TopUpSToast()
       }
@@ -62,7 +62,8 @@ export class MobilRechargePage {
       }
       loading.dismiss();
     }).catch((error => {
-      console.log("Error Data: ", error);
+      alert('حاول لاحقا')
+      // console.log("Error Data: ", error);
       loading.dismiss();
     }));
   }

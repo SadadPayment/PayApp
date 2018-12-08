@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, LoadingController } from 'ionic-angular';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { AccountProvider } from "../../providers/users/Account";
 import { App } from 'ionic-angular';
@@ -18,14 +18,18 @@ export class EditCreditCardPage {
   constructor(public navCtrl: NavController,
     private app: App,
     public navParams: NavParams,
+    private loadingCtrl: LoadingController,
     private toastCtrl: ToastController,
     private accoPro: AccountProvider) {
     this.accountForm = new FormGroup({
       PAN: new FormControl('', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(16), Validators.maxLength(19)]),
       expDate: new FormControl('', [Validators.required]),
-      name: new FormControl('', [Validators.required, Validators.pattern('^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z-_]*$'), Validators.minLength(4), Validators.maxLength(10)]),
+      name: new FormControl('', [Validators.required, Validators.pattern(''), Validators.minLength(3), Validators.maxLength(10)]),
+
+      // name: new FormControl('', [Validators.required, Validators.pattern('^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z ]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z-_]*$'), Validators.minLength(4), Validators.maxLength(10)]),
       IPIN: new FormControl('', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(4), Validators.maxLength(4)]),
     });
+    this.minDate();
   }
 
   ngAfterViewInit() {
@@ -33,20 +37,29 @@ export class EditCreditCardPage {
   }
 
   saveCard() {
+    let lod = this.loadingCtrl.create({
+      content: 'الرجاء الإنتظار لإتمام المعاملة'
+    });
+    lod.present();
     console.log('data add: ', this.accountData);
     this.accoPro.add_bank_account_Provider(this.accountData)
       .then(data => {
         if (data == true) {
+          lod.dismiss();
           this.AddToast();
           this.navCtrl.push('CreditCardPage')
         }
         else {
+          lod.dismiss();
           this.ErrorToast();
         }
-        console.log('data: ', data);
+        // console.log('data: ', data);
       })
       .catch(err => {
-        console.log('Serve Error: ', err);
+        lod.dismiss();
+        this.ServeToast();
+
+        // console.log('Serve Error: ', err);
       });
   }
 
@@ -75,6 +88,19 @@ export class EditCreditCardPage {
     });
     toast.present();
   }
+
+  ServeToast() {
+    let toast = this.toastCtrl.create({
+      message: 'حاول في وقت لاحق',
+      duration: 2000,
+      position: 'middle'
+    });
+
+    toast.onDidDismiss(() => {
+    });
+    toast.present();
+  }
+
 
   minDate() {
     this.min = new Date().toISOString();

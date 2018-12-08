@@ -44,7 +44,7 @@ export class LoginPage {
     lod.present();
 
     this.LoginProvider.LoginProvider(this.userData).then(response => {
-      console.log("data: ", this.data = response);
+      this.data = response;
       this.account = this.data.account;
       if (this.data.error == true) {
         this.FiallLoginToast();
@@ -69,9 +69,9 @@ export class LoginPage {
     }, error => {
       lod.dismiss();
       this.FiallLoginToast();
-      console.log("Data: ", error);
+      // console.log("Data: ", error);
     }
-    )
+    );
   }
 
   Registrtion() {

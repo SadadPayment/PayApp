@@ -18,17 +18,17 @@
 
       <ion-item no-lines *ngIf="( accountForm.get('name').hasError('minlength') || accountForm.get('name').hasError('maxlength') ||accountForm.get('name').hasError('pattern') ||accountForm.get('name').hasError('required') ) && accountForm.get('name').touched">
         <div class="error" *ngIf="accountForm.get('name').hasError('required') && accountForm.get('name').touched">
-          الرجاء اضافة اسم
+          الرجاء اضافة اسم للبطاقة
         </div>
         <div class="error" *ngIf="accountForm.get('name').hasError('minlength') && accountForm.get('name').touched">
-          اقل عدد للحروف 4
+          اقل عدد للحروف 3
         </div>
         <div class="error" *ngIf="accountForm.get('name').hasError('maxlength') && accountForm.get('name').touched">
-          لا يمكن اضافة اكثر من 30 حرف
+          لا يمكن اضافة اكثر من 10 حرف
         </div>
         <div class="error" *ngIf="accountForm.get('name').hasError('pattern') && accountForm.get('name').touched">
-          فقط حروف
-        </div>
+           فقط حروف بدون ارقام\رموز\فواصل    
+              </div>
       </ion-item>
 
 

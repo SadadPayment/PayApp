@@ -44,7 +44,7 @@ export class BalanceInquiryPage {
     loading.present();
     this.payProv.BalanceInquiryRequest(this.formData)
       .then(data => {
-        console.log(this.Message = data);
+        this.Message = data;
         if (this.Message.error == false) {
           this.dis = this.Message.error;
           this.presentAlert();
@@ -57,7 +57,7 @@ export class BalanceInquiryPage {
 
       })
       .catch(err => {
-        console.log("errorS: ", err);
+        // console.log("errorS: ", err);
         this.presentEAlert();
 
         loading.dismiss();
