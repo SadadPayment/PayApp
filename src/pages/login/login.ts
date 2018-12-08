@@ -1,6 +1,6 @@
 import { UsersProvider } from '../../providers/users/users';
 import { Component } from '@angular/core';
-import { IonicPage, LoadingController, NavController, NavParams, ToastController, MenuController } from 'ionic-angular';
+import { IonicPage, LoadingController, NavController, NavParams, MenuController, AlertController } from 'ionic-angular';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 // import { AccountProvider } from "../../providers/users/Account";
 
@@ -19,9 +19,8 @@ export class LoginPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    // private bankPro: AccountProvider,
     public LoginProvider: UsersProvider,
-    private toastCtrl: ToastController,
+    private alertCtrl: AlertController,
     private loadingCtrl: LoadingController,
     public menu: MenuController) {
     this.menu.enable(false);
@@ -62,30 +61,10 @@ export class LoginPage {
           localStorage.setItem('account', JSON.stringify(this.account));
         }
         localStorage.setItem('token', this.data.token);
-        // localStorage.setItem('account', this.data.account);
 
-        // this.bankPro.get_bank_account_Provider()
-        //   .then(data=>{
-        //     this.account = data;
-        //     if (localStorage.getItem('account') == null) {
-        //       localStorage.setItem('account', JSON.stringify(this.account));
-        //     }
-        //     else {
-        //       localStorage.removeItem('account');
-        //       localStorage.setItem('account', JSON.stringify(this.account));
-        //     }
-        //     console.log('data: ',this.account);
-        //     lod.dismiss();
-
-        //   })
-        //   .catch(err=> {
-        //     console.log("server Error: ", err);
-        //     lod.dismiss();
-
-        //   });
         lod.dismiss();
         this.navCtrl.setRoot('HomeTabsPage');
-        this.LoginToast()
+        // this.LoginToast()
       }
     }, error => {
       lod.dismiss();
@@ -98,29 +77,14 @@ export class LoginPage {
   Registrtion() {
     this.navCtrl.push('RegistrationPage');
   }
-  LoginToast() {
-    let toast = this.toastCtrl.create({
-      message: 'تم تسجيل الدخول بنجاح',
-      duration: 2000,
-      position: 'top'
-    });
-    toast.onDidDismiss(() => {
-    });
-    toast.present();
-  }
-
 
   FiallLoginToast() {
-    let toast = this.toastCtrl.create({
-      message: this.data.message,
-      duration: 5000,
-      position: 'middle'
+    let alert = this.alertCtrl.create({
+      title: 'خطأ',
+      subTitle: this.data.message
+      ,
+      buttons: ['موافق']
     });
-
-    toast.onDidDismiss(() => {
-
-    });
-
-    toast.present();
+    alert.present();
   }
 }

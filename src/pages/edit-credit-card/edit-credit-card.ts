@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import {IonicPage, NavController, NavParams, ToastController} from 'ionic-angular';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {AccountProvider} from "../../providers/users/Account";
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { AccountProvider } from "../../providers/users/Account";
 import { App } from 'ionic-angular';
 
 
@@ -11,14 +11,15 @@ import { App } from 'ionic-angular';
   templateUrl: 'edit-credit-card.html',
 })
 export class EditCreditCardPage {
-  accountData = {"IPIN": "", "PAN": "", "expDate": "", "name":""};
-  data:any;
+  accountData = { "IPIN": "", "PAN": "", "expDate": "", "name": "" };
+  data: any;
   accountForm: FormGroup;
+  min: any;
   constructor(public navCtrl: NavController,
-              private app: App,
-              public navParams: NavParams,
-              private toastCtrl: ToastController,
-              private accoPro:AccountProvider) {
+    private app: App,
+    public navParams: NavParams,
+    private toastCtrl: ToastController,
+    private accoPro: AccountProvider) {
     this.accountForm = new FormGroup({
       PAN: new FormControl('', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(16), Validators.maxLength(19)]),
       expDate: new FormControl('', [Validators.required]),
@@ -27,26 +28,24 @@ export class EditCreditCardPage {
     });
   }
 
-  ngAfterViewInit(){
+  ngAfterViewInit() {
     this.app._setDisableScroll(true);
   }
-  ionViewDidLoad() {
-  }
 
-  saveCard(){
+  saveCard() {
     console.log('data add: ', this.accountData);
     this.accoPro.add_bank_account_Provider(this.accountData)
-      .then(data=>{
-        if (data ==true){
+      .then(data => {
+        if (data == true) {
           this.AddToast();
           this.navCtrl.push('CreditCardPage')
         }
         else {
           this.ErrorToast();
         }
-        console.log('data: ',data);
+        console.log('data: ', data);
       })
-      .catch(err=>{
+      .catch(err => {
         console.log('Serve Error: ', err);
       });
   }
@@ -75,5 +74,9 @@ export class EditCreditCardPage {
     toast.onDidDismiss(() => {
     });
     toast.present();
+  }
+
+  minDate() {
+    this.min = new Date().toISOString();
   }
 }
