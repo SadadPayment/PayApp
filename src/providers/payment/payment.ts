@@ -1,10 +1,12 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Injectable} from '@angular/core';
 
 @Injectable()
 export class PaymentProvider {
-  url = "http://sadad.cf:8000/api/";
+  url = "https://sadad.cf/Api/public/api/";
   // url = "http://localhost:8000/api/";
+  // url = "http://104.248.31.11:8000/api/";
+
   TopUpPath = "topUp";
   TopUpUrl: string;
 
@@ -61,7 +63,7 @@ export class PaymentProvider {
 
     return new Promise((resolve, reject) => {
 
-      this.http.post(this.PaymentUrl, { service }, {
+      this.http.post(this.PaymentUrl, {service}, {
         headers: new HttpHeaders().set('Content-Type', 'application/json')
           .set('Authorization', "Bearer " + this.token),
       }).subscribe(res => {
@@ -73,7 +75,7 @@ export class PaymentProvider {
   }
 
   BalanceInquiryRequest(data) {
-  
+
     return new Promise((resolve, reject) => {
       this.http.post(this.BalanceInquiryUrl, JSON.stringify(data), {
         headers: new HttpHeaders().set('Content-Type', 'application/json')

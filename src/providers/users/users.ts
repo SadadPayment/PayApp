@@ -4,7 +4,8 @@ import {Injectable} from '@angular/core';
 @Injectable()
 export class UsersProvider {
   token = localStorage.getItem('token');
-  url = "http://sadad.cf:8000/api";
+  // url = "http://104.248.31.11:8000/api";
+  url = "https://sadad.cf/Api/public/api";
   // url = "http://localhost:8000/api";
   urlLogin = "/login";
   urlRegs = "/register";

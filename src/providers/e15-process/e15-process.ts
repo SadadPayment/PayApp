@@ -1,9 +1,11 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Injectable} from '@angular/core';
 
 @Injectable()
 export class E15ProcessProvider {
-  url = "http://sadad.cf:8000/api/";
+  url = "https://sadad.cf/Api/public/api/";
+  // url = "http://104.248.31.11:8000/api/";
+
   token = localStorage.getItem('token');
 
 

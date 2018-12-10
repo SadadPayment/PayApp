@@ -61,8 +61,6 @@ export class LoginPage {
           localStorage.setItem('account', JSON.stringify(this.account));
         }
         localStorage.setItem('token', this.data.token);
-
-        lod.dismiss();
         this.navCtrl.setRoot('HomeTabsPage');
         // this.LoginToast()
       }
