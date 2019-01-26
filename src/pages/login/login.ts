@@ -29,12 +29,12 @@ export class LoginPage {
       phone: new FormControl('', [Validators.required, Validators.pattern('^(?:0|\\(?\\09\\)?\\s?|01\\s?)[1-79](?:[\\.\\-\\s]?\\d\\d){4}$'), Validators.minLength(10), Validators.maxLength(10)]),
       password: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(25)]),
     });
-    let to = localStorage.getItem('token');
-    if (to != null) {
-      this.navCtrl.setRoot('HomeTabsPage')
-    }
-    else {
-    }
+    // let to = localStorage.getItem('token');
+    // if (to != null) {
+    //   this.navCtrl.setRoot('HomeTabsPage')
+    // }
+    // else {
+    // }
   }
 
   login() {

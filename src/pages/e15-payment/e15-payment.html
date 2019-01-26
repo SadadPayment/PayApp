@@ -13,7 +13,7 @@
       <ion-item>
         <ion-label>اختار المحفظة:</ion-label>
         <ion-select [(ngModel)]="E15Data.id" formControlName="id">
-          <ion-option *ngFor="let item of PAN"  value="{{item.id}}">{{item.name}}</ion-option>
+          <ion-option *ngFor="let item of PAN" value="{{item.id}}">{{item.name}}</ion-option>
         </ion-select>
       </ion-item>
 
@@ -28,21 +28,20 @@
       <ion-item no-lines
                 *ngIf="( E15Form.get('phone').hasError('minlength') || E15Form.get('phone').hasError('maxlength') ||E15Form.get('phone').hasError('pattern') ||E15Form.get('phone').hasError('required') ) && E15Form.get('phone').touched">
         <div class="error" *ngIf="E15Form.get('phone').hasError('phone') && E15Form.get('phone').touched">
-          الرجاء اداخل رقم الهاتف
+          الرجاء اداخل رقم الهاتف يبدا بـ09 او 01
         </div>
         <div class="error" *ngIf="E15Form.get('phone').hasError('minlength') && E15Form.get('phone').touched">
-          اقل عدد 10
+          رقم الهاتف مكون من 10 ارقام علي الاقل
         </div>
         <div class="error" *ngIf="E15Form.get('phone').hasError('maxlength') && E15Form.get('phone').touched">
-          لا يمكن اضافة اكثر من 10 ارقام
+            <span style="color: red">خطا رقم الهاتف المدخل اكبر من10 ارقام</span>
         </div>
         <div class="error" *ngIf="E15Form.get('phone').hasError('pattern') && E15Form.get('phone').touched">
-          فقط يمكنك اداخل ارقام-
-          09XXXXX 01XXXXX
+          فقط يمكنك اداخل ارقام - تبدا بـ 09 او 01
         </div>
       </ion-item>
       <ion-item>
-        <ion-label fixed>القيمة:</ion-label>
+        <ion-label floating>القيمة:</ion-label>
         <ion-input type="number" placeholder="القيمة" [(ngModel)]="E15Data.Amount"
                    formControlName="amount"
                    [class.error1]="!E15Form.controls.amount.valid && E15Form.controls.amount.dirty"></ion-input>
@@ -54,14 +53,14 @@
           الرجاء ادخال القيمة
         </div>
         <div class="error" *ngIf="E15Form.get('amount').hasError('minlength') && E15Form.get('amount').touched">
-          اقل عدد 1
+          قيمة الفاتورة عدد صحيح فقط اكبر من 1
         </div>
         <div class="error" *ngIf="E15Form.get('amount').hasError('pattern') && E15Form.get('amount').touched">
-          فقط ارقام
+          قيمة الفاتروة فقط ارقام صحيحة اكبر من 1
         </div>
       </ion-item>
       <ion-item>
-        <ion-label fixed>الرقم السري:</ion-label>
+        <ion-label floating>الرقم السري للانترنت:</ion-label>
         <ion-input type="password" placeholder="IPIN" [(ngModel)]="E15Data.IPIN"
                    formControlName="IPIN"
                    [class.error1]="!E15Form.controls.IPIN.valid && E15Form.controls.IPIN.dirty"></ion-input>
@@ -70,22 +69,22 @@
       <ion-item no-lines
                 *ngIf="( E15Form.get('IPIN').hasError('minlength') || E15Form.get('IPIN').hasError('maxlength') ||E15Form.get('IPIN').hasError('pattern') ||E15Form.get('IPIN').hasError('required') ) && E15Form.get('IPIN').touched">
         <div class="error" *ngIf="E15Form.get('IPIN').hasError('IPIN') && E15Form.get('IPIN').touched">
-          ادخل الرقم السري
+          ادخل رقم الانترنت السري
         </div>
         <div class="error" *ngIf="E15Form.get('IPIN').hasError('minlength') && E15Form.get('IPIN').touched">
-          اقل عدد 4
+          رقم الانترنت السري مكون من 4 ارقام علي الاقل
         </div>
         <div class="error" *ngIf="E15Form.get('IPIN').hasError('maxlength') && E15Form.get('IPIN').touched">
-          لايمكن اضافة اكثر من 4 رقم
+          رقم الانترنت السري مكون من 4 اراقم فقط
         </div>
         <div class="error" *ngIf="E15Form.get('IPIN').hasError('pattern') && E15Form.get('IPIN').touched">
-          فقط ارقام
+          رقم الانترنت السري مكون من اعداد صحيحة مثل (1234)
         </div>
       </ion-item>
 
 
       <ion-item>
-        <ion-label fixed>رقم الفاتورة:</ion-label>
+        <ion-label floating>رقم الفاتورة:</ion-label>
         <ion-input type="number" placeholder="رقم الفاتورة" [(ngModel)]="E15Data.InvouisNumber"
                    formControlName="InvouisNumber"
                    [class.error1]="!E15Form.controls.InvouisNumber.valid && E15Form.controls.InvouisNumber.dirty"></ion-input>
@@ -107,19 +106,19 @@
         </div>
         <div class="error"
              *ngIf="E15Form.get('InvouisNumber').hasError('pattern') && E15Form.get('InvouisNumber').touched">
-          فقط ارقام
+          رقم الفاتورة مكون فقط من ارقام من 18 الي 30 رقم
         </div>
       </ion-item>
       <button type="submit" ion-button block color="one" [disabled]="E15Form.invalid">تحقق</button>
     </form>
   </ion-list>
-  
-<!-- 
-  <ion-card *ngIf"data">
-      <p>الاسم:{{ data.response.PayerName}}</p>
-      <p> الرقم المرجعي: {{data.response.ReferenceId}}</p>
-      <p> اسم الخدمة: {{ data.response.ServiceName}}</p>
-      <p>القيمة الاجمالية:{{data.response.TotalAmount}}</p>
-      <p>اسم الوحدة: {{data.response.UnitName}}</p>
-    </ion-card> -->
+
+  <!--
+    <ion-card *ngIf"data">
+        <p>الاسم:{{ data.response.PayerName}}</p>
+        <p> الرقم المرجعي: {{data.response.ReferenceId}}</p>
+        <p> اسم الخدمة: {{ data.response.ServiceName}}</p>
+        <p>القيمة الاجمالية:{{data.response.TotalAmount}}</p>
+        <p>اسم الوحدة: {{data.response.UnitName}}</p>
+      </ion-card> -->
 </ion-content>

@@ -21,6 +21,7 @@ export class PaymentProvider {
 
   CardTransfer = "cardTransfer";
   CardTransferUrl: string;
+  PurchaseUrl: string = this.url + 'purchase';
 
   token = localStorage.getItem('token');
 
@@ -109,8 +110,6 @@ export class PaymentProvider {
 
 
   CardTransferRequest(data) {
-    console.log("data: ", data);
-
     let cardInfo = {
       'to': data.to,
       'amount': data.amount,
@@ -131,4 +130,19 @@ export class PaymentProvider {
       });
     });
   }
+
+
+  PurchaseProvider(data) {
+    return new Promise((resolve, reject) => {
+      this.http.post(this.PurchaseUrl, JSON.stringify(data), {
+        headers: new HttpHeaders().set('Content-Type', 'application/json')
+          .set('Authorization', "Bearer " + this.token),
+      }).subscribe(res => {
+        resolve(res)
+      }, (err) => {
+        reject(err)
+      });
+    });
+  }
+
 }

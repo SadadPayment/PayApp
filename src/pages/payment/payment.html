@@ -1,11 +1,6 @@
 <ion-header>
   <ion-navbar dir="rtl" color="one">
 
-    <!--<ion-buttons right>-->
-      <!--<button ion-button (click)="menue()">-->
-        <!--<ion-icon style="font-size: 2.2em;" color="#ffff" name="menu"></ion-icon>-->
-      <!--</button>--> 
-    <!--</ion-buttons>-->
     <ion-title text-center>SadadPay</ion-title>
 
     <ion-buttons left>
@@ -74,6 +69,19 @@
           </div>
         </ion-col>
       </ion-row>
+
+      <!--//New-->
+      <ion-row>
+        <ion-col>
+          <div>
+            <button ion-button icon-only (click)="Purchase()">
+              <ion-icon color="danger" name="basket"></ion-icon>
+            </button>
+            <p>شراء</p>
+          </div>
+        </ion-col>
+      </ion-row>
+      <!--endNew-->
       <!-- </ion-card> -->
     </ion-grid>
   </ion-card>

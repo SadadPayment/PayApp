@@ -14,7 +14,6 @@ export class E15ProcessProvider {
   }
 
   PayE15Provider(body) {
-    console.log("Providers: ", body);
     return new Promise((resolve, reject) => {
 
       this.http.post(this.url + 'e15_payment', JSON.stringify(body), {
@@ -29,10 +28,9 @@ export class E15ProcessProvider {
   }
 
   GetE15Provider(body) {
-    console.log("data: ", body);
     return new Promise((resolve, reject) => {
 
-      this.http.post(this.url + 'e15_inquery', JSON.stringify(body), {
+      this.http.post(this.url + 'e15_inquiry', JSON.stringify(body), {
         headers: new HttpHeaders().set('Content-Type', 'application/json')
           .set('Authorization', "Bearer " + this.token),
       }).subscribe(res => {

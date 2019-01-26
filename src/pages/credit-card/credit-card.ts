@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {IonicPage, LoadingController, NavController, NavParams} from 'ionic-angular';
+import {AlertController, IonicPage, LoadingController, NavController, NavParams} from 'ionic-angular';
 import {AccountProvider} from "../../providers/users/Account";
 
 @IonicPage()
@@ -12,16 +12,16 @@ data:any;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
+    private alertCtrl: AlertController,
     private loadingCtrl: LoadingController,
   private bankPro:AccountProvider) {
   }
 
   ionViewDidLoad() {
-    this.getBanckAccount();
-    console.log("after Get")
+    this.getBankAccount();
   }
 
-  getBanckAccount(){
+  getBankAccount(){
     let loading = this.loadingCtrl.create({
       content: 'الرجاء الإنتظار لإتمام المعاملة'
     });
@@ -41,7 +41,7 @@ data:any;
 
       })
       .catch(err=> {
-        console.log("server Error: ", err)
+        console.log("server Error: ", err);
         loading.dismiss();
 
       })
@@ -50,9 +50,28 @@ data:any;
   addBankAccount(){
     this.navCtrl.push('EditCreditCardPage')
   }
-
-  delteAccount(id){
-    console.log('id: ',id);
+deleteConfirm(id){
+  let alert = this.alertCtrl.create({
+    title: 'تنبيه',
+    message: 'هل تريد حذف هذه البطاقة ؟',
+    buttons: [
+      {
+        text: 'الغاء',
+        role: 'cancel',
+        handler: () => {
+        }
+      },
+      {
+        text: 'حذف',
+        handler: () => {
+          this.deleteAccount(id);
+          }
+      }
+    ]
+  });
+  alert.present();
+}
+  deleteAccount(id){
     this.bankPro.delete_bank_account_provider(id)
       .then(data=>{
         this.data = data;

@@ -1,42 +1,44 @@
-import { Component, ViewChild } from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {AlertController, Nav, Platform, ToastController} from 'ionic-angular';
-import { StatusBar } from '@ionic-native/status-bar';
+import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from "@ionic-native/splash-screen";
-import { HardwareButtons } from '@scaffold-digital/ionic-hardware-buttons';
+import {HardwareButtons} from '@scaffold-digital/ionic-hardware-buttons';
+// import {Idle, DEFAULT_INTERRUPTSOURCES} from "@ng-idle/core";
 
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  login: any = { title: 'تسجيل/ دخول', component: 'LoginPage', icon: "log-in" };
+  login: any = {title: 'تسجيل/ دخول', component: 'LoginPage', icon: "log-in"};
 
   @ViewChild(Nav) nav: Nav;
   dataLog = localStorage.getItem('token');
   showedAlert: boolean;
-  confirmAlert:any;
+  confirmAlert: any;
   rootPage: any = 'LoginPage';
-  counter:number=0;
+  counter: number = 0;
   pages: Array<{ title: string, component: any, icon: string }>;
 
   constructor(
     public platform: Platform,
     public statusBar: StatusBar,
+    // private idle: Idle,
     private toastCtrl: ToastController,
     public splashScreen: SplashScreen,
-   private hardwareButtons: HardwareButtons,
+    private hardwareButtons: HardwareButtons,
     public alertCtrl: AlertController,
   ) {
     this.initializeApp();
-
+    // this.tiemOute();
     // used for an example of ngFor and navigation
     this.pages = [
 
-      { title: 'الرئيسية', component: 'HomeTabsPage', icon: "md-home" },
+      {title: 'الرئيسية', component: 'HomeTabsPage', icon: "md-home"},
       // { title: 'ملفي الشخصي', component: 'ProfilePage', icon: "md-person" },
-      { title: 'سجل العمليات', component: 'HistoryUserPage', icon: "calendar" },
-      { title: 'انشاء رقم الانترنت السري', component: 'CreateIpinPage', icon: "lock" },
-      { title: 'عن التطبيق', component: 'AboutUsPage', icon: "information-circle" },
+      {title: 'سجل العمليات', component: 'HistoryUserPage', icon: "calendar"},
+      {title: 'انشاء رقم الانترنت السري', component: 'CreateIpinPage', icon: "lock"},
+      {title: 'عن التطبيق', component: 'AboutUsPage', icon: "information-circle"},
 
     ];
 
@@ -51,7 +53,7 @@ export class MyApp {
 
     this.platform.ready().then(() => {
       if (this.platform.is('cordova')) {
-        this.statusBar.backgroundColorByHexString('#00bcd4');
+        this.statusBar.backgroundColorByHexString('#00b3d4');
         this.statusBar.styleDefault();
         this.splashScreen.hide();
         this.hardwareButtons.init();
@@ -62,8 +64,51 @@ export class MyApp {
       // this.twoBackButton();
 
     });
+
+    // this.platform.ready().then(() => {
+    //   this.platform.pause.subscribe(() => {
+    //     // console.log('[INFO] App paused');
+    //   });
+    //
+    //   this.platform.resume.subscribe(() => {
+    //     // console.log('[INFO] App resumed');
+    //   });
+    // });
+
+
   }
 
+  // tiemOute() {
+  //   this.idle.setIdle(10);
+  //   this.idle.setTimeout(5);
+  //   this.idle.setInterrupts(DEFAULT_INTERRUPTSOURCES);
+  //
+  //   this.idle.onTimeoutWarning.subscribe((countdown: number) => {
+  //     alert('Timeout Warning - ' + countdown);
+  //   });
+  //
+  //   this.idle.onTimeout.subscribe(() => {
+  //     alert('Timeout');
+  //     localStorage.clear();
+  //
+  //     this.nav.setRoot('LoginPage');
+  //   });
+  //
+  //   this.idle.watch();
+  // }
+
+  // logout() {
+  //   this.idle.stop();
+  //   this.idle.ngOnDestroy(); //includes this.idle.stop() and this.clearInterrupts() both.
+  //   this.headerService.exit()
+  //     .subscribe(
+  //       data => {
+  //         localStorage.clear();
+  //         this.nav.setRoot('LoginPage');
+  //       },
+  //       error => console.log(error)
+  //     )
+  // }
   confirmExitApp() {
     this.showedAlert = true;
     this.confirmAlert = this.alertCtrl.create({
@@ -88,7 +133,7 @@ export class MyApp {
     this.confirmAlert.present();
   }
 
-  backBoutton(){
+  backBoutton() {
     this.platform.registerBackButtonAction(() => {
       if (this.nav.length() == 1) {
         if (!this.showedAlert) {
@@ -119,17 +164,16 @@ export class MyApp {
   }
 
 
+  presentToast() {
+    let toast = this.toastCtrl.create({
+      message: "Press again to exit",
+      duration: 3000,
+      position: "middle"
+    });
+    toast.present();
+  }
 
-presentToast() {
-  let toast = this.toastCtrl.create({
-    message: "Press again to exit",
-    duration: 3000,
-    position: "middle"
-  });
-  toast.present();
-}
-
-   openPage(page) {
+  openPage(page) {
 
     this.nav.setRoot(page.component);
   }

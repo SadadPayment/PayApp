@@ -23,7 +23,7 @@ export class RegistrationPage {
   min: any;
   signupform: FormGroup;
   // userData = {"username": "", "phone": "", "password": "", "fullName": "", "panNumber": "", "Ipin": "", "expDate": ""};
-  userData = {"phone": "", "password": "", "fullName": "", "panNumber": "", "Ipin": "", "expDate": ""};
+  userData = {"phone": "", "password": "", "fullName": ""};
 
   constructor(
     public navCtrl: NavController,
@@ -34,7 +34,7 @@ export class RegistrationPage {
     private toastCtrl: ToastController,
     public menu: MenuController) {
     this.menu.enable(false);
-    this.minDate();
+    // this.minDate();
     // }
 
     // ngOnInit() {
@@ -43,9 +43,9 @@ export class RegistrationPage {
       phone: new FormControl('', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(10), Validators.maxLength(10)]),
       password: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(25)]),//([a-zA-Z ]+)
       fullName: new FormControl('', [Validators.required, Validators.pattern('^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z ]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z-_ ]*$'), Validators.minLength(4), Validators.maxLength(30)]),
-      panNumber: new FormControl('', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(16), Validators.maxLength(19)]),
-      Ipin: new FormControl('', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(4), Validators.maxLength(4)]),
-      expDate: new FormControl('', [Validators.required])
+      // panNumber: new FormControl('', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(16), Validators.maxLength(19)]),
+      // Ipin: new FormControl('', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(4), Validators.maxLength(4)]),
+      // expDate: new FormControl('', [Validators.required])
       // email: new FormControl('', [Validators.required, Validators.pattern(EMAILPATTERN)]),
     });
   }
@@ -124,8 +124,8 @@ export class RegistrationPage {
   }
 
 
-  minDate() {
-    this.min = new Date().toISOString();
-  }
+  // minDate() {
+  //   this.min = new Date().toISOString();
+  // }
 
 }

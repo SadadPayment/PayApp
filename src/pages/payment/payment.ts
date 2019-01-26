@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {App, IonicPage, MenuController, NavController, NavParams, Platform} from 'ionic-angular';
-import { BackButton } from '@scaffold-digital/ionic-hardware-buttons';
+import {BackButton} from '@scaffold-digital/ionic-hardware-buttons';
 
 
 @IonicPage()
@@ -23,14 +23,16 @@ export class PaymentPage {
   ionViewDidLoad() {
   }
 
-menue(){
-  this.menuCtrl.open('')
-  // this.menuCtrl.open('right');
-}
-  ngAfterViewInit(){
+  menue() {
+    this.menuCtrl.open('')
+    // this.menuCtrl.open('right');
+  }
+
+  ngAfterViewInit() {
     // this.app.setScrollDisabled(true);
     this.app._setDisableScroll(true)
   }
+
   MobilBiil() {
     this.navCtrl.push('MobilRechargePage');
   }
@@ -51,7 +53,7 @@ menue(){
     this.navCtrl.push('CardTransfermPage')
   }
 
-  BalanceInquiry(){
+  BalanceInquiry() {
     this.navCtrl.push('BalanceInquiryPage')
   }
 
@@ -63,11 +65,16 @@ menue(){
   }
 
 
-  openMyQr(){
+  openMyQr() {
     this.navCtrl.push('CreateQrPage');
   }
-  openPayQr(){
+
+  openPayQr() {
     this.navCtrl.push('GetPaymentQrPage');
+  }
+
+  Purchase() {
+    this.navCtrl.push('PurchasePage');
   }
 
 }

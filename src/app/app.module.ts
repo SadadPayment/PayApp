@@ -21,6 +21,7 @@ import { HardwareButtons } from '@scaffold-digital/ionic-hardware-buttons';
 import { NgxQRCodeModule } from 'ngx-qrcode2';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import {InAppBrowser} from "@ionic-native/in-app-browser";
+// import {Idle, IdleExpiry} from "@ng-idle/core";
 
 @NgModule({
   declarations: [
@@ -42,6 +43,8 @@ import {InAppBrowser} from "@ionic-native/in-app-browser";
     StatusBar,
     BackendProvider,
     SplashScreen,
+    // Idle,
+    // IdleExpiry,
     UsersProvider,
     AccountProvider,
     {provide: ErrorHandler, useClass: IonicErrorHandler},

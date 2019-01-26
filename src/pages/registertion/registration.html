@@ -65,7 +65,7 @@
       <ion-item>
         <ion-label floating>رقم الهاتف:</ion-label>
         <ion-input type="text" maxlength="10" minlength="10" [(ngModel)]="userData.phone"
-                   placeholder="09XXXX 01XXXXX"
+                   placeholder="09 - 01"
                    formControlName="phone"
                    [class.error1]="!signupform.controls.phone.valid && signupform.controls.phone.dirty"></ion-input>
       </ion-item>
@@ -109,64 +109,64 @@
         </div>
       </ion-item>
 
-      <ion-item>
-        <ion-label floating>رقم البطاقة:</ion-label>
-        <ion-input type="number" maxlength="19" minlength="4" [(ngModel)]="userData.panNumber"
-                   formControlName="panNumber"
-                   [class.error1]="!signupform.controls.panNumber.valid && signupform.controls.panNumber.dirty"></ion-input>
-      </ion-item>
+      <!--<ion-item>-->
+      <!--<ion-label floating>رقم البطاقة:</ion-label>-->
+      <!--<ion-input type="number" maxlength="19" minlength="4" [(ngModel)]="userData.panNumber"-->
+      <!--formControlName="panNumber"-->
+      <!--[class.error1]="!signupform.controls.panNumber.valid && signupform.controls.panNumber.dirty"></ion-input>-->
+      <!--</ion-item>-->
 
-      <ion-item no-lines
-                *ngIf="( signupform.get('panNumber').hasError('minlength') || signupform.get('panNumber').hasError('maxlength') ||signupform.get('panNumber').hasError('pattern') ||signupform.get('panNumber').hasError('required') ) && signupform.get('panNumber').touched">
-        <div class="error"
-             *ngIf="signupform.get('panNumber').hasError('panNumber') && signupform.get('panNumber').touched">
-          الرجاء ادخال رقم البطاقة
-        </div>
-        <div class="error"
-             *ngIf="signupform.get('panNumber').hasError('minlength') && signupform.get('panNumber').touched">
-          رقم البطاقة لا يمكن ان يكون اقل 16 رقم
-        </div>
-        <div class="error"
-             *ngIf="signupform.get('panNumber').hasError('maxlength') && signupform.get('panNumber').touched">
-          رقم البطاقة لايمكن ان يكون اكثر من 19 رقم
-        </div>
-        <div class="error"
-             *ngIf="signupform.get('panNumber').hasError('pattern') && signupform.get('panNumber').touched">
-          رقم البطاقة مكون من ارقام فقط
-        </div>
-      </ion-item>
+      <!--<ion-item no-lines-->
+      <!--*ngIf="( signupform.get('panNumber').hasError('minlength') || signupform.get('panNumber').hasError('maxlength') ||signupform.get('panNumber').hasError('pattern') ||signupform.get('panNumber').hasError('required') ) && signupform.get('panNumber').touched">-->
+      <!--<div class="error"-->
+      <!--*ngIf="signupform.get('panNumber').hasError('panNumber') && signupform.get('panNumber').touched">-->
+      <!--الرجاء ادخال رقم البطاقة-->
+      <!--</div>-->
+      <!--<div class="error"-->
+      <!--*ngIf="signupform.get('panNumber').hasError('minlength') && signupform.get('panNumber').touched">-->
+      <!--رقم البطاقة لا يمكن ان يكون اقل 16 رقم-->
+      <!--</div>-->
+      <!--<div class="error"-->
+      <!--*ngIf="signupform.get('panNumber').hasError('maxlength') && signupform.get('panNumber').touched">-->
+      <!--رقم البطاقة لايمكن ان يكون اكثر من 19 رقم-->
+      <!--</div>-->
+      <!--<div class="error"-->
+      <!--*ngIf="signupform.get('panNumber').hasError('pattern') && signupform.get('panNumber').touched">-->
+      <!--رقم البطاقة مكون من ارقام فقط-->
+      <!--</div>-->
+      <!--</ion-item>-->
 
 
-      <ion-item>
-        <ion-label floating>رقم الانترنت السري:</ion-label>
-        <ion-input type="number" maxlength="4" minlength="4" [(ngModel)]="userData.Ipin" formControlName="Ipin"
+      <!--<ion-item>-->
+      <!--<ion-label floating>رقم الانترنت السري:</ion-label>-->
+      <!--<ion-input type="number" maxlength="4" minlength="4" [(ngModel)]="userData.Ipin" formControlName="Ipin"-->
 
-                   [class.error1]="!signupform.controls.Ipin.valid && signupform.controls.Ipin.dirty"></ion-input>
-      </ion-item>
+      <!--[class.error1]="!signupform.controls.Ipin.valid && signupform.controls.Ipin.dirty"></ion-input>-->
+      <!--</ion-item>-->
 
-      <ion-item no-lines
-                *ngIf="( signupform.get('Ipin').hasError('minlength') || signupform.get('Ipin').hasError('maxlength') ||signupform.get('Ipin').hasError('pattern') ||signupform.get('Ipin').hasError('required') ) && signupform.get('Ipin').touched">
-        <div class="error" *ngIf="signupform.get('Ipin').hasError('Ipin') && signupform.get('Ipin').touched">
-          الرجاء ادخال الرقم السر المكونة من 4 اراقم الخاص بالبطاقة
-        </div>
-        <div class="error" *ngIf="signupform.get('Ipin').hasError('minlength') && signupform.get('Ipin').touched">
-          اقل عدد 4
-        </div>
-        <div class="error" *ngIf="signupform.get('Ipin').hasError('maxlength') && signupform.get('Ipin').touched">
-          لا يمكن اضافة اكثر من 4 ارقام
-        </div>
-        <div class="error" *ngIf="signupform.get('Ipin').hasError('pattern') && signupform.get('Ipin').touched">
-          الرقم السري مكون من ارقام فقط
-        </div>
-      </ion-item>
+      <!--<ion-item no-lines-->
+      <!--*ngIf="( signupform.get('Ipin').hasError('minlength') || signupform.get('Ipin').hasError('maxlength') ||signupform.get('Ipin').hasError('pattern') ||signupform.get('Ipin').hasError('required') ) && signupform.get('Ipin').touched">-->
+      <!--<div class="error" *ngIf="signupform.get('Ipin').hasError('Ipin') && signupform.get('Ipin').touched">-->
+      <!--الرجاء ادخال الرقم السر المكونة من 4 اراقم الخاص بالبطاقة-->
+      <!--</div>-->
+      <!--<div class="error" *ngIf="signupform.get('Ipin').hasError('minlength') && signupform.get('Ipin').touched">-->
+      <!--اقل عدد 4-->
+      <!--</div>-->
+      <!--<div class="error" *ngIf="signupform.get('Ipin').hasError('maxlength') && signupform.get('Ipin').touched">-->
+      <!--لا يمكن اضافة اكثر من 4 ارقام-->
+      <!--</div>-->
+      <!--<div class="error" *ngIf="signupform.get('Ipin').hasError('pattern') && signupform.get('Ipin').touched">-->
+      <!--الرقم السري مكون من ارقام فقط-->
+      <!--</div>-->
+      <!--</ion-item>-->
 
-      <ion-item>
-        <ion-label floating>تاريخ انتهاء البطاقة</ion-label>
-        <ion-datetime displayFormat="MM, YY" pickerFormat="MM YYYY" [(ngModel)]="userData.expDate"
-                      placeholder="شهر - عام"
-                      min="{{min}}" max="2050-10-20"
-                      formControlName="expDate"></ion-datetime>
-      </ion-item>
+      <!--<ion-item>-->
+      <!--<ion-label floating>تاريخ انتهاء البطاقة</ion-label>-->
+      <!--<ion-datetime displayFormat="MM, YY" pickerFormat="MM YYYY" [(ngModel)]="userData.expDate"-->
+      <!--placeholder="شهر - عام"-->
+      <!--min="{{min}}" max="2050-10-20"-->
+      <!--formControlName="expDate"></ion-datetime>-->
+      <!--</ion-item>-->
       <button type="submit" ion-button block color="one" [disabled]="signupform.invalid">تسجيل</button>
     </form>
   </ion-list>

@@ -16,17 +16,18 @@
       <ion-item>
         <ion-label>اختار المحفظة:</ion-label>
         <ion-select [(ngModel)]="RechargeData.id" formControlName="id">
-          <ion-option *ngFor="let item of PAN"  value="{{item.id}}">{{item.name}}</ion-option>
+          <ion-option *ngFor="let item of PAN" value="{{item.id}}">{{item.name}}
+          </ion-option>
         </ion-select>
       </ion-item>
 
 
       <ion-item>
         <ion-label>اختار الشبكة:</ion-label>
-        <ion-select [(ngModel)]="RechargeData.biller" formControlName="biller" (ionChange)="applyCategoryFilter()">
-          <ion-option value="MTN">MTN</ion-option>
-          <ion-option value="Sudani">Sudani</ion-option>
-          <ion-option value="Zain">Zain</ion-option>
+        <ion-select [(ngModel)]="RechargeData.biller" formControlName="biller">
+          <ion-option value="MTN">MTN - ام تي ان</ion-option>
+          <ion-option value="Sudani">Sudani- سوداني</ion-option>
+          <ion-option value="Zain">Zain- زين</ion-option>
         </ion-select>
       </ion-item>
 
@@ -55,26 +56,19 @@
           لا بمكن ادخال اقل من 10 ارقام
         </div>
         <div class="error" *ngIf="RechargeForm.get('phone').hasError('maxlength') && RechargeForm.get('phone').touched">
-          لا بمكن اضافة اكثر من 10
+          لا بمكن اضافة اكثر من 10 ارقام
         </div>
         <div class="error" *ngIf="RechargeForm.get('phone').hasError('pattern') && RechargeForm.get('phone').touched">
-          فقط ارقام تبدا بـ09 أو 01
+          رقم الهاتف يتكون من ارقام تبدا بـ09 أو 01
         </div>
 
       </ion-item>
-
 
       <ion-item>
         <ion-label floating>القيمة المراد شحنها:</ion-label>
         <ion-input type="number" maxlength="4" minlength="1" max="4" min="1" [(ngModel)]="RechargeData.amount"
                    formControlName="amount"
                    [class.error1]="!RechargeForm.controls.amount.valid && RechargeForm.controls.amount.dirty"></ion-input>
-      </ion-item>
-      <ion-item no-lines>
-        <div class="error" *ngIf="error == 1 ">
-          <span style="color:red;">خطا في القيمة المدخلة</span>
-        </div>
-        <div class="error" *ngIf="error == 2 "></div>
       </ion-item>
       <ion-item no-lines
                 *ngIf="( RechargeForm.get('amount').hasError('minlength') || RechargeForm.get('amount').hasError('maxlength') ||RechargeForm.get('amount').hasError('pattern') ||RechargeForm.get('amount').hasError('required') ) && RechargeForm.get('amount').touched">
@@ -83,20 +77,16 @@
         </div>
         <div class="error"
              *ngIf="RechargeForm.get('amount').hasError('minlength') && RechargeForm.get('amount').touched">
-          اقل قيمة 1
+          اقل قيمة للشحن هي: 1
         </div>
-        <div class="error"
-             *ngIf="RechargeForm.get('amount').hasError('maxlength') && RechargeForm.get('amount').touched">
-          Maximum 4 Number
-        </div>
+
         <div class="error" *ngIf="RechargeForm.get('amount').hasError('pattern') && RechargeForm.get('amount').touched">
-          فقط ارقام
+          قيمة الشحن تتكون من ارقام صحيحة فقط
         </div>
       </ion-item>
 
-
       <ion-item>
-        <ion-label floating>الرقم السري:</ion-label>
+        <ion-label floating>الرقم السري للانترنت:</ion-label>
         <ion-input type="password" maxlength="4" minlength="4" max="4" min="4" [(ngModel)]="RechargeData.IPIN"
                    formControlName="IPIN"
                    [class.error1]="!RechargeForm.controls.IPIN.valid && RechargeForm.controls.IPIN.dirty"></ion-input>
@@ -108,13 +98,13 @@
           Please input your ipin
         </div>
         <div class="error" *ngIf="RechargeForm.get('IPIN').hasError('minlength') && RechargeForm.get('IPIN').touched">
-          وصلة الي اقصى قيمة ممكنة
+          الرقم السري للانترنت يتكون من 4 راقام
         </div>
         <div class="error" *ngIf="RechargeForm.get('IPIN').hasError('maxlength') && RechargeForm.get('IPIN').touched">
-          4 ارقام علي الاقل
+          الرقم السري للانترنت يتكون من 4 اراقم
         </div>
         <div class="error" *ngIf="RechargeForm.get('IPIN').hasError('pattern') && RechargeForm.get('IPIN').touched">
-          فقط ارقام
+          الرقم السري للانترنت يتكون من ارقام فقط 0-9
         </div>
       </ion-item>
 

@@ -9,9 +9,12 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
   templateUrl: 'e15-inquery.html',
 })
 export class E15InqueryPage {
+  rep: string;
   data: any;
   response: any;
+  transaction: any;
   PAN: any;
+  newPAN: any;
   E15Form: FormGroup;
   E15Data = {"Phone": "", "IPIN": "", "Amount": "", "InvouisNumber": "", "id": ""};
   // private Message: any;
@@ -27,9 +30,10 @@ export class E15InqueryPage {
   ) {
     this.E15Form = new FormGroup({
       phone: new FormControl('', [Validators.required, Validators.pattern('^(?:0|\\(?\\09\\)?\\s?|01\\s?)[1-79](?:[\\.\\-\\s]?\\d\\d){4}$'), Validators.minLength(10), Validators.maxLength(10)]),
-      amount: new FormControl('', [Validators.required, Validators.pattern('^[1-9][0-9 \.]*'), Validators.minLength(1), Validators.maxLength(15)]),
+      // amount: new FormControl('', [Validators.required, Validators.pattern('^[1-9][0-9 \.]*'), Validators.minLength(1), Validators.maxLength(15)]),
       IPIN: new FormControl('', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(4), Validators.maxLength(4)]),
-      InvouisNumber: new FormControl('', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(18), Validators.maxLength(30)]),
+      // InvouisNumber: new FormControl('', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(18), Validators.maxLength(30)]),
+      InvouisNumber: new FormControl('', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(1)]),
       id: new FormControl('', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(1)]),
     });
   }
@@ -39,15 +43,21 @@ export class E15InqueryPage {
   }
 
   getBanckAccount() {
+    let nu = "[]";
     let ac = localStorage.getItem('account');
-    this.PAN = JSON.parse(ac);
+    if (ac != nu.toString()) {
+      this.PAN = JSON.parse(ac);
+    }
+    else {
+      alert('تحتاج الي اضافة بطاقة اولاً');
+      this.navCtrl.push('CreditCardPage');
+    }
   }
 
   Check() {
     let body = {
       "phone": this.E15Data.Phone,
       "IPIN": this.E15Data.IPIN,
-      "amount": this.E15Data.Amount,
       "invoiceNo": this.E15Data.InvouisNumber,
       "id": this.E15Data.id
     };
@@ -57,45 +67,92 @@ export class E15InqueryPage {
     loading.present();
     this.e15Prov.GetE15Provider(body)
       .then(data => {
-        console.log("data: ", this.data = data);
+        this.data = data;
+        console.log('data: ', this.data);
+        this.errorCodeResponse();
+        console.log(this.data);
         this.response = this.data.response;
-        if (this.data.error == false) {
-          this.pass(this.data);
+        this.transaction = this.data.data;
+
+        switch (this.data.error) {
+          case (true):
+            this.error();
+            break;
+          case (false):
+            this.pass(this.data);
+            break;
+          default:
+            this.error();
         }
-        else {
-          this.error();
-        }
-     
+
         loading.dismiss();
       })
       .catch((error => {
-        console.log("Serve: ", error);
-        this.error();
+        this.ServerError(error);
         loading.dismiss();
       }));
   }
 
 
   pass(rep) {
-    // status: "PENDING", expiry: "2020-01-01"
+    let PAN = this.data.full_response.PAN;
+    this.newPAN = PAN.substring(1, 6) + "*****" + PAN.substring(11, 30);
+
     let alert = this.alertCtrl.create({
-      title: 'نجحت العملية',
+      title: 'استعلام عن ايصال:15 ',
       subTitle:
-        '<h2>الاسم: </h2>'
-        + "<p>" + this.response.PayerName + "</p>"
-        + '<h2>الرقم المرجعي :</h2>'
-        + "<p>" + this.response.ReferenceId + "</p>"
-        + '<h2>الحالة: </h2>' +
-        +"<p>" + this.e15Status() + "</p>"
-        + '<h2>التاريخ: </h2>' +
-        +"<p>" + rep.expiry + "</p>"
-        // + '<br>' +
-        // "اسم الخدمة: " +
-        // +response.ServiceName
-        + '<h2>القيمة الاجمالية: </h2>' +
-        +"<p>" + this.response.TotalAmount + "</p>"
-      // '<h2>اسم الوحدة: </h2>'
-      // + '<p>' + response.response.UnitName + '</p>',
+        'نجحت العملية '
+        + '<br>'
+      +'رقم البطاقة: '
+        + '<br>'
+        + this.newPAN
+        + '<br>'
+        + 'الاسم: '
+        + '<br>'
+        + this.response.PayerName
+        + '<br>'
+        + ' :الرقم المرجعي'
+        + '<br>'
+        + this.response.ReferenceId
+        + '<br>'
+        + ' :رقم الهاتف'
+        + '<br>'
+        + this.E15Data.Phone
+        + '<br>'
+        + 'الحالة: '
+        + this.e15Status()
+        + '<br>'
+        + 'التاريخ: '
+        + '<br>'
+        + rep.expiry
+        + '<br>'
+        + 'تاريخ الإنتهاء: '
+        + '<br>'
+        + this.response.InvoiceExpiry
+        + '<br>'
+        + "اسم الخدمة: "
+        + '<br>'
+        + this.response.ServiceName
+        + '<br>'
+        + 'القيمة الاجمالية: '
+        + '<br>'
+        + this.response.TotalAmount +" ج.س "
+        + '<br>'
+        + 'المطالبة المالية: '
+        + '<br>'
+        + this.response.DueAmount +" ج.س "
+        + '<br>'
+        + 'اسم الوحدة: '
+        + '<br>'
+        + this.response.UnitName
+        + '<br>'
+        + 'وقت التنفيذ: '
+        + '<br>'
+        + this.transaction.date.toString()
+        + '<br>'
+        + 'رقم العملية: '
+        + this.transaction.id
+
       ,
       buttons: ['تم'],
       cssClass: 'alertOne'
@@ -109,19 +166,32 @@ export class E15InqueryPage {
     let alert = this.alertCtrl.create({
       title: 'خطأ',
       subTitle: "فشلت العملية" +
-        "<br> " +
-        this.data.message
-        +"<br>"
-        + "حالة الارسال"
-        // + this.Message.ebs.responseMessage
-        + "<br>" + "حالة الطلب"
-      // + this.Message.ebs.responseStatus
+        "<br> "
+        + "رسالة الخطا: "
+        + '<br>'
+        + this.rep
       ,
       buttons: ['تم'],
       cssClass: 'alertTwo'
     });
     alert.present();
-    // this.E15Form.reset();
+
+  }
+
+
+  ServerError(error) {
+    let alert = this.alertCtrl.create({
+      title: 'خطأ',
+      subTitle: "فشلت العملية" +
+        "<br> "
+        + "رسالة الخطا: "
+        + '<br>'
+        + error,
+
+      buttons: ['تم'],
+      cssClass: 'alertTwo'
+    });
+    alert.present();
 
   }
 
@@ -135,12 +205,103 @@ export class E15InqueryPage {
     if (this.data.status == 'PAID') {
       return 'تم الدفع';
     }
-    if(this.data.ebs.responseCode == 73){
-      return 'خطا في رقم البطاقة';
-    }
-    else {
-      return 'غير معروف';
+
+  }
+
+  errorCodeResponse() {
+    switch (this.data.ebs.responseCode) {
+      case (11):
+        this.rep = 'يجب تغير الرقم السري للبطاقة او رقم الانترنت السري';
+        break;
+
+      case (40):
+        this.rep = 'رقم البطاقة المدخل تم الابلاغ عن فقدانها';
+        break;
+
+      case (41):
+        this.rep = 'رقم البطاقة المدخل تم الابلاغ عن سرقتها';
+        break;
+      case (51):
+        this.rep = 'خطا في رقم البطاقة المدخل';
+        break;
+      case (52):
+        this.rep = 'خطا في رقم البطاقة او تاريخ الانتهاء';
+        break;
+      case (53):
+        this.rep = 'خطا في رقم الانترنت السري المدخل';
+        break;
+      case (56):
+        this.rep = 'بيانات الدفع غير مقبولة <br> او رقم رقم الحساب (البنكي او البطاقة) بها مشكلة';
+        break;
+      case (57):
+        this.rep = 'المعاملة غير مدعومة بواسطة النظام أو البنك';
+        break;
+      case (58):
+        this.rep = "حالة البطاقة - مقيدة";
+        break;
+      case (59):
+        this.rep = 'ليس لديك رصيد كافي في البطاقة';
+        break;
+      case (60):
+        this.rep = 'تم تجاوز حد البطاقة لهذه العملية - القيمة المدخلة اكبر اوقل من المسموح به';
+
+        break;
+      case (61):
+        this.rep = 'سيتم تجاوز حد السحاب المتاح';
+
+        break;
+      case (62):
+        this.rep = 'تم تجاوز الفرص المتاحة لادخال IPIN-PIN :' +
+          '(الرقم السري للانترنت) خطاء اكثر من مرة';
+        break;
+
+      case (63):
+        this.rep = 'حدود السحب تم الوصول إليها بالفعل';
+        break;
+
+      case (67):
+        this.rep = 'المبلغ غير صحيح';
+        break;
+
+      case (68):
+        this.rep = 'تم رفض الطلب من قبل مزود الخدمة' +
+          '<br>' +
+          ' راجع البيانات المدخلة مثل رقم الهاتف او الفاتورة';
+        break;
+
+      case (72):
+        this.rep = ", تم خصم المبلغ من الحساب و تعليقه"
+          + '<br>'
+          + 'لان الجهة المحول لها غير متاحة حالياً';
+        break;
+      case (73):
+        this.rep = 'خطا في رقم البطاقة';
+        break;
+      case (83):
+        this.rep = 'تم تجاوز الفرص المتاحة لادخال IPIN-PIN :' +
+          '(الرقم السري للانترنت) خطاء اكثر من مرة';
+        break;
+      case (609):
+        this.rep = 'رقم البطاقة المحول لها غير موجود'
+        break;
+      case (634):
+        this.rep = 'رقم الهاتف المدخل غير مطابق لرقم الهاتف المسجل مع البطاقة ';
+        break;
+      case (696):
+        this.rep = 'النظام متوقف عن العمل حالياً ' +
+          '<br>' +
+          'حاول في وقت لاحق';
+        break;
+      case (999):
+        this.rep = 'انتها وقت الاتصال ';
+        break;
+      default:
+        this.rep = 'حاول في وقت لاحق';
+
     }
   }
 
+  isFilter(PAN) {
+    this.newPAN = PAN.substring(1, 6) + "*****" + PAN.substring(11, 30);
+  }
 }

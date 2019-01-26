@@ -16,37 +16,36 @@
       <ion-item>
         <ion-label>اختار المحفظة:</ion-label>
         <ion-select [(ngModel)]="electData.id" formControlName="id">
-          <ion-option *ngFor="let item of PAN"  value="{{item.id}}">{{item.name}}</ion-option>
+          <ion-option *ngFor="let item of PAN" value="{{item.id}}">{{item.name}}</ion-option>
         </ion-select>
       </ion-item>
 
       <ion-item>
-        <ion-label fixed>رقم العداد:</ion-label>
+        <ion-label floating>رقم العداد:</ion-label>
         <ion-input
-        formControlName="METER" type="number" placeholder="Meter Number" [(ngModel)]="electData.METER"
+        formControlName="METER" type="number" placeholder="" [(ngModel)]="electData.METER"
         [class.error1]="!ElectForm.controls.METER.valid && ElectForm.controls.METER.dirty"></ion-input>
       </ion-item>
-
       <ion-item no-lines
                 *ngIf="( ElectForm.get('METER').hasError('minlength') || ElectForm.get('METER').hasError('maxlength') ||ElectForm.get('METER').hasError('pattern') ||ElectForm.get('METER').hasError('required') ) && ElectForm.get('METER').touched">
         <div class="error" *ngIf="ElectForm.get('METER').hasError('METER') && ElectForm.get('METER').touched">
           ادخل رقم العداد
         </div>
         <div class="error" *ngIf="ElectForm.get('METER').hasError('minlength') && ElectForm.get('METER').touched">
-          اقل عدد 11
+          رقم العداد مكون من 11 رقم علي الاقل
         </div>
         <div class="error" *ngIf="ElectForm.get('METER').hasError('maxlength') && ElectForm.get('METER').touched">
-          لايمكن اضافة اكثر من 12 رقم
+          لا يمكن اضافة اكثر من 13 رقم
         </div>
         <div class="error" *ngIf="ElectForm.get('METER').hasError('pattern') && ElectForm.get('METER').touched">
-          فقط ارقام
+         رقم العداد مكون من ارقام فقط 0-9 
         </div>
       </ion-item>
 
 
       <ion-item>
-        <ion-label fixed>القيمة:</ion-label>
-        <ion-input type="number" placeholder="amount Number" [(ngModel)]="electData.amount"
+        <ion-label floating>القيمة:</ion-label>
+        <ion-input type="number" placeholder="" [(ngModel)]="electData.amount"
         formControlName="amount"
         [class.error1]="!ElectForm.controls.amount.valid && ElectForm.controls.amount.dirty"></ion-input>
       </ion-item>
@@ -57,16 +56,16 @@
           ادخل الوحدات
         </div>
         <div class="error" *ngIf="ElectForm.get('amount').hasError('minlength') && ElectForm.get('amount').touched">
-          اقل عدد 1
+         الوحدات تتكون من عدد صحيح 1 علي الاقل
         </div>
         <div class="error" *ngIf="ElectForm.get('amount').hasError('pattern') && ElectForm.get('amount').touched">
-          فقط ارقام
+          فقط ارقام صحيحٍة 0-9
         </div>
       </ion-item>
 
       <ion-item>
-        <ion-label fixed>الرقم السري:</ion-label>
-        <ion-input type="password" placeholder="IPIN number" [(ngModel)]="electData.IPIN"
+        <ion-label floating>الرقم السري للانترنت:</ion-label>
+        <ion-input type="password" placeholder="IPIN" [(ngModel)]="electData.IPIN"
         formControlName="IPIN"
         [class.error1]="!ElectForm.controls.IPIN.valid && ElectForm.controls.IPIN.dirty"></ion-input>
       </ion-item>
@@ -74,17 +73,17 @@
       <ion-item no-lines
                 *ngIf="( ElectForm.get('IPIN').hasError('minlength') || ElectForm.get('IPIN').hasError('maxlength') ||ElectForm.get('IPIN').hasError('pattern') ||ElectForm.get('IPIN').hasError('required') ) && ElectForm.get('IPIN').touched">
         <div class="error" *ngIf="ElectForm.get('IPIN').hasError('IPIN') && ElectForm.get('IPIN').touched">
-          ادخل الرقم السري
+          ادخل رقم الانترنت السري
         </div>
         <div class="error" *ngIf="ElectForm.get('IPIN').hasError('minlength') && ElectForm.get('IPIN').touched">
-          اقل عدد 4
+          رقم الانترنت السري مكون من 4 ارقام علي الاقل
         </div>
         <div class="error" *ngIf="ElectForm.get('IPIN').hasError('maxlength') && ElectForm.get('IPIN').touched">
-          لايمكن اضافة اكثر من 6 رقم
+          لايمكن اضافة اكثر من 4 ارقم
         </div>
         <div class="error" *ngIf="ElectForm.get('IPIN').hasError('pattern') && ElectForm.get('IPIN').touched">
-          فقط ارقام
-        </div>
+          رقم الانترنت السري مكون من ارقام فقط
+        </div> 
       </ion-item>
 
       <button type="submit" ion-button block color="one" [disabled]="ElectForm.invalid">شحن</button>

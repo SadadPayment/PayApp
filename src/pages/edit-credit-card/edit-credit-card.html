@@ -54,31 +54,31 @@
       </ion-item>
 
 
-      <ion-item>
-        <ion-label floating>الرقم السري</ion-label>
-        <ion-input type="password" maxlength="4" minlength="4" [(ngModel)]="accountData.IPIN" formControlName="IPIN"
-          [class.error1]="!accountForm.controls.IPIN.valid && accountForm.controls.IPIN.dirty"></ion-input>
-      </ion-item>
+      <!--<ion-item>-->
+        <!--<ion-label floating>الرقم السري</ion-label>-->
+        <!--<ion-input type="password" maxlength="4" minlength="4" [(ngModel)]="accountData.IPIN" formControlName="IPIN"-->
+          <!--[class.error1]="!accountForm.controls.IPIN.valid && accountForm.controls.IPIN.dirty"></ion-input>-->
+      <!--</ion-item>-->
 
-      <ion-item no-lines *ngIf="( accountForm.get('IPIN').hasError('minlength') || accountForm.get('IPIN').hasError('maxlength') ||accountForm.get('IPIN').hasError('pattern') ||accountForm.get('IPIN').hasError('required') ) && accountForm.get('IPIN').touched">
-        <div class="error" *ngIf="accountForm.get('IPIN').hasError('IPIN') && accountForm.get('IPIN').touched">
-          الرجاء ادخال الرقم السر المكونة من 4 اراقم الخاص بالبطاقة
-        </div>
-        <div class="error" *ngIf="accountForm.get('IPIN').hasError('minlength') && accountForm.get('IPIN').touched">
-          اقل عدد 4
-        </div>
-        <div class="error" *ngIf="accountForm.get('IPIN').hasError('maxlength') && accountForm.get('IPIN').touched">
-          لا يمكن اضافة اكثر من 4 ارقام
-        </div>
-        <div class="error" *ngIf="accountForm.get('IPIN').hasError('pattern') && accountForm.get('IPIN').touched">
-          فقط ارقام
-        </div>
-      </ion-item>
+      <!--<ion-item no-lines *ngIf="( accountForm.get('IPIN').hasError('minlength') || accountForm.get('IPIN').hasError('maxlength') ||accountForm.get('IPIN').hasError('pattern') ||accountForm.get('IPIN').hasError('required') ) && accountForm.get('IPIN').touched">-->
+        <!--<div class="error" *ngIf="accountForm.get('IPIN').hasError('IPIN') && accountForm.get('IPIN').touched">-->
+          <!--الرجاء ادخال الرقم السر المكونة من 4 اراقم الخاص بالبطاقة-->
+        <!--</div>-->
+        <!--<div class="error" *ngIf="accountForm.get('IPIN').hasError('minlength') && accountForm.get('IPIN').touched">-->
+          <!--اقل عدد 4-->
+        <!--</div>-->
+        <!--<div class="error" *ngIf="accountForm.get('IPIN').hasError('maxlength') && accountForm.get('IPIN').touched">-->
+          <!--لا يمكن اضافة اكثر من 4 ارقام-->
+        <!--</div>-->
+        <!--<div class="error" *ngIf="accountForm.get('IPIN').hasError('pattern') && accountForm.get('IPIN').touched">-->
+          <!--فقط ارقام-->
+        <!--</div>-->
+      <!--</ion-item>-->
 
       <ion-item>
         <ion-label floating>تاريخ انتهاء البطاقة</ion-label>
         <ion-datetime displayFormat="MM, YY" pickerFormat="MM YYYY" [(ngModel)]="accountData.expDate" placeholder="شهر - عام"
-          min="{{min}}" max="2050-10-20" formControlName="expDate"></ion-datetime>
+          min="{{min}}" max="2090-10-20" formControlName="expDate"></ion-datetime>
       </ion-item>
       <button type="submit" ion-button block color="one" [disabled]="accountForm.invalid">حفظ</button>
     </form>

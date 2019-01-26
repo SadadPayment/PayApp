@@ -34,7 +34,6 @@ export class ActivatePage {
     loading.present();
     this.UsersProvider.ActivationProvider(this.code, this.phone).then(response => {
       this.data = response;
-      console.log(this.data);
       if (this.data.error == false) {
         loading.dismiss();
         this.PassAlert();

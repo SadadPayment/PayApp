@@ -1,0 +1,104 @@
+<ion-header>
+
+  <ion-navbar color="one">
+    <ion-buttons right>
+      <button ion-button (click)="menue()">
+        <ion-icon style="font-size: 2.2em;" color="#ffff" name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title text-center="">شراء</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    <form novalidate (ngSubmit)="sendPurchaseRequest()" [formGroup]="PurchaseForm">
+
+      <ion-item>
+        <ion-label>اختار المحفظة:</ion-label>
+        <ion-select [(ngModel)]="PurchaseInfo.id" formControlName="id">
+          <ion-option *ngFor="let item of PAN" value="{{item.id}}">{{item.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+
+
+      <ion-item>
+        <ion-label floating>
+          رقم المستفيد:
+        </ion-label>
+
+        <ion-input type="number" placeholder="" [(ngModel)]="PurchaseInfo.serviceProviderId"
+                   value="{{serviceProviderId}}"
+                   formControlName="serviceProviderId"
+                   [class.error1]="!PurchaseForm.controls.serviceProviderId.valid && PurchaseForm.controls.serviceProviderId.dirty">
+        </ion-input>
+      </ion-item>
+
+      <ion-item no-lines
+                *ngIf="( PurchaseForm.get('serviceProviderId').hasError('minlength') || PurchaseForm.get('serviceProviderId').hasError('maxlength') ||PurchaseForm.get('serviceProviderId').hasError('pattern') ||PurchaseForm.get('serviceProviderId').hasError('required') ) && PurchaseForm.get('serviceProviderId').touched">
+        <div class="error"
+             *ngIf="PurchaseForm.get('serviceProviderId').hasError('serviceProviderId') && PurchaseForm.get('serviceProviderId').touched">
+          ادخل رقم البائع
+        </div>
+        <div class="error"
+             *ngIf="PurchaseForm.get('serviceProviderId').hasError('minlength') && PurchaseForm.get('serviceProviderId').touched">
+          لا تترك الحقل فارغ
+        </div>
+
+        <div class="error"
+             *ngIf="PurchaseForm.get('serviceProviderId').hasError('pattern') && PurchaseForm.get('serviceProviderId').touched">
+          رقم البائع يتكون من ارقام 0-9
+        </div>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>القيمة:</ion-label>
+        <ion-input type="number" placeholder="القيمة" [(ngModel)]="PurchaseInfo.tranAmount"
+                   formControlName="tranAmount"
+                   [class.error1]="!PurchaseForm.controls.tranAmount.valid && PurchaseForm.controls.tranAmount.dirty"></ion-input>
+      </ion-item>
+
+      <ion-item no-lines
+                *ngIf="( PurchaseForm.get('tranAmount').hasError('minlength') || PurchaseForm.get('tranAmount').hasError('maxlength') ||PurchaseForm.get('tranAmount').hasError('pattern') ||PurchaseForm.get('tranAmount').hasError('required') ) && PurchaseForm.get('tranAmount').touched">
+        <div class="error"
+             *ngIf="PurchaseForm.get('tranAmount').hasError('tranAmount') && PurchaseForm.get('tranAmount').touched">
+          ادخل الوحدات
+        </div>
+        <div class="error"
+             *ngIf="PurchaseForm.get('tranAmount').hasError('minlength') && PurchaseForm.get('tranAmount').touched">
+          اقل عدد 1
+        </div>
+        <div class="error"
+             *ngIf="PurchaseForm.get('tranAmount').hasError('pattern') && PurchaseForm.get('tranAmount').touched">
+          فقط ارقام
+        </div>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>الرقم السري للانترنت:</ion-label>
+
+        <ion-input type="password" placeholder="IPIN" [(ngModel)]="PurchaseInfo.IPIN"
+                   formControlName="IPIN"
+                   [class.error1]="!PurchaseForm.controls.IPIN.valid && PurchaseForm.controls.IPIN.dirty"></ion-input>
+      </ion-item>
+
+      <ion-item no-lines
+                *ngIf="( PurchaseForm.get('IPIN').hasError('minlength') || PurchaseForm.get('IPIN').hasError('maxlength') ||PurchaseForm.get('IPIN').hasError('pattern') ||PurchaseForm.get('IPIN').hasError('required') ) && PurchaseForm.get('IPIN').touched">
+        <div class="error" *ngIf="PurchaseForm.get('IPIN').hasError('IPIN') && PurchaseForm.get('IPIN').touched">
+          ادخل الرقم السري
+        </div>
+        <div class="error" *ngIf="PurchaseForm.get('IPIN').hasError('minlength') && PurchaseForm.get('IPIN').touched">
+          رقم الانترنت السري مكون من 4 ارقام        </div>
+        <div class="error" *ngIf="PurchaseForm.get('IPIN').hasError('maxlength') && PurchaseForm.get('IPIN').touched">
+          رقم الانترنت السري مكون من 4 ارقام        </div>
+        <div class="error" *ngIf="PurchaseForm.get('IPIN').hasError('pattern') && PurchaseForm.get('IPIN').touched">
+          رقم الانترنت السري مكون من اعداد صحيحة        </div>
+      </ion-item>
+
+      <button type="submit" ion-button block color="one" [disabled]="PurchaseForm.invalid">تحويل</button>
+      <!-- <button type="submit" ion-button block color="one">تحويل</button> -->
+    </form>
+  </ion-list>
+</ion-content>

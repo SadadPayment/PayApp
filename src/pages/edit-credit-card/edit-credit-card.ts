@@ -27,7 +27,7 @@ export class EditCreditCardPage {
       name: new FormControl('', [Validators.required, Validators.pattern(''), Validators.minLength(3), Validators.maxLength(10)]),
 
       // name: new FormControl('', [Validators.required, Validators.pattern('^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z ]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z-_]*$'), Validators.minLength(4), Validators.maxLength(10)]),
-      IPIN: new FormControl('', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(4), Validators.maxLength(4)]),
+      // IPIN: new FormControl('', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(4), Validators.maxLength(4)]),
     });
     this.minDate();
   }

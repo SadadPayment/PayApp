@@ -11,50 +11,41 @@
   <ion-list>
     <form novalidate (ngSubmit)="sendData()" [formGroup]="ElectForm">
 
-
       <ion-item>
         <ion-label>اختار المحفظة:</ion-label>
         <ion-select [(ngModel)]="cardInfo.id" formControlName="id">
-          <ion-option *ngFor="let item of PAN"  value="{{item.id}}">{{item.name}}</ion-option>
+          <ion-option *ngFor="let item of PAN" value="{{item.id}}">{{item.name}}</ion-option>
+          <!--<ion-option *ngFor="let item of PAN" [hidden]="isFilter(item.PAN)" value="{{item.id}}">{{item.name}}</ion-option>-->
         </ion-select>
       </ion-item>
 
       <!--<ion-item *ngIf="cardPan == null">-->
       <ion-item>
-        <ion-label fixed>الي:</ion-label>
+        <ion-label floating>الي:</ion-label>
         <ion-input type="number" placeholder="رقم الحساب المرسل اليه" [(ngModel)]="cardInfo.to"
                    value="{{cardPan}}"
                    formControlName="to"
                    [class.error1]="!ElectForm.controls.to.valid && ElectForm.controls.to.dirty"></ion-input>
       </ion-item>
 
-      <!--<ion-item *ngIf="cardPan !=null">-->
-        <!--<h2 text-center="">الي:-->
-          <!--<p>{{cardInfo.to}}</p></h2>-->
-        <!--<ion-input hidden type="number" placeholder="رقم الحساب المرسل اليه" [(ngModel)]="cardInfo.to"-->
-                   <!--value="{{cardPan}}"-->
-                   <!--formControlName="to"-->
-                   <!--[class.error1]="!ElectForm.controls.to.valid && ElectForm.controls.to.dirty"></ion-input>-->
-      <!--</ion-item>-->
 
       <ion-item no-lines
                 *ngIf="( ElectForm.get('to').hasError('minlength') || ElectForm.get('to').hasError('maxlength') ||ElectForm.get('to').hasError('pattern') ||ElectForm.get('to').hasError('required') ) && ElectForm.get('to').touched">
         <div class="error" *ngIf="ElectForm.get('to').hasError('to') && ElectForm.get('to').touched">
-          ادخل الوحدات
+          ادخل رقم البطاقة
         </div>
         <div class="error" *ngIf="ElectForm.get('to').hasError('minlength') && ElectForm.get('to').touched">
           رقم البطاقة يجب ان لا يقل 16
         </div>  <div class="error" *ngIf="ElectForm.get('to').hasError('maxlength') && ElectForm.get('to').touched">
-          رقم البطاقة يجب ان لا يتجاوز 19
+          رقم البطاقة يجب ان لا يتجاوز 30
         </div>
         <div class="error" *ngIf="ElectForm.get('to').hasError('pattern') && ElectForm.get('to').touched">
-          فقط ارقام
-        </div>
+          رقم البطاقة مكون من اعداد صحيحة        </div>
       </ion-item>
 
 
       <ion-item>
-        <ion-label fixed>القيمة:</ion-label>
+        <ion-label floating>القيمة:</ion-label>
         <ion-input type="number" placeholder="القيمة" [(ngModel)]="cardInfo.amount"
                    formControlName="amount"
                    [class.error1]="!ElectForm.controls.amount.valid && ElectForm.controls.amount.dirty"></ion-input>
@@ -63,18 +54,19 @@
       <ion-item no-lines
                 *ngIf="( ElectForm.get('amount').hasError('minlength') || ElectForm.get('amount').hasError('maxlength') ||ElectForm.get('amount').hasError('pattern') ||ElectForm.get('amount').hasError('required') ) && ElectForm.get('amount').touched">
         <div class="error" *ngIf="ElectForm.get('amount').hasError('amount') && ElectForm.get('amount').touched">
-          ادخل الوحدات
+          الرجاء ادخال القيمة
         </div>
         <div class="error" *ngIf="ElectForm.get('amount').hasError('minlength') && ElectForm.get('amount').touched">
-          اقل عدد 1
+          القيمة عدد صحيح فقط, اكبر من 1
         </div>
         <div class="error" *ngIf="ElectForm.get('amount').hasError('pattern') && ElectForm.get('amount').touched">
-          فقط ارقام
+          فقط ارقام صحيحة, 0-9
         </div>
       </ion-item>
 
       <ion-item>
-        <ion-label fixed>الرقم السري:</ion-label>
+        <ion-label floating>الرقم السري للانترنت:</ion-label>
+
         <ion-input type="password" placeholder="IPIN Number" [(ngModel)]="cardInfo.IPIN"
                    formControlName="IPIN"
                    [class.error1]="!ElectForm.controls.IPIN.valid && ElectForm.controls.IPIN.dirty"></ion-input>

@@ -1,41 +1,45 @@
 import {Component} from '@angular/core';
 import {AlertController, IonicPage, LoadingController, NavController, NavParams} from 'ionic-angular';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {PaymentProvider} from '../../providers/payment/payment';
+
+import {PaymentProvider} from "../../providers/payment/payment";
 
 @IonicPage()
 @Component({
-  selector: 'page-mobil-recharge',
-  templateUrl: 'mobil-recharge.html',
+  selector: 'page-purchase',
+  templateUrl: 'purchase.html',
 })
-export class MobilRechargePage {
+export class PurchasePage {
   newPAN: string;
-  rep: string;
-
-  // RechargeModel: MobilePaymentModel;
   data: any;
-  RechargeData = {"phone": "", "amount": "", "IPIN": "", "biller": "", "id": ""};
-  RechargeForm: FormGroup;
-  error: any;
+  rep: any;
+  serviceProviderId: string;
+  serviceProviderIdFromQr: string;
+  errorCode: any;
+  // Message: any;
   PAN: any;
-
-  // private errorP: number;
+  PurchaseInfo = {"IPIN": "", "tranAmount": "", "serviceProviderId": "", "id": ""};
+  PurchaseForm: FormGroup;
 
   constructor(
     public navCtrl: NavController,
+    private payment: PaymentProvider,
     public navParams: NavParams,
-    private payProv: PaymentProvider,
+    private alertCtrl: AlertController,
     private loadingCtrl: LoadingController,
-    private alertCtrl: AlertController
   ) {
-    this.RechargeForm = new FormGroup({
-      phone: new FormControl('', [Validators.required, Validators.pattern('^(?:0|\\(?\\09\\)?\\s?|01\\s?)[1-79](?:[\\.\\-\\s]?\\d\\d){4}$'), Validators.minLength(10), Validators.maxLength(10)]),
-      // ^(?:0|\(?\+33\)?\s?|0033\s?)[1-79](?:[\.\-\s]?\d\d){4}$
-      id: new FormControl('', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(1)]),
-      amount: new FormControl('', [Validators.required, Validators.pattern('^[1-9][0-9 \.]*'), Validators.minLength(1)]),
-      IPIN: new FormControl('', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(4), Validators.maxLength(4)]),
-      biller: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z]*'), Validators.maxLength(6)]),
+    this.serviceProviderIdFromQr = this.navParams.get('data');
+    // this.cardPan = '21541541213541231345543';
+    if (this.serviceProviderIdFromQr) {
+      this.PurchaseInfo.serviceProviderId = this.serviceProviderIdFromQr;
+      this.serviceProviderId = this.serviceProviderIdFromQr
+    }
 
+    this.PurchaseForm = new FormGroup({
+      serviceProviderId: new FormControl('', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(1)]),
+      tranAmount: new FormControl('', [Validators.required, Validators.pattern('^[1-9][0-9 \.]*'), Validators.minLength(1), Validators.maxLength(15)]),
+      IPIN: new FormControl('', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(4), Validators.maxLength(4)]),
+      id: new FormControl('', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(1)]),
     });
   }
 
@@ -49,35 +53,67 @@ export class MobilRechargePage {
     if (ac != nu.toString()) {
       this.PAN = JSON.parse(ac);
     }
-    else  {
+    else {
       alert('تحتاج الي اضافة بطاقة اولاً');
       this.navCtrl.push('CreditCardPage');
     }
   }
 
-  SendRecharge() {
+  sendPurchaseRequest() {
+    console.log(this.PurchaseInfo);
     let loading = this.loadingCtrl.create({
       content: 'الرجاء الإنتظار لإتمام المعاملة'
     });
     loading.present();
-    this.payProv.TopUpRequestProvider(this.RechargeData).then(data => {
-      this.data = data;
-      this.errorCodeResponse();
-      if (this.data.error == false) {
-        this.TopUpSToast(this.data.full_response, this.data.date)
-      }
-      else {
-        this.TopUpEToast();
-      }
-      loading.dismiss();
-    }).catch((error => {
-      this.ServerError();
-      loading.dismiss();
-    }));
+    this.payment.PurchaseProvider(this.PurchaseInfo)
+      .then(data => {
+        this.data = data;
+        // this.Message = this.data;
+        this.errorCode = this.data.ebs.responseCode;
+        this.errorCodeResponse();
+        if (this.data.error == false) {
+          this.presentAlert(this.data.data, this.data.ebs);
+        }
+        else if (this.data.error == true && this.errorCode == "72") {
+          this.depitError()
+        }
+        else {
+          this.presentEAlert();
+        }
+
+        loading.dismiss();
+      })
+      .catch(err => {
+        this.presentEAlert();
+        console.log("error: ", err);
+        loading.dismiss();
+      });
   }
 
 
-  TopUpSToast(ebs, date) {
+  depitError() {
+    if (this.errorCode == 72) {
+      let alert = this.alertCtrl.create({
+        title: 'خطأ',
+        subTitle: "فشلت العملية" +
+          ", تم خصم المبلغ من الحساب و تعليقه"
+          + '<br>'
+          + 'لان الجهة المحول لها غير متاحة حالياً'
+          + '<br>'
+        ,
+        buttons: ['تم'],
+        cssClass: 'alertTwo'
+      });
+      alert.present();
+    }
+  }
+
+  //
+  // isFilter(PAN) {
+  //   this.newPAN = PAN.substring(1, 6) + "*****" + PAN.substring(11, 30);
+  // }
+
+  presentAlert(date, ebs) {
     let blanc = "0";
     if (ebs.balance != null) {
       blanc = ebs.balance.available;
@@ -85,29 +121,25 @@ export class MobilRechargePage {
     this.newPAN = ebs.PAN.substring(1, 6) + "*****" + ebs.PAN.substring(11, 30);
 
     let alert = this.alertCtrl.create({
-      title: 'شحن الرصيد',
-      subTitle:
-        'تم الشحن بنجاح'
+      title: 'شراء',
+      subTitle: 'نجحت العملية'
         + '<br>'
-        + 'رقم البطاقة: '
+        + "تم تحويل: "
+        + this.PurchaseInfo.tranAmount + ' ج.س '
+        + '<br>'
+        + 'من البطاقة: '
+        + '<br>'
         + this.newPAN
-        + "<br>"
-        + 'مزود الخدمة: '
         + '<br>'
-        + this.RechargeData.biller
-        + '<br>'
-        + 'رقم الهاتف: '
-        + this.RechargeData.phone
-        + '<br>'
-        + 'قيمة الشحن: '
-        + this.RechargeData.amount +"ج.س"
+        + 'الي صاحب الحسابـ: '
+        + this.PurchaseInfo.serviceProviderId
         + '<br>'
         + 'الرصيد المتبقي: '
-        + blanc +"ج.س"
+        + blanc + "ج.س"
         + '<br>'
-        + "العمولة: " + ebs.acqTranFee +"ج.س"
+        + "العمولة: " + ebs.acqTranFee + "ج.س"
         + '<br>'
-        + 'العمولة الخارجية: ' + ebs.issuerTranFee +"ج.س"
+        + 'العمولة الخارجية: ' + ebs.issuerTranFee + "ج.س"
         + '<br>'
         + '<p>وقت التنفيذ: </p>'
         + date.date.toString()
@@ -119,12 +151,11 @@ export class MobilRechargePage {
       cssClass: 'alertOne'
     });
     alert.present();
-    this.RechargeForm.reset();
+    this.PurchaseForm.reset();
 
   }
 
-
-  TopUpEToast() {
+  presentEAlert() {
     let alert = this.alertCtrl.create({
       title: 'خطأ',
       subTitle:
@@ -137,20 +168,8 @@ export class MobilRechargePage {
   }
 
 
-  ServerError() {
-    let alert = this.alertCtrl.create({
-      title: 'خطأ',
-      subTitle:
-        'فشل الطلب - حاول لاحقا'
-      ,
-      buttons: ['تم'],
-      cssClass: 'alertTwo'
-    });
-    alert.present();
-  }
-
   errorCodeResponse() {
-    switch (this.data.code) {
+    switch (this.errorCode) {
       case (11):
         this.rep = 'يجب تغير الرقم السري للبطاقة او رقم الانترنت السري';
         break;
@@ -185,17 +204,14 @@ export class MobilRechargePage {
         break;
       case (60):
         this.rep = 'تم تجاوز حد البطاقة لهذه العملية - القيمة المدخلة اكبر اوقل من المسموح به';
-
         break;
       case (61):
         this.rep = 'سيتم تجاوز حد السحاب المتاح';
-
         break;
       case (62):
         this.rep = 'تم تجاوز الفرص المتاحة لادخال IPIN-PIN :' +
           '(الرقم السري للانترنت) خطاء اكثر من مرة';
         break;
-
       case (63):
         this.rep = 'حدود السحب تم الوصول إليها بالفعل';
         break;
@@ -223,10 +239,16 @@ export class MobilRechargePage {
           '(الرقم السري للانترنت) خطاء اكثر من مرة';
         break;
       case (609):
-        this.rep = 'رقم البطاقة المحول لها غير موجود'
+        this.rep = 'رقم البطاقة المحول لها غير موجود';
         break;
       case (634):
         this.rep = 'رقم الهاتف المدخل غير مطابق لرقم الهاتف المسجل مع البطاقة ';
+        break;
+      case (661):
+        this.rep = 'معلومات الخدمة غير صالحة';
+        break;
+      case (662):
+        this.rep = 'رقم البائع غير صحيح';
         break;
       case (696):
         this.rep = 'النظام متوقف عن العمل حالياً ' +
