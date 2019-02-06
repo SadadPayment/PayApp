@@ -57,7 +57,7 @@ export class RegistrationPage {
     loading.present();
     this.UsersProvider.RegistrationProvider(this.userData).then(response => {
       this.data = response;
-      // console.log("Data: ", this.data);
+      console.log("Data: ", this.data);
       if (this.data.error == false) {
         loading.dismiss();
         this.SignupToast();

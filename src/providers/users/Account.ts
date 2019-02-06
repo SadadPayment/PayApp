@@ -4,9 +4,11 @@ import {Injectable} from '@angular/core';
 @Injectable()
 export class AccountProvider {
   token: any = localStorage.getItem('token');
-url:string = "https://sadad.cf/Api/public/api/user/";
+// url:string = "https://sadad.cf/Api/public/api/user/";
 //   url = "http://104.248.31.11:8000/api/user/";
 // url:string = "http://localhost:8000/api/user/";
+  url = "http://104.248.31.11/Api/public/api/user/";
+
   addUrl: string = this.url + 'add_account';
   editUrl: string = this.url + 'edit_account';
   getUrl: string = this.url + 'list_account';

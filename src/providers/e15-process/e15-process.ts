@@ -3,8 +3,10 @@ import {Injectable} from '@angular/core';
 
 @Injectable()
 export class E15ProcessProvider {
-  url = "https://sadad.cf/Api/public/api/";
+  // url = "https://sadad.cf/Api/public/api/";
   // url = "http://104.248.31.11:8000/api/";
+  url = "http://104.248.31.11/Api/public/api/";
+
 
   token = localStorage.getItem('token');
 

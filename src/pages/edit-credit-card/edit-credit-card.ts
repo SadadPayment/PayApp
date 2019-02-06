@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController, LoadingController } from 'ionic-angular';
-import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { AccountProvider } from "../../providers/users/Account";
-import { App } from 'ionic-angular';
+import {Component} from '@angular/core';
+import {IonicPage, NavController, NavParams, ToastController, LoadingController} from 'ionic-angular';
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {AccountProvider} from "../../providers/users/Account";
+import {App} from 'ionic-angular';
 
 
 @IonicPage()
@@ -11,23 +11,21 @@ import { App } from 'ionic-angular';
   templateUrl: 'edit-credit-card.html',
 })
 export class EditCreditCardPage {
-  accountData = { "IPIN": "", "PAN": "", "expDate": "", "name": "" };
+  accountData = {"PAN": "", "expDate": "", "name": ""};
   data: any;
   accountForm: FormGroup;
   min: any;
+
   constructor(public navCtrl: NavController,
-    private app: App,
-    public navParams: NavParams,
-    private loadingCtrl: LoadingController,
-    private toastCtrl: ToastController,
-    private accoPro: AccountProvider) {
+              private app: App,
+              public navParams: NavParams,
+              private loadingCtrl: LoadingController,
+              private toastCtrl: ToastController,
+              private accoPro: AccountProvider) {
     this.accountForm = new FormGroup({
       PAN: new FormControl('', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(16), Validators.maxLength(19)]),
       expDate: new FormControl('', [Validators.required]),
       name: new FormControl('', [Validators.required, Validators.pattern(''), Validators.minLength(3), Validators.maxLength(10)]),
-
-      // name: new FormControl('', [Validators.required, Validators.pattern('^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z ]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z-_]*$'), Validators.minLength(4), Validators.maxLength(10)]),
-      // IPIN: new FormControl('', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(4), Validators.maxLength(4)]),
     });
     this.minDate();
   }
@@ -44,6 +42,7 @@ export class EditCreditCardPage {
     console.log('data add: ', this.accountData);
     this.accoPro.add_bank_account_Provider(this.accountData)
       .then(data => {
+        console.log(data);
         if (data == true) {
           lod.dismiss();
           this.AddToast();

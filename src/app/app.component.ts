@@ -3,6 +3,7 @@ import {AlertController, Nav, Platform, ToastController} from 'ionic-angular';
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from "@ionic-native/splash-screen";
 import {HardwareButtons} from '@scaffold-digital/ionic-hardware-buttons';
+
 // import {Idle, DEFAULT_INTERRUPTSOURCES} from "@ng-idle/core";
 
 
@@ -57,11 +58,21 @@ export class MyApp {
         this.statusBar.styleDefault();
         this.splashScreen.hide();
         this.hardwareButtons.init();
-
       }
 
       // this.backBoutton();
       // this.twoBackButton();
+
+    });
+    // this.platform.resume.subscribe(() => {
+    //   console.log('[INFO] App resumed');
+    // });
+    this.platform.pause.subscribe(() => {
+      console.log('[INFO] App Pass');
+      let TIME_IN_MS = 5000;
+      let hideFooterTimeout = setTimeout(() => {
+        this.nav.setRoot('LoginPage')
+      }, TIME_IN_MS);
 
     });
 

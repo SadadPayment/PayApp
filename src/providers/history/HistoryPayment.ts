@@ -4,9 +4,10 @@ import {Injectable} from '@angular/core';
 @Injectable()
 export class HistoryPaymentProvider {
 
-  url = "https://sadad.cf/Api/public/api/";
+  // url = "https://sadad.cf/Api/public/api/";
   // url = "http://localhost:8000/api/";
   // url = "http://104.248.31.11:8000/api/";
+  url = "http://104.248.31.11/Api/public/api/";
 
   getUserUrl = "getByUsers";
   getAllUserTransactionUrl = "getAllTransaction";
